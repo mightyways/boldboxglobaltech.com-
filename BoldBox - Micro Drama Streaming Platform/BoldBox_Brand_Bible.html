@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoldBox Brand Bible</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --yellow:#F4C430;--gold:#A08C20;--black:#000000;--surface:#1A1A1A;
+    --surface2:#242424;--white:#FFFFFF;--gray:#666666;--gray2:#333333;
+    --green:#22C55E;--red:#EF4444;
+  }
+  body{background:#000;color:#fff;font-family:'Sarabun',sans-serif;font-size:15px;line-height:1.6}
+  .page{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+
+  /* HEADER */
+  .site-header{display:flex;align-items:center;justify-content:space-between;padding:24px 0 40px;border-bottom:1px solid #222;margin-bottom:48px}
+  .logo-mark{width:52px;height:52px;background:var(--yellow);clip-path:polygon(15% 0%,85% 0%,100% 50%,85% 100%,15% 100%,0% 50%);display:flex;align-items:center;justify-content:center;position:relative}
+  .logo-shadow{width:52px;height:52px;background:var(--gold);clip-path:polygon(15% 0%,85% 0%,100% 50%,85% 100%,15% 100%,0% 50%);position:absolute;top:4px;left:4px;z-index:0}
+  .logo-wrap{position:relative;width:60px;height:60px;display:flex;align-items:center;justify-content:center}
+  .logo-front{width:52px;height:52px;background:var(--yellow);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);display:flex;align-items:center;justify-content:center;z-index:1;position:relative}
+  .logo-back{width:52px;height:52px;background:var(--gold);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);position:absolute;top:5px;left:5px;z-index:0}
+  .logo-b{font-family:'Nunito',sans-serif;font-weight:900;font-size:26px;color:#fff;z-index:2;position:relative;line-height:1}
+  .brand-name{font-family:'Nunito',sans-serif;font-weight:900;font-size:28px;color:var(--yellow);letter-spacing:-0.5px;margin-left:12px}
+  .header-tag{font-size:12px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;border:1px solid #333;padding:5px 14px;border-radius:20px}
+  .tagline-header{font-size:13px;color:var(--gray);font-style:italic;text-align:right}
+
+  /* SECTION */
+  .section{margin-bottom:56px}
+  .section-header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+  .sec-num{width:32px;height:32px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;color:#000;flex-shrink:0}
+  .sec-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;color:#fff;letter-spacing:1.5px;text-transform:uppercase}
+  .sec-line{flex:1;height:1px;background:#222}
+
+  /* CARDS */
+  .card{background:var(--surface);border:1px solid #2a2a2a;border-radius:12px;padding:20px}
+  .card-sm{background:var(--surface);border:1px solid #2a2a2a;border-radius:10px;padding:16px}
+  .card-yellow{background:var(--yellow);border-radius:10px;padding:16px}
+  .card-dark2{background:var(--surface2);border:1px solid #2a2a2a;border-radius:10px;padding:16px}
+
+  /* GRID */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  .grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px}
+  .grid-auto{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+
+  /* LABELS */
+  .label{font-size:10px;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+  .label-yellow{font-size:10px;color:var(--yellow);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;font-weight:700}
+  .h2{font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;color:#fff;margin-bottom:8px}
+  .h3{font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;color:var(--yellow);margin-bottom:6px}
+  .body{font-size:13px;color:#aaa;line-height:1.7}
+  .body-w{font-size:13px;color:#fff;line-height:1.7}
+
+  /* TAGS */
+  .tag{display:inline-block;background:#111;border:1px solid #333;border-radius:20px;padding:4px 12px;font-size:11px;color:var(--yellow);margin:3px 3px 3px 0}
+  .tag-dark{display:inline-block;background:#000;border:1px solid var(--yellow);border-radius:4px;padding:3px 10px;font-size:11px;color:var(--yellow);margin:2px}
+
+  /* POSITIONING BAR */
+  .pos-bar{display:flex;align-items:stretch;gap:2px;background:#111;border-radius:10px;overflow:hidden;border:1px solid #222;margin:12px 0}
+  .pos-item{flex:1;padding:12px;text-align:center}
+  .pos-item.active{background:var(--yellow)}
+  .pos-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px}
+  .pos-desc{font-size:11px;margin-top:2px;opacity:0.7}
+  .pos-item.active .pos-name{color:#000}
+  .pos-item.active .pos-desc{color:#333}
+  .pos-item:not(.active) .pos-name{color:#888}
+  .pos-item:not(.active) .pos-desc{color:#555}
+
+  /* COLOR SWATCHES */
+  .swatch{border-radius:10px;overflow:hidden;border:1px solid #2a2a2a}
+  .swatch-color{height:60px;width:100%}
+  .swatch-info{background:var(--surface);padding:10px 12px}
+  .swatch-name{font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:#fff;margin-bottom:2px}
+  .swatch-hex{font-size:11px;color:var(--gray);font-family:monospace;margin-bottom:4px}
+  .swatch-use{font-size:10px;color:#555;line-height:1.4}
+
+  /* PERSONALITY PILLS */
+  .pill{display:flex;align-items:center;gap:10px;background:var(--surface2);border:1px solid #2a2a2a;border-radius:8px;padding:10px 14px}
+  .pill-icon{width:28px;height:28px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .pill-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--yellow)}
+  .pill-desc{font-size:11px;color:#888;margin-top:1px}
+
+  /* ARCHETYPE */
+  .archetype{background:var(--surface2);border:1px solid #2a2a2a;border-radius:10px;padding:16px;text-align:center}
+  .arch-icon{font-size:32px;margin-bottom:8px}
+  .arch-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--yellow);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .arch-desc{font-size:11px;color:#888;line-height:1.5}
+
+  /* TYPOGRAPHY */
+  .type-row{display:flex;align-items:baseline;gap:16px;padding:10px 0;border-bottom:1px solid #1a1a1a}
+  .type-row:last-child{border-bottom:none}
+  .type-label{width:60px;font-size:11px;color:var(--gray);flex-shrink:0}
+  .type-size{width:70px;font-size:11px;color:#555;flex-shrink:0}
+  .type-sample{flex:1;color:#fff}
+
+  /* CORE VALUES */
+  .value-item{background:var(--surface2);border-left:3px solid var(--yellow);border-radius:0 8px 8px 0;padding:10px 14px}
+  .value-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:var(--yellow)}
+  .value-desc{font-size:11px;color:#888;margin-top:2px}
+
+  /* RULES */
+  .rule-card{background:var(--surface);border:1px solid #2a2a2a;border-radius:12px;padding:24px;text-align:center;position:relative;overflow:hidden}
+  .rule-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:64px;color:#111;position:absolute;top:-8px;right:16px;line-height:1}
+  .rule-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:var(--yellow);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;position:relative;z-index:1}
+  .rule-desc{font-size:12px;color:#888;line-height:1.6;position:relative;z-index:1}
+
+  /* LOGO DEMO */
+  .logo-demo{background:#000;border-radius:12px;padding:32px;display:flex;flex-direction:column;align-items:center;gap:8px;border:1px solid #1a1a1a}
+  .logo-demo-wrap{display:flex;align-items:center;gap:14px}
+  .demo-wordmark{font-family:'Nunito',sans-serif;font-weight:900;font-size:32px;color:var(--yellow);letter-spacing:-0.5px}
+
+  /* MESSAGING */
+  .tagline-opt{background:var(--surface2);border-radius:8px;padding:12px 16px;border-left:3px solid #333}
+  .tagline-opt.primary{border-left-color:var(--yellow)}
+  .tl-num{font-size:10px;color:var(--gray);margin-bottom:4px;text-transform:uppercase;letter-spacing:1px}
+  .tl-text{font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;color:#fff}
+  .tl-text.hero{color:var(--yellow)}
+
+  /* UI SCREEN MOCKUP */
+  .phone-frame{background:#111;border-radius:24px;padding:12px;width:140px;border:2px solid #333;flex-shrink:0}
+  .phone-screen{background:#000;border-radius:16px;overflow:hidden;aspect-ratio:9/16}
+  .screen-inner{padding:10px;height:100%;display:flex;flex-direction:column;gap:6px}
+  .screen-bar{height:6px;background:#1a1a1a;border-radius:3px}
+  .screen-bar.yellow{background:var(--yellow);width:60%}
+  .screen-bar.short{width:40%}
+  .screen-bar.med{width:70%}
+  .screen-card{background:#1a1a1a;border-radius:6px;padding:6px;margin-bottom:4px}
+  .screen-thumb{width:100%;height:40px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);border-radius:4px;margin-bottom:4px}
+
+  /* VOICE */
+  .voice-pill{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid #2a2a2a}
+  .voice-dot{width:8px;height:8px;background:var(--yellow);border-radius:50%;flex-shrink:0}
+  .voice-name{font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;color:var(--yellow)}
+  .voice-desc{font-size:11px;color:#888;margin-top:1px}
+
+  /* DIVIDER */
+  .divider{height:1px;background:#1a1a1a;margin:20px 0}
+
+  /* DO DONT */
+  .do-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0}
+  .do-check{width:18px;height:18px;background:#22C55E;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px}
+  .dont-check{width:18px;height:18px;background:#EF4444;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px}
+
+  /* SOCIAL CARD */
+  .social-card{background:#1a1a1a;border-radius:10px;overflow:hidden;border:1px solid #2a2a2a}
+  .social-top{background:var(--yellow);padding:10px 12px;min-height:70px;display:flex;flex-direction:column;justify-content:flex-end}
+  .social-tag{font-size:9px;color:#000;text-transform:uppercase;letter-spacing:1px;opacity:0.6;margin-bottom:2px}
+  .social-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:#000;line-height:1.2}
+  .social-body{padding:10px 12px}
+
+  /* FOOTER */
+  .brand-footer{margin-top:60px;padding-top:24px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center}
+  .footer-tag{font-size:11px;color:#444;letter-spacing:1px}
+
+  @media(max-width:768px){
+    .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+    .grid-auto{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="site-header">
+    <div style="display:flex;align-items:center;gap:0">
+      <div class="logo-wrap">
+        <div class="logo-back"></div>
+        <div class="logo-front"><span class="logo-b">B</span></div>
+      </div>
+      <span class="brand-name">BoldBox</span>
+    </div>
+    <div style="text-align:right">
+      <div class="tagline-header">WATCH IN SECONDS. FEEL IN MOMENTS. RETURN EVERY DAY.</div>
+      <div class="header-tag" style="margin-top:8px;display:inline-block">BRAND BIBLE — VERSION 1.0 — MAY 2025</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: BRAND STRATEGY -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">1</div>
+      <div class="sec-title">Brand Strategy Foundation</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:16px">
+      <div class="card">
+        <div class="label-yellow">Brand Purpose</div>
+        <div class="body-w">เราเชื่อในพลังของเรื่องราว ที่สามารถเคลื่อนผู้คน ข้ามวัฒนธรรม และสร้างความรู้สึกร่วมกันได้ไม่จำกัดเวลา</div>
+        <div class="divider"></div>
+        <div class="label-yellow">Vision</div>
+        <div class="body-w">BoldBox is building the next cross-border storytelling platform for Asia.</div>
+        <div class="divider"></div>
+        <div class="label-yellow">Mission</div>
+        <div class="body">สร้างแพลตฟอร์มที่ทำให้ Local Stories เดินทางข้ามประเทศ เข้าถึงง่าย สนุก และเชื่อมผู้ชม แบรนด์ และวัฒนธรรมเข้าด้วยกัน</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <div class="label-yellow">Positioning Statement</div>
+          <div class="body-w" style="font-style:italic">"BoldBox is a micro drama streaming platform built for the attention economy — combining short-form video with storytelling to deliver instant emotional engagement and scalable monetization."</div>
+        </div>
+        <div class="card">
+          <div class="label-yellow">Positioning Map</div>
+          <div class="pos-bar">
+            <div class="pos-item"><div class="pos-name">TIKTOK</div><div class="pos-desc">เร็ว แต่ไม่มี story</div></div>
+            <div class="pos-item active"><div class="pos-name">BOLDBOX</div><div class="pos-desc">เร็ว + มี story ทุกวัน</div></div>
+            <div class="pos-item"><div class="pos-name">NETFLIX</div><div class="pos-desc">มี story แต่เข้าถึงยาก</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-bottom:16px">
+      <div class="archetype">
+        <div class="arch-icon">🎭</div>
+        <div class="arch-name">The Entertainer</div>
+        <div class="arch-desc">สร้างความสุข ความตื่นเต้น ทำให้ผู้คนผ่อนคลายเพลิดเพลิน</div>
+      </div>
+      <div class="archetype">
+        <div class="arch-icon">🧭</div>
+        <div class="arch-name">The Explorer</div>
+        <div class="arch-desc">พาผู้ชมพบเรื่องใหม่ ข้ามวัฒนธรรม ค้นหาสิ่งที่ดีที่สุด</div>
+      </div>
+      <div class="card">
+        <div class="label-yellow">Brand Promise</div>
+        <div class="body-w" style="font-size:12px">"เราสัญญาว่า คุณจะได้สัมผัสเรื่องราวที่ดี ภายในเวลาไม่กี่วินาที และอยากกลับมาดูซ้ำบ่อยครั้ง"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label-yellow">Brand Personality</div>
+      <div class="grid-auto" style="margin-top:8px">
+        <div class="pill"><div class="pill-icon">⚡</div><div><div class="pill-name">BOLD</div><div class="pill-desc">กล้า ชัดเจน ไม่กลัวโดดเด่น</div></div></div>
+        <div class="pill"><div class="pill-icon">💛</div><div><div class="pill-name">EMOTIONAL</div><div class="pill-desc">สัมผัสอารมณ์ เชื่อมกับผู้ชมจริงๆ</div></div></div>
+        <div class="pill"><div class="pill-icon">🚀</div><div><div class="pill-name">FAST</div><div class="pill-desc">เร็ว ตรง ไม่เสียเวลาผู้ชม</div></div></div>
+        <div class="pill"><div class="pill-icon">🌟</div><div><div class="pill-name">WARM</div><div class="pill-desc">เป็นกันเอง อบอุ่น ไม่เย็นชา</div></div></div>
+        <div class="pill"><div class="pill-icon">🌏</div><div><div class="pill-name">ASIAN</div><div class="pill-desc">รากเหง้าชัด ภูมิใจในวัฒนธรรม</div></div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="label-yellow">Core Values</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+        <span class="tag">Story First</span>
+        <span class="tag">Audience Obsession</span>
+        <span class="tag">Move Fast</span>
+        <span class="tag">Create Impact</span>
+        <span class="tag">Stay Bold</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: LOGO SYSTEM -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">2</div>
+      <div class="sec-title">Logo System</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="grid-3">
+      <div class="logo-demo">
+        <div class="label" style="color:#444;margin-bottom:16px">PRIMARY LOGO</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="logo-wrap" style="width:70px;height:70px">
+            <div style="width:60px;height:60px;background:var(--gold);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);position:absolute;top:6px;left:6px"></div>
+            <div style="width:60px;height:60px;background:var(--yellow);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);display:flex;align-items:center;justify-content:center;z-index:1;position:relative">
+              <span style="font-family:'Nunito',sans-serif;font-weight:900;font-size:30px;color:#fff;position:relative;z-index:2">B</span>
+            </div>
+          </div>
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:28px;color:var(--yellow)">BoldBox</div>
+        </div>
+      </div>
+      <div class="logo-demo">
+        <div class="label" style="color:#444;margin-bottom:16px">SECONDARY LOGO</div>
+        <div class="logo-demo-wrap">
+          <div style="position:relative;width:40px;height:40px">
+            <div style="width:34px;height:34px;background:var(--gold);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);position:absolute;top:4px;left:4px"></div>
+            <div style="width:34px;height:34px;background:var(--yellow);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);display:flex;align-items:center;justify-content:center;position:relative;z-index:1">
+              <span style="font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;color:#fff">B</span>
+            </div>
+          </div>
+          <span class="demo-wordmark" style="font-size:22px">BoldBox</span>
+        </div>
+      </div>
+      <div class="logo-demo">
+        <div class="label" style="color:#444;margin-bottom:16px">ICON ONLY</div>
+        <div style="position:relative;width:60px;height:60px">
+          <div style="width:52px;height:52px;background:var(--gold);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);position:absolute;top:6px;left:6px"></div>
+          <div style="width:52px;height:52px;background:var(--yellow);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);display:flex;align-items:center;justify-content:center;position:relative;z-index:1">
+            <span style="font-family:'Nunito',sans-serif;font-weight:900;font-size:26px;color:#fff">B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="label-yellow">Logo Usage Rules</div>
+      <div class="grid-2" style="margin-top:8px;gap:8px">
+        <div class="do-item"><div class="do-check">✓</div><div class="body" style="font-size:12px">ใช้ logo บนพื้นดำหรือ Dark Surface เป็นหลัก</div></div>
+        <div class="do-item"><div class="do-check">✓</div><div class="body" style="font-size:12px">ใช้ icon "B" เป็น App Icon, Favicon, Social Avatar</div></div>
+        <div class="dont-check" style="margin-top:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;width:18px;height:18px;background:#EF4444;border-radius:50%;font-size:10px">✕</div><div class="body" style="font-size:12px">ห้ามใช้ logo บนพื้นสีอื่นนอกจากดำ/เทาเข้ม</div>
+        <div class="dont-check" style="margin-top:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;width:18px;height:18px;background:#EF4444;border-radius:50%;font-size:10px">✕</div><div class="body" style="font-size:12px">ห้ามเปลี่ยนสีหรือ distort รูปทรงโลโก้</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: COLOR PALETTE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">3</div>
+      <div class="sec-title">Color Palette</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="body" style="margin-bottom:16px">สีทั้งหมดของแบรนด์: <strong style="color:#fff">Bold, Cinematic, Premium, Energetic</strong></div>
+    <div class="grid-4" style="margin-bottom:16px">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F4C430"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">BOLDBOX YELLOW</div>
+          <div class="swatch-hex">#F4C430</div>
+          <div class="swatch-use">Primary · Highlight · CTA · ไอคอนสำคัญ</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#A08C20"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">SHADOW GOLD</div>
+          <div class="swatch-hex">#A08C20</div>
+          <div class="swatch-use">Depth · ใต้โลโก้ · Hover · Gradient Accent</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#000000;border:1px solid #333"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">PURE BLACK</div>
+          <div class="swatch-hex">#000000</div>
+          <div class="swatch-use">Background หลัก · Dark mode content</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1A1A1A"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">DARK SURFACE</div>
+          <div class="swatch-hex">#1A1A1A</div>
+          <div class="swatch-use">พื้นหลังการ์ด · พื้นที่รอง · Surface</div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-4">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#FFFFFF"></div>
+        <div class="swatch-info">
+          <div class="swatch-name" style="color:#000">WHITE</div>
+          <div class="swatch-hex">#FFFFFF</div>
+          <div class="swatch-use">Text / Icon · ตัวอักษรบนพื้นมืด</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#666666"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">MID GRAY</div>
+          <div class="swatch-hex">#666666</div>
+          <div class="swatch-use">Body text รอง · Placeholder · Supporting</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#22C55E"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">SUCCESS GREEN</div>
+          <div class="swatch-hex">#22C55E</div>
+          <div class="swatch-use">สำเร็จ · ยืนยัน · ตัวเลขบวก</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#EF4444"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">ALERT RED</div>
+          <div class="swatch-hex">#EF4444</div>
+          <div class="swatch-use">แจ้งเตือน · Error · Badge · Alert</div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="label-yellow">Color Combinations (ตัวอย่างการใช้งาน)</div>
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+        <div style="background:#000;border:1px solid #222;border-radius:8px;padding:10px 20px;text-align:center">
+          <div style="color:var(--yellow);font-family:'Nunito',sans-serif;font-weight:800;font-size:14px">Yellow on Black</div>
+          <div style="font-size:10px;color:#444;margin-top:2px">Primary Use</div>
+        </div>
+        <div style="background:#1a1a1a;border:1px solid #333;border-radius:8px;padding:10px 20px;text-align:center">
+          <div style="color:var(--yellow);font-family:'Nunito',sans-serif;font-weight:800;font-size:14px">Yellow on Dark</div>
+          <div style="font-size:10px;color:#444;margin-top:2px">Surface Use</div>
+        </div>
+        <div style="background:#000;border:1px solid #222;border-radius:8px;padding:10px 20px;text-align:center">
+          <div style="color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:14px">White on Black</div>
+          <div style="font-size:10px;color:#444;margin-top:2px">Body Text</div>
+        </div>
+        <div style="background:#000;border:1px solid #222;border-radius:8px;padding:10px 20px;text-align:center">
+          <div style="color:#22C55E;font-family:'Nunito',sans-serif;font-weight:800;font-size:14px">Green on Black</div>
+          <div style="font-size:10px;color:#444;margin-top:2px">Success State</div>
+        </div>
+        <div style="background:#000;border:1px solid #222;border-radius:8px;padding:10px 20px;text-align:center">
+          <div style="color:#EF4444;font-family:'Nunito',sans-serif;font-weight:800;font-size:14px">Red on Black</div>
+          <div style="font-size:10px;color:#444;margin-top:2px">Alert State</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: TYPOGRAPHY -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">4</div>
+      <div class="sec-title">Typography System</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="grid-2" style="margin-bottom:16px">
+      <div class="card">
+        <div class="label-yellow">Font Family</div>
+        <div style="margin:12px 0">
+          <div class="label">HEADLINE / DISPLAY</div>
+          <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:32px;color:var(--yellow);line-height:1.1">Nunito ExtraBold</div>
+          <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:20px;color:#fff">Aa Bb Cc 123</div>
+        </div>
+        <div class="divider"></div>
+        <div>
+          <div class="label">BODY TEXT</div>
+          <div style="font-family:'Sarabun',sans-serif;font-size:20px;color:#aaa">Sarabun / IBM Plex Sans Thai</div>
+          <div style="font-family:'Sarabun',sans-serif;font-size:16px;color:#888">ก ข ค ง จ ฉ ช Aa Bb Cc 123</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label-yellow">Type Scale</div>
+        <div class="type-row"><div class="type-label">H1</div><div class="type-size">48–64px</div><div class="type-sample" style="font-family:'Nunito',sans-serif;font-weight:800;font-size:28px">Headlines ใหญ่</div></div>
+        <div class="type-row"><div class="type-label">H2</div><div class="type-size">32–40px</div><div class="type-sample" style="font-family:'Nunito',sans-serif;font-weight:800;font-size:22px">Section Title</div></div>
+        <div class="type-row"><div class="type-label">H3</div><div class="type-size">24–28px</div><div class="type-sample" style="font-family:'Nunito',sans-serif;font-weight:700;font-size:18px">Sub Title</div></div>
+        <div class="type-row"><div class="type-label">H4</div><div class="type-size">18–24px</div><div class="type-sample" style="font-family:'Nunito',sans-serif;font-weight:700;font-size:15px">Card Title</div></div>
+        <div class="type-row"><div class="type-label">Body</div><div class="type-size">16px</div><div class="type-sample" style="font-size:14px;color:#888">เนื้อหาทั่วไป body copy</div></div>
+        <div class="type-row"><div class="type-label">Small</div><div class="type-size">12px</div><div class="type-sample" style="font-size:12px;color:#666">Caption / รายละเอียดเล็ก</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="label-yellow">Typography Rules</div>
+      <div class="grid-2" style="margin-top:10px;gap:8px">
+        <div class="do-item"><div class="do-check">✓</div><div class="body" style="font-size:12px">หัวข้อใช้ Nunito ExtraBold เสมอ อ่านง่าย ดูชัดเจน</div></div>
+        <div class="do-item"><div class="do-check">✓</div><div class="body" style="font-size:12px">ใช้ White/Yellow บน Dark Background เท่านั้น</div></div>
+        <div class="do-item"><div class="do-check">✓</div><div class="body" style="font-size:12px">ตัวหนังสือบนมือถือ ขนาดขั้นต่ำ Body 14px</div></div>
+        <div class="do-item" style="align-items:flex-start"><div class="dont-check" style="margin-top:2px;width:18px;height:18px;background:#EF4444;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">✕</div><div class="body" style="font-size:12px">ห้ามใช้ font Light / Thin เด็ดขาด</div></div>
+        <div class="do-item" style="align-items:flex-start"><div class="dont-check" style="margin-top:2px;width:18px;height:18px;background:#EF4444;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">✕</div><div class="body" style="font-size:12px">ห้ามใช้สีหลายสีผสมกันในย่อหน้าเดียว</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: VISUAL DIRECTION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">5</div>
+      <div class="sec-title">Visual Direction</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="grid-3" style="margin-bottom:16px">
+      <div class="card">
+        <div class="label-yellow">Photography Style</div>
+        <div class="body" style="margin-top:6px">โทนภาพ: <strong style="color:#fff">Cinematic, Dramatic, Emotional</strong></div>
+        <div class="divider"></div>
+        <div class="body" style="font-size:12px">• เน้นใบหน้า อารมณ์ ความสัมพันธ์<br>• แสงมืด มีคอนทราสต์สูง<br>• ใช้ภาพแนวตั้ง เต็มหน้าเป็นหลัก</div>
+        <div style="margin-top:12px;background:#111;border-radius:8px;height:80px;display:flex;align-items:center;justify-content:center;border:1px solid #1a1a1a">
+          <div style="text-align:center;color:#333;font-size:12px">[ Cinematic Image ]<br>Dark · Dramatic · Emotional</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label-yellow">Illustration Style</div>
+        <div class="body" style="margin-top:6px">สไตล์: <strong style="color:#fff">Flat + Soft Gradient</strong></div>
+        <div class="divider"></div>
+        <div class="body" style="font-size:12px">• ใช้ไอคอนเส้นเรียบง่าย<br>• โทนสีเหลือง/เทา บนพื้นดำ<br>• ไม่ตกแต่งมากเกินไป</div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
+          <div style="width:36px;height:36px;border:2px solid var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px">▶</div>
+          <div style="width:36px;height:36px;border:2px solid var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px">★</div>
+          <div style="width:36px;height:36px;border:2px solid var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px">♛</div>
+          <div style="width:36px;height:36px;border:2px solid var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px">🔔</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label-yellow">Layout & Composition</div>
+        <div class="body" style="margin-top:6px">หลักการ: <strong style="color:#fff">Mobile-First · Vertical</strong></div>
+        <div class="divider"></div>
+        <div class="body" style="font-size:12px">• เน้น Vertical Content (9:16)<br>• จัดวางเรียบง่าย ไม่รกสายตา<br>• ข้อความใหญ่ อ่านได้ใน 1 วินาที</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="label-yellow" style="color:#22C55E">Visual DO's</div>
+        <div class="do-item"><div class="do-check">✓</div><div class="body" style="font-size:12px">ใช้ภาพแนวตั้ง เต็มหน้า</div></div>
+        <div class="do-item"><div class="do-check">✓</div><div class="body" style="font-size:12px">ใช้ข้อความใหญ่ ชัดเจน</div></div>
+        <div class="do-item"><div class="do-check">✓</div><div class="body" style="font-size:12px">ใช้ Yellow เป็น highlight เสมอ</div></div>
+        <div class="do-item"><div class="do-check">✓</div><div class="body" style="font-size:12px">ให้ความรู้สึก Cinematic</div></div>
+        <div class="do-item"><div class="do-check">✓</div><div class="body" style="font-size:12px">เน้นจุดสำคัญด้วยตัวหนา</div></div>
+      </div>
+      <div class="card">
+        <div class="label-yellow" style="color:#EF4444">Visual DON'Ts</div>
+        <div class="do-item"><div class="dont-check" style="background:#EF4444;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px">✕</div><div class="body" style="font-size:12px">ใช้พื้นหลังสว่างเป็นหลัก</div></div>
+        <div class="do-item"><div class="dont-check" style="background:#EF4444;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px">✕</div><div class="body" style="font-size:12px">ใช้สีหลายสีเกินไปในชิ้นเดียว</div></div>
+        <div class="do-item"><div class="dont-check" style="background:#EF4444;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px">✕</div><div class="body" style="font-size:12px">ทำงานดูยุ่งเกินความจำเป็น</div></div>
+        <div class="do-item"><div class="dont-check" style="background:#EF4444;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px">✕</div><div class="body" style="font-size:12px">ใช้ font เล็กหรือบาง</div></div>
+        <div class="do-item"><div class="dont-check" style="background:#EF4444;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px">✕</div><div class="body" style="font-size:12px">ทำให้โลโก้หรือ CTA เล็กเกินไป</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: BRAND VOICE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">6</div>
+      <div class="sec-title">Brand Voice &amp; Messaging</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="grid-2" style="margin-bottom:16px">
+      <div class="card">
+        <div class="label-yellow">Voice Character</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+          <div class="voice-pill"><div class="voice-dot"></div><div><div class="voice-name">FRIENDLY</div><div class="voice-desc">พูดคุยเป็นกันเอง เหมือนเพื่อนแนะนำหนังดี</div></div></div>
+          <div class="voice-pill"><div class="voice-dot"></div><div><div class="voice-name">CONFIDENT</div><div class="voice-desc">มั่นใจ กล้า ไม่ลังเล</div></div></div>
+          <div class="voice-pill"><div class="voice-dot"></div><div><div class="voice-name">EXCITING</div><div class="voice-desc">สร้างความตื่นเต้น อยากเปิดดูทันที</div></div></div>
+          <div class="voice-pill"><div class="voice-dot"></div><div><div class="voice-name">EMOTIONAL</div><div class="voice-desc">เชื่อมความรู้สึก ให้รู้สึกว่าเข้าใจ</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label-yellow">Tagline Options</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+          <div class="tagline-opt primary">
+            <div class="tl-num">HERO TAGLINE</div>
+            <div class="tl-text hero">Watch in seconds. Feel in moments. Return every day.</div>
+          </div>
+          <div class="tagline-opt">
+            <div class="tl-num">OPTION 2</div>
+            <div class="tl-text">เรื่องดี อยู่ ความรู้สึกยาว</div>
+          </div>
+          <div class="tagline-opt">
+            <div class="tl-num">OPTION 3</div>
+            <div class="tl-text">เปิดแอป ความรู้สึกยาว</div>
+          </div>
+          <div class="tagline-opt">
+            <div class="tl-num">OPTION 4</div>
+            <div class="tl-text">เป็น BoldBox. มันเลย.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="label-yellow">Message Hierarchy</div>
+      <div class="grid-3" style="margin-top:12px">
+        <div class="card-dark2">
+          <div style="width:24px;height:24px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:#000;margin-bottom:8px">1</div>
+          <div class="h3">Hero Message</div>
+          <div class="body" style="font-size:12px">ดูได้เลย ทันที ไม่ต้องรอ ทุกๆที่ทุกวัน</div>
+        </div>
+        <div class="card-dark2">
+          <div style="width:24px;height:24px;background:var(--gray2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:#aaa;margin-bottom:8px">2</div>
+          <div class="h3">Supporting Message</div>
+          <div class="body" style="font-size:12px">ซีรีส์ดี ออกใหม่ เป็นซีรีส์สั้น วันนี้ อัดแน่น</div>
+        </div>
+        <div class="card-dark2">
+          <div style="width:24px;height:24px;background:var(--gray2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:#aaa;margin-bottom:8px">3</div>
+          <div class="h3">Reason to Believe</div>
+          <div class="body" style="font-size:12px">ซีรีส์ออริจินัล ทุกเรื่อง ผลิตบนมือถือโดยตรง ราคาเข้าถึงง่าย</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="label-yellow">Investor / Business Line</div>
+      <div class="body-w" style="font-style:italic;margin-top:6px">"BoldBox turns short attention into storytelling, retention, and scalable monetization."</div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: SOCIAL MEDIA -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">7</div>
+      <div class="sec-title">Social Media Templates (1080×1350)</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="grid-4">
+      <div class="social-card">
+        <div class="social-top" style="background:var(--yellow)">
+          <div class="social-tag">New Series</div>
+          <div class="social-title">NEW SERIES วันนี้ ตอนแรก!</div>
+        </div>
+        <div class="social-body">
+          <div style="height:40px;background:#111;border-radius:6px;margin-bottom:8px"></div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <div style="position:relative;width:24px;height:24px">
+              <div style="width:20px;height:20px;background:var(--gold);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);position:absolute;top:2px;left:2px"></div>
+              <div style="width:20px;height:20px;background:var(--yellow);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);display:flex;align-items:center;justify-content:center;position:relative;z-index:1">
+                <span style="font-size:9px;font-weight:900;color:#fff;font-family:'Nunito',sans-serif">B</span>
+              </div>
+            </div>
+            <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;color:var(--yellow)">BoldBox</div>
+          </div>
+        </div>
+      </div>
+      <div class="social-card">
+        <div class="social-top" style="background:#1a1a1a;border-bottom:1px solid #333">
+          <div class="social-tag" style="color:var(--yellow)">Quote Post</div>
+          <div class="social-title" style="color:#fff">"บางความรู้สึก พูดออกไปไม่ได้... แต่แล้วก็เข้าใจ"</div>
+        </div>
+        <div class="social-body">
+          <div style="height:40px;background:#111;border-radius:6px;margin-bottom:8px"></div>
+          <div style="font-size:10px;color:var(--yellow)">BoldBox Original</div>
+        </div>
+      </div>
+      <div class="social-card">
+        <div class="social-top" style="background:#111;border-bottom:1px solid #222">
+          <div class="social-tag" style="color:var(--yellow)">Character Post</div>
+          <div class="social-title" style="color:#fff">เขาไม่ใช่ร้าย แต่ต้องปกป้องคนที่รัก</div>
+        </div>
+        <div class="social-body">
+          <div style="height:40px;background:#1a1a1a;border-radius:6px;margin-bottom:8px"></div>
+          <div style="font-size:10px;color:#666">Drama · Romance · Revenge</div>
+        </div>
+      </div>
+      <div class="social-card">
+        <div class="social-top" style="background:var(--yellow)">
+          <div class="social-tag">Promo / CTA</div>
+          <div class="social-title">ดูฟรี! ตอนแรก ทุกวัน ที่ BoldBox</div>
+        </div>
+        <div class="social-body">
+          <div style="background:var(--yellow);border-radius:6px;padding:8px;text-align:center;margin-bottom:6px">
+            <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:13px;color:#000">ดาวน์โหลดเลย ฟรี!</div>
+          </div>
+          <div style="font-size:10px;color:#666;text-align:center">App Store · Google Play</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: APP UI -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">8</div>
+      <div class="sec-title">Application UI Guidelines (Key Screens)</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="card" style="margin-bottom:16px">
+      <div class="label-yellow">UI Color Rules</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px">
+        <div style="display:flex;align-items:center;gap:8px"><div style="width:16px;height:16px;background:#000;border:1px solid #333;border-radius:3px"></div><div class="body" style="font-size:12px">พื้นดำ <code style="color:#888">#000</code></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div style="width:16px;height:16px;background:#1A1A1A;border-radius:3px"></div><div class="body" style="font-size:12px">Surface <code style="color:#888">#1A1A1A</code></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div style="width:16px;height:16px;background:#fff;border-radius:3px"></div><div class="body" style="font-size:12px">ตัวอักษรขาว <code style="color:#888">#FFF</code></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div style="width:16px;height:16px;background:var(--yellow);border-radius:3px"></div><div class="body" style="font-size:12px">ไอคอนสีเหลือง <code style="color:#888">#F4C430</code></div></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <!-- Splash -->
+      <div style="text-align:center">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div style="background:#000;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+              <div style="position:relative;width:40px;height:40px">
+                <div style="width:34px;height:34px;background:var(--gold);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);position:absolute;top:4px;left:4px"></div>
+                <div style="width:34px;height:34px;background:var(--yellow);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);display:flex;align-items:center;justify-content:center;position:relative;z-index:1">
+                  <span style="font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;color:#fff">B</span>
+                </div>
+              </div>
+              <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;color:var(--yellow)">BoldBox</div>
+              <div style="font-size:7px;color:#444;text-align:center;padding:0 10px">Watch in seconds.<br>Feel in moments.</div>
+            </div>
+          </div>
+        </div>
+        <div class="label" style="margin-top:8px;text-align:center">SPLASH</div>
+      </div>
+      <!-- For You -->
+      <div style="text-align:center">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div style="background:#000;height:100%;padding:8px;display:flex;flex-direction:column;gap:5px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:10px;color:var(--yellow)">BoldBox</div>
+                <div style="font-size:8px;color:#444">🔔 ☰</div>
+              </div>
+              <div style="display:flex;gap:4px">
+                <div style="background:var(--yellow);border-radius:10px;padding:2px 8px;font-size:7px;color:#000;font-weight:700">For You</div>
+                <div style="border:1px solid #333;border-radius:10px;padding:2px 8px;font-size:7px;color:#666">Romance</div>
+                <div style="border:1px solid #333;border-radius:10px;padding:2px 8px;font-size:7px;color:#666">Drama</div>
+              </div>
+              <div style="background:#1a1a1a;border-radius:6px;height:55px;display:flex;align-items:flex-end;padding:5px">
+                <div>
+                  <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:8px;color:#fff">รักข้ามชาติ EP.1</div>
+                  <div style="font-size:6px;color:var(--yellow)">▶ ดูฟรี</div>
+                </div>
+              </div>
+              <div style="background:#1a1a1a;border-radius:6px;height:40px"></div>
+              <div style="background:#1a1a1a;border-radius:6px;height:40px"></div>
+            </div>
+          </div>
+        </div>
+        <div class="label" style="margin-top:8px;text-align:center">HOME / FOR YOU</div>
+      </div>
+      <!-- Play Screen -->
+      <div style="text-align:center">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div style="background:#000;height:100%;display:flex;flex-direction:column">
+              <div style="background:#1a1a1a;flex:1;display:flex;align-items:center;justify-content:center">
+                <div style="width:24px;height:24px;background:rgba(244,196,48,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#000">▶</div>
+              </div>
+              <div style="padding:8px">
+                <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:8px;color:#fff;margin-bottom:3px">รักข้ามชาติ EP.1</div>
+                <div style="background:#222;border-radius:2px;height:2px;margin-bottom:6px"><div style="background:var(--yellow);width:40%;height:100%"></div></div>
+                <div style="display:flex;justify-content:space-between">
+                  <div style="font-size:7px;color:#666">0:45</div>
+                  <div style="font-size:7px;color:#666">3:20</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="label" style="margin-top:8px;text-align:center">PLAY SCREEN</div>
+      </div>
+      <!-- VIP -->
+      <div style="text-align:center">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div style="background:#000;height:100%;padding:8px;display:flex;flex-direction:column;gap:5px">
+              <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:10px;color:var(--yellow);text-align:center">VIP Membership</div>
+              <div style="background:linear-gradient(135deg,#1a1400,#2a2000);border:1px solid var(--yellow);border-radius:8px;padding:8px;text-align:center">
+                <div style="font-size:7px;color:var(--yellow);margin-bottom:2px">VIP MEMBER</div>
+                <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;color:var(--yellow)">฿129</div>
+                <div style="font-size:7px;color:#888">/เดือน</div>
+              </div>
+              <div style="font-size:7px;color:#888">✓ ดู Exclusive ไม่อั้น</div>
+              <div style="font-size:7px;color:#888">✓ ไม่มีโฆษณา</div>
+              <div style="background:var(--yellow);border-radius:6px;padding:5px;text-align:center;margin-top:4px">
+                <div style="font-family:'Nunito',sans-serif;font-weight:700;font-size:9px;color:#000">สมัครเลย</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="label" style="margin-top:8px;text-align:center">VIP / SUBSCRIBE</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: BRAND RULES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="sec-num">9</div>
+      <div class="sec-title">The 3 Brand Rules — Never Break</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="grid-3">
+      <div class="rule-card">
+        <div class="rule-num">1</div>
+        <div style="font-size:28px;margin-bottom:12px;position:relative;z-index:1">👁</div>
+        <div class="rule-title">ALWAYS BOLD &amp; CLEAR</div>
+        <div class="rule-desc">ทุกอย่างต้องชัดเจน กล้า ไม่ใช้ตัวอักษรเล็ก สีจาง หรือ layout สับสน ผู้ชมต้องเข้าใจทันทีใน 1 วินาที</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">2</div>
+        <div style="font-size:28px;margin-bottom:12px;position:relative;z-index:1">▶</div>
+        <div class="rule-title">STORY &amp; EMOTION FIRST</div>
+        <div class="rule-desc">ทุกคอนเทนต์ต้องนำด้วยเรื่องราวและอารมณ์เสมอ ไม่ใช่ Feature หรือ Specification ให้ผู้ชมรู้สึกก่อน แล้วค่อยรู้ทีหลัง</div>
+      </div>
+      <div class="rule-card" style="border:1px solid var(--yellow)">
+        <div class="rule-num">3</div>
+        <div style="font-size:28px;margin-bottom:12px;position:relative;z-index:1">
+          <div style="position:relative;width:36px;height:36px;margin:0 auto">
+            <div style="width:30px;height:30px;background:var(--gold);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);position:absolute;top:4px;left:4px"></div>
+            <div style="width:30px;height:30px;background:var(--yellow);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);display:flex;align-items:center;justify-content:center;position:relative;z-index:1">
+              <span style="font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:#fff">B</span>
+            </div>
+          </div>
+        </div>
+        <div class="rule-title">YELLOW ON BLACK IS OUR SIGNATURE</div>
+        <div class="rule-desc">เอกลักษณ์ของเราคือสีเหลืองบนดำเสมอ ห้ามเปลี่ยนสี ห้ามใช้พื้นหลังสว่าง นี่คือ DNA ของแบรนด์</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="brand-footer">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="position:relative;width:32px;height:32px">
+        <div style="width:26px;height:26px;background:var(--gold);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);position:absolute;top:3px;left:3px"></div>
+        <div style="width:26px;height:26px;background:var(--yellow);clip-path:polygon(20% 0%,80% 5%,100% 45%,80% 95%,20% 100%,0% 50%);display:flex;align-items:center;justify-content:center;position:relative;z-index:1">
+          <span style="font-family:'Nunito',sans-serif;font-weight:900;font-size:13px;color:#fff">B</span>
+        </div>
+      </div>
+      <span style="font-family:'Nunito',sans-serif;font-weight:900;font-size:16px;color:var(--yellow)">BoldBox</span>
+    </div>
+    <div class="footer-tag">BOLDBOX BRAND BIBLE · VERSION 1.0 · UPDATED MAY 2025</div>
+    <div class="footer-tag">CONFIDENTIAL — INTERNAL USE ONLY</div>
+  </div>
+
+</div>
+</body>
+</html>

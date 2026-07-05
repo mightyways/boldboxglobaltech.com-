@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoldBox — Post-Investment Action Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --yellow: #F4C430;
+  --gold: #A08C20;
+  --black: #000000;
+  --surface: #111111;
+  --surface2: #1A1A1A;
+  --surface3: #242424;
+  --white: #FFFFFF;
+  --gray: #888888;
+  --gray-light: #CCCCCC;
+  --green: #22C55E;
+  --red: #EF4444;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Sarabun', sans-serif;
+  font-size: 18px;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+section { padding: 64px 0; }
+section:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+/* TYPOGRAPHY */
+.label-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.section-sub {
+  font-size: 18px;
+  color: var(--gray);
+  margin-bottom: 44px;
+  line-height: 1.6;
+}
+.divider {
+  width: 48px; height: 3px;
+  background: var(--yellow);
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+
+/* BADGE */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.badge-yellow { background: rgba(244,196,48,0.15); color: var(--yellow); }
+.badge-green  { background: rgba(34,197,94,0.15);  color: var(--green); }
+.badge-gray   { background: rgba(136,136,136,0.15); color: var(--gray-light); }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+/* HERO */
+.hero {
+  padding: 48px 0 44px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.logo-img {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+}
+.hero-right { text-align: right; }
+.hero-doc-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 4px;
+}
+.hero-date { font-size: 15px; color: var(--gray-light); }
+
+.hero-banner {
+  background: var(--surface2);
+  border-radius: 18px;
+  border-left: 5px solid var(--yellow);
+  padding: 28px 36px;
+}
+.hero-banner h1 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 36px;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+.hero-banner h1 span { color: var(--yellow); }
+.hero-banner p {
+  font-size: 18px;
+  color: var(--gray-light);
+  line-height: 1.6;
+  max-width: 760px;
+}
+
+/* WHY FAST */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.why-card {
+  background: var(--surface2);
+  border-radius: 14px;
+  padding: 26px 22px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.why-icon { font-size: 28px; margin-bottom: 12px; }
+.why-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.why-body { font-size: 16px; color: var(--gray-light); line-height: 1.55; }
+
+/* PROGRESS CARDS */
+.progress-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.progress-card {
+  background: var(--surface2);
+  border-radius: 16px;
+  padding: 28px 26px;
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.progress-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--yellow);
+}
+.progress-card.green-top::before { background: var(--green); }
+.progress-card.gray-top::before  { background: var(--gray); }
+
+.progress-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+.progress-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.progress-pct {
+  font-family: 'Nunito', sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--yellow);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.progress-pct.green { color: var(--green); }
+.progress-pct.gray  { color: var(--gray); }
+.progress-pct-sub { font-size: 15px; color: var(--gray); margin-bottom: 14px; }
+
+.progress-bar-wrap {
+  background: rgba(255,255,255,0.08);
+  border-radius: 100px;
+  height: 7px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: var(--yellow);
+}
+.progress-bar-fill.green { background: var(--green); }
+.progress-bar-fill.gray  { background: var(--gray); }
+
+.progress-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex: 1;
+}
+.progress-bullets li {
+  font-size: 15px;
+  color: var(--gray-light);
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+.progress-bullets li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--yellow);
+}
+.progress-bullets li.green-dash::before { color: var(--green); }
+.progress-bullets li.gray-dash::before  { color: var(--gray); }
+
+/* CALLOUT */
+.callout {
+  background: rgba(244,196,48,0.07);
+  border: 1px solid rgba(244,196,48,0.25);
+  border-radius: 14px;
+  padding: 24px 28px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.callout-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+.callout-title { font-size: 17px; font-weight: 700; color: var(--yellow); margin-bottom: 6px; }
+.callout-body { font-size: 17px; color: var(--gray-light); line-height: 1.6; }
+
+/* PHASE CARDS */
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.phase-num {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 1px;
+  background: rgba(244,196,48,0.15);
+  color: var(--yellow);
+  padding: 6px 16px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.phase-title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* SHAREHOLDER TABLE */
+.sh-table-wrap {
+  background: var(--surface2);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 24px;
+}
+.sh-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.sh-table th {
+  background: var(--surface3);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gray);
+  padding: 14px 20px;
+  text-align: left;
+}
+.sh-table td {
+  padding: 14px 20px;
+  font-size: 17px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.sh-table tr:hover td { background: rgba(255,255,255,0.02); }
+.sh-dot-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sh-dot {
+  width: 10px; height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.sh-pct-val {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+}
+.sh-group-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  padding: 10px 20px 6px;
+  background: rgba(255,255,255,0.02);
+}
+
+/* GOVERNANCE CARDS */
+.gov-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+.gov-card {
+  background: var(--surface2);
+  border-radius: 14px;
+  padding: 22px 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.gov-icon { font-size: 24px; margin-bottom: 10px; }
+.gov-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.gov-body { font-size: 15px; color: var(--gray-light); line-height: 1.55; }
+
+/* MONEY FLOW */
+.money-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.money-step {
+  background: var(--surface2);
+  border-radius: 14px;
+  padding: 22px 18px;
+  border: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+  position: relative;
+}
+.money-step.highlight {
+  background: rgba(244,196,48,0.07);
+  border-color: rgba(244,196,48,0.3);
+}
+.money-step-num {
+  font-family: 'Nunito', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: rgba(244,196,48,0.2);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.money-step-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.money-step-body { font-size: 14px; color: var(--gray); line-height: 1.5; }
+
+/* DAY 0 TABLE */
+.day0-table-wrap {
+  background: var(--surface2);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.day0-table { width: 100%; border-collapse: collapse; }
+.day0-table th {
+  background: var(--surface3);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gray);
+  padding: 13px 20px;
+  text-align: left;
+}
+.day0-table td {
+  padding: 13px 20px;
+  font-size: 17px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.day0-table tr.total td {
+  font-weight: 700;
+  color: var(--yellow);
+  background: rgba(244,196,48,0.06);
+  border-top: 1px solid rgba(244,196,48,0.2);
+  font-size: 18px;
+}
+.day0-table .amount { text-align: right; font-family: 'Nunito', sans-serif; font-weight: 700; }
+
+/* PHASE 3 GRID */
+.prelaunch-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.prelaunch-card {
+  background: var(--surface2);
+  border-radius: 14px;
+  padding: 24px 22px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.prelaunch-card-icon { font-size: 24px; margin-bottom: 10px; }
+.prelaunch-card-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+.prelaunch-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.prelaunch-bullets li {
+  font-size: 16px;
+  color: var(--gray-light);
+  line-height: 1.5;
+  padding-left: 16px;
+  position: relative;
+}
+.prelaunch-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--yellow);
+  font-size: 13px;
+  top: 2px;
+}
+
+/* MILESTONE TABLE */
+.milestone-table-wrap {
+  background: var(--surface2);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 24px;
+}
+.milestone-table { width: 100%; border-collapse: collapse; }
+.milestone-table th {
+  background: var(--surface3);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gray);
+  padding: 13px 22px;
+  text-align: left;
+}
+.milestone-table td {
+  padding: 14px 22px;
+  font-size: 17px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.milestone-table tr.highlight-row td {
+  background: rgba(34,197,94,0.06);
+  border-top: 1px solid rgba(34,197,94,0.15);
+  font-weight: 700;
+  color: var(--green);
+}
+.milestone-table tr.highlight-row td:first-child { border-left: 3px solid var(--green); }
+.milestone-mau {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  color: var(--yellow);
+}
+
+/* FINANCIAL HIGHLIGHTS */
+.fin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.fin-card {
+  background: var(--surface2);
+  border-radius: 14px;
+  padding: 24px 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+}
+.fin-card.primary {
+  background: rgba(244,196,48,0.07);
+  border-color: rgba(244,196,48,0.25);
+}
+.fin-card-label { font-size: 15px; color: var(--gray); margin-bottom: 8px; font-weight: 500; }
+.fin-card-val {
+  font-family: 'Nunito', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.fin-card-val.yellow { color: var(--yellow); }
+.fin-card-val.green  { color: var(--green); }
+.fin-card-note { font-size: 15px; color: var(--gray); }
+
+/* CHART */
+.chart-container {
+  background: var(--surface2);
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.chart-title { font-size: 17px; font-weight: 700; }
+.chart-sub { font-size: 14px; color: var(--gray); margin-top: 3px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 0; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 39px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--yellow), rgba(244,196,48,0.08));
+}
+.tl-item {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 28px;
+  position: relative;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot-wrap {
+  flex-shrink: 0;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.tl-dot {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--yellow);
+  border: 3px solid var(--black);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 10px;
+  color: var(--black);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.tl-dot.future {
+  background: var(--surface3);
+  border-color: var(--gold);
+  color: var(--yellow);
+}
+.tl-time {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--yellow);
+  letter-spacing: 0.5px;
+  text-align: center;
+  white-space: nowrap;
+}
+.tl-time.future { color: var(--gray); }
+.tl-card {
+  flex: 1;
+  background: var(--surface2);
+  border-radius: 14px;
+  padding: 22px 26px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.tl-card.highlight {
+  border-color: rgba(244,196,48,0.3);
+  background: rgba(244,196,48,0.04);
+}
+.tl-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tl-card-sub { font-size: 15px; color: var(--gray); margin-bottom: 18px; }
+.tl-tasks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.tl-task {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--gray-light);
+  line-height: 1.45;
+}
+.tl-check {
+  width: 17px; height: 17px;
+  border-radius: 4px;
+  background: rgba(244,196,48,0.18);
+  border: 1px solid rgba(244,196,48,0.4);
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  color: var(--yellow);
+}
+.tl-check.empty {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.18);
+  color: transparent;
+}
+.tl-metrics {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  flex-wrap: wrap;
+}
+.tl-metric-item { font-size: 14px; color: var(--gray); }
+.tl-metric-val {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--yellow);
+}
+.tl-metric-val.green { color: var(--green); }
+
+/* SUMMARY BOX */
+.summary-box {
+  background: var(--surface2);
+  border-radius: 18px;
+  border: 1px solid rgba(244,196,48,0.2);
+  padding: 40px 44px;
+  text-align: center;
+}
+.summary-box h2 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 30px;
+  color: var(--yellow);
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+.summary-box p {
+  font-size: 18px;
+  color: var(--gray-light);
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto 28px;
+}
+.summary-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.summary-stat-val {
+  font-family: 'Nunito', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--yellow);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.summary-stat-label { font-size: 14px; color: var(--gray); }
+
+/* FOOTER */
+.footer {
+  padding: 32px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-note { font-size: 13px; color: var(--gray); }
+
+@media (max-width: 800px) {
+  .progress-grid, .why-grid, .gov-grid, .money-grid, .prelaunch-grid, .fin-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-top">
+      <img src="Bold Box - LOGO.png" alt="BoldBox" class="logo-img">
+      <div class="hero-right">
+        <div class="hero-doc-label">Confidential · Investors Only</div>
+        <div class="hero-date">พฤษภาคม 2569 · May 2026</div>
+      </div>
+    </div>
+    <div class="hero-banner">
+      <h1>Post-Investment <span>Action Plan</span></h1>
+      <p>แผนการดำเนินงานหลังรับเงินลงทุน — ขั้นตอน ระยะเวลา และเป้าหมายที่ชัดเจน ตั้งแต่วันแรกจนถึง 410,000 Active Users</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ WHY NOW ═══ -->
+<section>
+  <div class="container">
+    <div class="label-tag">ทำไมต้องตัดสินใจเร็ว</div>
+    <h2 class="section-title">โอกาสที่รอไม่ได้</h2>
+    <p class="section-sub">ตลาด micro drama ในเอเชียกำลังเติบโตเร็วมาก — ประเทศไทยยังไม่มี local player ที่ชัดเจน</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🏃</div>
+        <div class="why-title">First-mover Advantage</div>
+        <div class="why-body">ไทยยังไม่มีแพลตฟอร์ม micro drama ที่เป็น local player ชัดเจน ทีมที่เข้าก่อนได้ advantage ในการสร้าง brand และ user base ก่อนใคร</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <div class="why-title">ทีมพร้อมแล้ว — รอแค่ทุน</div>
+        <div class="why-body">แอปพัฒนาแล้ว 80% content 320 เรื่องอยู่ในมือ deal กับ supplier เปิดไว้แล้ว ทุกอย่างรอแค่เงินทุนเพื่อ execute สิ่งที่เตรียมไว้</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🚀</div>
+        <div class="why-title">Launch ได้ใน 90 วัน</div>
+        <div class="why-body">เพราะงานหลักทุกด้านเดินไปแล้ว ไม่ต้องเริ่มจากศูนย์ พอได้รับทุนสามารถ launch ได้ภายใน 90 วัน เร็วกว่า startup ทั่วไปมาก</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION: CURRENT PROGRESS ═══ -->
+<section>
+  <div class="container">
+    <div class="label-tag">สถานะความคืบหน้า ณ ปัจจุบัน</div>
+    <h2 class="section-title">ทีมไม่ได้เริ่มจากศูนย์</h2>
+    <p class="section-sub">งานหลักทุกด้านเดินไปแล้ว — รอแค่ทุนเพื่อกดปุ่ม Launch</p>
+
+    <div class="progress-grid">
+
+      <!-- APP -->
+      <div class="progress-card">
+        <div class="progress-label">📱 App Development</div>
+        <div class="progress-title">พัฒนาแอปพลิเคชัน</div>
+        <div class="progress-pct">80%</div>
+        <div class="progress-pct-sub">เสร็จแล้ว</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" style="width:80%"></div>
+        </div>
+        <ul class="progress-bullets">
+          <li>iOS + Android ฟังก์ชันหลักทั้งหมดเสร็จแล้ว</li>
+          <li>เหลือ Testing + Bug Fix ก็พร้อม Launch</li>
+          <li>รอ Submit App Store ด้วยชื่อบริษัท BoldBox ที่จดทะเบียนใหม่ เพื่อให้อยู่ภายใต้นิติบุคคลที่ถูกต้องตั้งแต่ต้น</li>
+          <li>เมื่อจดบริษัทเสร็จ Submit ได้ทันที คาดว่า Publish ได้ใน <strong style="color:var(--yellow)">2–4 สัปดาห์</strong></li>
+        </ul>
+        <span class="badge badge-yellow"><span class="badge-dot"></span>ใกล้พร้อม App Store</span>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="progress-card green-top">
+        <div class="progress-label">🎬 Content Library</div>
+        <div class="progress-title">การเตรียมคอนเทนต์ซีรีส์</div>
+        <div class="progress-pct green">320</div>
+        <div class="progress-pct-sub">Series อยู่ในมือแล้ว</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill green" style="width:100%"></div>
+        </div>
+        <ul class="progress-bullets">
+          <li class="green-dash">Ake (CCO) ติดต่อและ deal กับค่ายซีรีส์ผู้ถือลิขสิทธิ์ไปแล้ว <strong style="color:var(--green)">2 ค่าย</strong></li>
+          <li class="green-dash">ได้ข้อมูลซีรีส์กลับมา <strong style="color:var(--green)">320 เรื่อง</strong>: ซีรีส์จีน 280 เรื่อง + ซีรีส์ญี่ปุ่น 40 เรื่อง</li>
+          <li class="green-dash">มีตัวอย่างและ Synopsis ครบทุกเรื่อง</li>
+          <li class="green-dash">ขณะนี้คัดเลือกซีรีส์ที่มี potential สูงในตลาดไทย-จีน-เอเชีย และรอดีลซื้อ Sub และพากย์เสียง</li>
+        </ul>
+        <span class="badge badge-green"><span class="badge-dot"></span>พร้อม Deploy</span>
+      </div>
+
+      <!-- BUSINESS -->
+      <div class="progress-card gray-top">
+        <div class="progress-label">🏢 Business Status</div>
+        <div class="progress-title">สถานะธุรกิจ</div>
+        <div class="progress-pct gray">รอ</div>
+        <div class="progress-pct-sub">การตัดสินใจลงทุน</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill gray" style="width:30%"></div>
+        </div>
+        <ul class="progress-bullets">
+          <li class="gray-dash">อยู่ในขั้นตอนสุดท้ายของการยืนยันผู้ถือหุ้น และจัดเตรียมเอกสารจดจัดตั้งบริษัท BoldBox</li>
+          <li class="gray-dash">สรุป Business Model และช่องทางรายได้พร้อมพัฒนาต่อยอด</li>
+          <li class="gray-dash">รอ confirm จากนักลงทุน — เมื่อได้รับสามารถดำเนินการได้ทันที</li>
+        </ul>
+        <span class="badge badge-gray"><span class="badge-dot"></span>รอการลงทุน</span>
+      </div>
+
+    </div>
+
+    <div class="callout" style="margin-top:28px">
+      <div class="callout-icon">⚡</div>
+      <div>
+        <div class="callout-title">พร้อม Launch ภายใน 90 วัน หลังรับเงินลงทุน</div>
+        <div class="callout-body">เนื่องจากทีมได้เตรียมทั้ง App (80%) และ Content (320 series) ไว้ล่วงหน้า BoldBox จึงสามารถ Launch ตลาดจริงได้ภายใน Month 4 — เร็วกว่า Startup ทั่วไปที่เพิ่งเริ่มพัฒนาหลังได้รับทุน</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PHASE 1: COMPANY SETUP ═══ -->
+<section>
+  <div class="container">
+    <div class="label-tag">Phase 1</div>
+    <div class="phase-header">
+      <span class="phase-num">สัปดาห์ที่ 1–2</span>
+      <h2 class="phase-title">จัดตั้งโครงสร้างบริษัท</h2>
+    </div>
+
+    <!-- Shareholder Table -->
+    <div class="sh-table-wrap">
+      <table class="sh-table">
+        <thead>
+          <tr>
+            <th>ผู้ถือหุ้น</th>
+            <th>สัดส่วน</th>
+            <th>บทบาท</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3" class="sh-group-label">นักลงทุน (Investors) — รวม 51%</td>
+          </tr>
+          <tr>
+            <td><div class="sh-dot-cell"><div class="sh-dot" style="background:#F4C430"></div>พี่ต๊อด</div></td>
+            <td><span class="sh-pct-val" style="color:#F4C430">31%</span></td>
+            <td style="color:var(--gray-light)">นักลงทุน</td>
+          </tr>
+          <tr>
+            <td><div class="sh-dot-cell"><div class="sh-dot" style="background:#A08C20"></div>น้องพี่ต๊อด</div></td>
+            <td><span class="sh-pct-val" style="color:#A08C20">20%</span></td>
+            <td style="color:var(--gray-light)">นักลงทุน</td>
+          </tr>
+          <tr>
+            <td colspan="3" class="sh-group-label">ทีม Founders — รวม 49%</td>
+          </tr>
+          <tr>
+            <td><div class="sh-dot-cell"><div class="sh-dot" style="background:#60A5FA"></div>Mighty</div></td>
+            <td><span class="sh-pct-val" style="color:#60A5FA">14%</span></td>
+            <td style="color:var(--gray-light)">CEO / กรรมการ</td>
+          </tr>
+          <tr>
+            <td><div class="sh-dot-cell"><div class="sh-dot" style="background:#86EFAC"></div>Ake</div></td>
+            <td><span class="sh-pct-val" style="color:#86EFAC">14%</span></td>
+            <td style="color:var(--gray-light)">CCO / กรรมการ</td>
+          </tr>
+          <tr>
+            <td><div class="sh-dot-cell"><div class="sh-dot" style="background:#F9A8D4"></div>Fim</div></td>
+            <td><span class="sh-pct-val" style="color:#F9A8D4">12%</span></td>
+            <td style="color:var(--gray-light)">CPO / กรรมการ</td>
+          </tr>
+          <tr>
+            <td><div class="sh-dot-cell"><div class="sh-dot" style="background:#C4B5FD"></div>Joe</div></td>
+            <td><span class="sh-pct-val" style="color:#C4B5FD">9%</span></td>
+            <td style="color:var(--gray-light)">CTO / กรรมการ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Governance -->
+    <div class="gov-grid">
+      <div class="gov-card">
+        <div class="gov-icon">🏛️</div>
+        <div class="gov-title">การกำกับดูแล</div>
+        <div class="gov-body">กรรมการบริหาร 4 คน (Mighty, Ake, Fim, Joe) ดูแล operation ทั้งหมด<br><br>อำนาจเซ็นธุรกรรม: Mighty ร่วมกับ Ake หรือ Fim พร้อมตราสำคัญ<br><br>ทุนจดทะเบียน: <strong style="color:var(--yellow)">5,000,000 บาท</strong></div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-icon">🔒</div>
+        <div class="gov-title">ความมั่นคงของทีม</div>
+        <div class="gov-body">กรรมการบริหาร 4 คน คงตำแหน่งไม่น้อยกว่า <strong style="color:var(--yellow)">5 ปี</strong> เพื่อให้ operation มีความต่อเนื่องและนักลงทุนมั่นใจได้ว่าทีมจะไม่เปลี่ยนแปลงกลางทาง</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-icon">🛡️</div>
+        <div class="gov-title">การคุ้มครองนักลงทุน</div>
+        <div class="gov-body">หุ้นนักลงทุน (51%) หากจะขาย ต้องเสนอให้ Founder ซื้อก่อน <strong style="color:var(--yellow)">(Right of First Refusal)</strong><br><br>Shareholder Agreement ลงนามก่อนจดทะเบียน ครอบคลุมทุกเงื่อนไข</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PHASE 2: FUNDING & OPERATIONS ═══ -->
+<section>
+  <div class="container">
+    <div class="label-tag">Phase 2</div>
+    <div class="phase-header">
+      <span class="phase-num">สัปดาห์ที่ 2–3</span>
+      <h2 class="phase-title">รับทุนและเริ่ม Operations</h2>
+    </div>
+
+    <div class="money-grid" style="margin-bottom:28px">
+      <div class="money-step">
+        <div class="money-step-num">01</div>
+        <div class="money-step-title">จดทะเบียนบริษัท</div>
+        <div class="money-step-body">จดทะเบียนบริษัทและเปิดบัญชีธุรกิจ KBank</div>
+      </div>
+      <div class="money-step">
+        <div class="money-step-num">02</div>
+        <div class="money-step-title">โอน 5M แรก</div>
+        <div class="money-step-body">นักลงทุนโอนทุนจดทะเบียน 5M เข้าบริษัท</div>
+      </div>
+      <div class="money-step">
+        <div class="money-step-num">03</div>
+        <div class="money-step-title">โอน 5M ที่เหลือ</div>
+        <div class="money-step-body">โอนทุนดำเนินการส่วนที่เหลืออีก 5M เข้าบัญชี</div>
+      </div>
+      <div class="money-step highlight">
+        <div class="money-step-num" style="color:rgba(244,196,48,0.4)">✓</div>
+        <div class="money-step-title" style="color:var(--yellow)">ทุนในบัญชีรวม</div>
+        <div style="font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:var(--yellow);margin:6px 0">฿10,000,000</div>
+        <div class="money-step-body">พร้อม deploy ทันที</div>
+      </div>
+    </div>
+
+    <p style="font-size:17px;font-weight:700;color:var(--white);margin-bottom:14px">การใช้เงิน Day 0 — Setup Costs</p>
+    <div class="day0-table-wrap">
+      <table class="day0-table">
+        <thead>
+          <tr>
+            <th>รายการ</th>
+            <th style="text-align:right">จำนวน</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Content Licensing (40 series คัดแล้ว)</td>
+            <td class="amount">฿4,300,000</td>
+          </tr>
+          <tr>
+            <td>Legal &amp; Registration</td>
+            <td class="amount">฿100,000</td>
+          </tr>
+          <tr>
+            <td>Withholding Tax (WHT 10%)</td>
+            <td class="amount">฿430,000</td>
+          </tr>
+          <tr class="total">
+            <td>💰 คงเหลือทุนดำเนินการ (Operating Balance)</td>
+            <td class="amount">฿5,170,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PHASE 3: PRE-LAUNCH ═══ -->
+<section>
+  <div class="container">
+    <div class="label-tag">Phase 3</div>
+    <div class="phase-header">
+      <span class="phase-num">Month 1–3</span>
+      <h2 class="phase-title">Pre-Launch Execution</h2>
+    </div>
+
+    <div class="prelaunch-grid">
+      <div class="prelaunch-card">
+        <div class="prelaunch-card-icon">📱</div>
+        <div class="prelaunch-card-title">App</div>
+        <ul class="prelaunch-bullets">
+          <li>Submit แอปขึ้น App Store และ Google Play ทันทีหลังจดบริษัท</li>
+          <li>คาดว่า Publish ได้ภายใน 2–4 สัปดาห์</li>
+          <li>ระหว่างรอ Review ทำ Testing และแก้ Bug ให้เสร็จสมบูรณ์</li>
+          <li>ตั้ง Analytics, Attribution, Tracking ทั้งระบบ</li>
+        </ul>
+      </div>
+      <div class="prelaunch-card">
+        <div class="prelaunch-card-icon">🎬</div>
+        <div class="prelaunch-card-title">Content</div>
+        <ul class="prelaunch-bullets">
+          <li>Finalize คัดเลือกซีรีส์จาก 320 เรื่องที่มีอยู่</li>
+          <li>ซื้อลิขสิทธิ์ 40 เรื่องแรก</li>
+          <li>เริ่ม production งาน dub/sub ภาษาไทย</li>
+          <li>Upload + Tag คอนเทนต์บน Platform</li>
+        </ul>
+      </div>
+      <div class="prelaunch-card">
+        <div class="prelaunch-card-icon">⚖️</div>
+        <div class="prelaunch-card-title">Legal &amp; Compliance</div>
+        <ul class="prelaunch-bullets">
+          <li>จด Trademark ชื่อและโลโก้ BoldBox</li>
+          <li>ลงทะเบียน VAT (ก่อน Month 5)</li>
+          <li>เตรียม PDPA / Privacy Policy / Terms of Service</li>
+          <li>ให้พร้อมก่อน Launch</li>
+        </ul>
+      </div>
+      <div class="prelaunch-card">
+        <div class="prelaunch-card-icon">💼</div>
+        <div class="prelaunch-card-title">Revenue Pipeline</div>
+        <ul class="prelaunch-bullets">
+          <li>Hire Sales Exec #1 + Performance Marketing</li>
+          <li>สร้าง Ad Sales Kit + Media Kit สำหรับ Brand</li>
+          <li>เริ่ม approach แบรนด์ไทยที่ target ไว้ล่วงหน้า</li>
+          <li>เป้าหมาย: มี confirmed advertiser รออยู่ตั้งแต่วันแรกที่แอปเปิด</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PHASE 4: LAUNCH & SCALE ═══ -->
+<section>
+  <div class="container">
+    <div class="label-tag">Phase 4</div>
+    <div class="phase-header">
+      <span class="phase-num">Month 4 เป็นต้นไป</span>
+      <h2 class="phase-title">Launch &amp; Scale</h2>
+    </div>
+
+    <!-- Milestone Table -->
+    <div class="milestone-table-wrap">
+      <table class="milestone-table">
+        <thead>
+          <tr>
+            <th>Milestone</th>
+            <th>เวลา</th>
+            <th>Active Users</th>
+            <th>หมายเหตุ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🚀 App Launch</td>
+            <td>Month 4</td>
+            <td><span class="milestone-mau">20,000</span></td>
+            <td style="color:var(--gray-light)">เริ่มรายได้จาก Ad + IAP</td>
+          </tr>
+          <tr class="highlight-row">
+            <td>📈 Break-Even</td>
+            <td>Month 5</td>
+            <td><span class="milestone-mau" style="color:var(--green)">50,000</span></td>
+            <td>Monthly cashflow เป็นบวกครั้งแรก</td>
+          </tr>
+          <tr>
+            <td>💎 VIP Subscription เปิด</td>
+            <td>Month 5</td>
+            <td><span class="milestone-mau">50,000</span></td>
+            <td style="color:var(--gray-light)">฿129/เดือน · 1% of Active Users</td>
+          </tr>
+          <tr>
+            <td>🎯 Branded Content เริ่ม</td>
+            <td>Month 7</td>
+            <td><span class="milestone-mau">130,000</span></td>
+            <td style="color:var(--gray-light)">ดีลแรก ฿150K/ดีล</td>
+          </tr>
+          <tr>
+            <td>✅ Cumulative P&amp;L บวก</td>
+            <td>Month 7</td>
+            <td><span class="milestone-mau">130,000</span></td>
+            <td style="color:var(--gray-light)">กำไรสะสมเป็นบวก</td>
+          </tr>
+          <tr>
+            <td>🌏 ASEAN Expansion พร้อม</td>
+            <td>Month 15</td>
+            <td><span class="milestone-mau">410,000</span></td>
+            <td style="color:var(--gray-light)">Indonesia, Vietnam, Philippines</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Financial highlights -->
+    <div class="fin-grid">
+      <div class="fin-card primary">
+        <div class="fin-card-label">Seed Investment</div>
+        <div class="fin-card-val yellow">฿10M</div>
+        <div class="fin-card-note">เงินลงทุนทั้งหมด</div>
+      </div>
+      <div class="fin-card">
+        <div class="fin-card-label">Break-even</div>
+        <div class="fin-card-val">Month 5</div>
+        <div class="fin-card-note">Monthly CF เป็นบวก</div>
+      </div>
+      <div class="fin-card">
+        <div class="fin-card-label">Year 1 After-tax Profit</div>
+        <div class="fin-card-val green">฿11.9M</div>
+        <div class="fin-card-note">กำไรปีแรกหลังภาษี</div>
+      </div>
+      <div class="fin-card primary">
+        <div class="fin-card-label">15-Month After-tax Profit</div>
+        <div class="fin-card-val green">฿27.2M</div>
+        <div class="fin-card-note">กำไรสะสม 15 เดือน</div>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="chart-container">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Active Users Growth — Month 4 ถึง Month 15</div>
+          <div class="chart-sub">เป้าหมาย 410,000 Active Users ภายใน 12 เดือนหลัง Launch</div>
+        </div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+          <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--gray)"><span style="width:10px;height:10px;border-radius:2px;background:#F4C430;display:inline-block"></span>Active Users</span>
+          <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--gray)"><span style="width:10px;height:3px;background:#22C55E;display:inline-block"></span>Break-even (M5)</span>
+        </div>
+      </div>
+      <div style="position:relative;height:240px">
+        <canvas id="mauChart" role="img" aria-label="Active Users growth Month 4 to Month 15">M4=20K M5=50K M6=90K M7=130K M8=175K M9=215K M10=255K M11=290K M12=325K M13=355K M14=385K M15=410K</canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TIMELINE ═══ -->
+<section>
+  <div class="container">
+    <div class="label-tag">Post-Investment Roadmap</div>
+    <h2 class="section-title">Action Plan หลังรับเงินลงทุน</h2>
+    <p class="section-sub">ขั้นตอนที่ชัดเจน เดือนต่อเดือน — ตั้งแต่วันแรกจนถึง Scale</p>
+
+    <div class="timeline">
+
+      <!-- Day 1 -->
+      <div class="tl-item">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot">D1</div>
+          <div class="tl-time">Day 1</div>
+        </div>
+        <div class="tl-card highlight">
+          <div class="tl-card-title">
+            เริ่มดำเนินการทันที
+            <span class="badge badge-yellow"><span class="badge-dot"></span>สำคัญที่สุด</span>
+          </div>
+          <div class="tl-card-sub">ขั้นตอน Legal &amp; Corporate Setup — เสร็จภายใน 1–2 สัปดาห์แรก</div>
+          <div class="tl-tasks">
+            <div class="tl-task"><div class="tl-check">✓</div><span>โอนเงิน Seed ฿10M เข้าบัญชีบริษัท</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>จดทะเบียนบริษัท + เปิดบัญชีธุรกิจ</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>เซ็น Shareholder Agreement (6 ผู้ถือหุ้น)</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>จัดสรรหุ้นตามโครงสร้างที่ตกลง</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>จ่าย Setup Costs ฿4,830,000 (Content + WHT + Legal)</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>ลงทะเบียน VAT (ก่อน Month 5)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Month 1-3 -->
+      <div class="tl-item">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot" style="font-size:9px">M1-3</div>
+          <div class="tl-time">Month 1–3</div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-card-title">Pre-Launch Phase — เตรียมพร้อมทุกด้าน</div>
+          <div class="tl-card-sub">3 เดือนสุดท้ายก่อน Launch — ยังไม่มีรายได้ แต่ Burn Rate ต่ำเพียง ฿465K/เดือน</div>
+          <div class="tl-tasks">
+            <div class="tl-task"><div class="tl-check">✓</div><span>Complete App Development — Final QA &amp; Bug Fix</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>Submit App Store (iOS) + Play Store (Android)</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>Setup Cloud Infrastructure + CDN</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>Upload + Tag คอนเทนต์ 320 series บน Platform</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>Hire: Sales Exec #1 + Performance Marketing</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>สร้าง Ad Sales Kit + Media Kit สำหรับ Brand</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>Pre-Marketing: Teaser, Social, PR, Influencer</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>ตั้ง Analytics, Attribution, Tracking ทั้งระบบ</span></div>
+          </div>
+          <div class="tl-metrics">
+            <div class="tl-metric-item">💰 Monthly Burn: <span class="tl-metric-val">฿465,000</span></div>
+            <div class="tl-metric-item">👥 Team Size: <span class="tl-metric-val">4–6 คน</span></div>
+            <div class="tl-metric-item">📱 Active Users: <span class="tl-metric-val">0 (Pre-launch)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Month 4 -->
+      <div class="tl-item">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot">M4</div>
+          <div class="tl-time">Month 4</div>
+        </div>
+        <div class="tl-card highlight">
+          <div class="tl-card-title">
+            🚀 Launch Day
+            <span class="badge badge-yellow"><span class="badge-dot"></span>เปิดตัว</span>
+          </div>
+          <div class="tl-card-sub">Official Launch — เริ่มมีรายได้จริง แม้ยังขาดทุนอยู่เดือนแรก</div>
+          <div class="tl-tasks">
+            <div class="tl-task"><div class="tl-check">✓</div><span>Public Launch iOS + Android</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>เปิดรับสมัคร Brand Advertising (4 Ad Placements)</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>เริ่ม User Acquisition Campaign ฿100K/เดือน</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>เปิด IAP Ad-Free Package ฿49 (one-time)</span></div>
+          </div>
+          <div class="tl-metrics">
+            <div class="tl-metric-item">🎯 Target: <span class="tl-metric-val">20,000 Active Users</span></div>
+            <div class="tl-metric-item">💰 Ad Revenue: <span class="tl-metric-val">~฿403K</span></div>
+            <div class="tl-metric-item">🏦 Cash: <span class="tl-metric-val">฿3.58M คงเหลือ</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Month 5 -->
+      <div class="tl-item">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot">M5</div>
+          <div class="tl-time">Month 5</div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-card-title">
+            📈 Break-even Month
+            <span class="badge badge-green"><span class="badge-dot"></span>กำไรครั้งแรก</span>
+          </div>
+          <div class="tl-card-sub">Monthly Cashflow เป็นบวกครั้งแรก — จุดเปลี่ยนสำคัญ</div>
+          <div class="tl-tasks">
+            <div class="tl-task"><div class="tl-check">✓</div><span>Hire: Sr. Developer + Jr. Developer #1</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>เปิด VIP Subscription ฿129/เดือน</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>Optimize Algorithm สำหรับ For You Feed</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>วิเคราะห์ User Behavior — ปรับ Content Strategy</span></div>
+          </div>
+          <div class="tl-metrics">
+            <div class="tl-metric-item">🎯 Target: <span class="tl-metric-val">50,000 Active Users</span></div>
+            <div class="tl-metric-item">💰 Monthly CF: <span class="tl-metric-val green">+฿1.1M</span></div>
+            <div class="tl-metric-item">👑 VIP: <span class="tl-metric-val">1% of Active Users</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Month 7 -->
+      <div class="tl-item">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot">M7</div>
+          <div class="tl-time">Month 7</div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-card-title">
+            ⚡ Profitable &amp; Scale
+            <span class="badge badge-green"><span class="badge-dot"></span>กำไรสะสม</span>
+          </div>
+          <div class="tl-card-sub">Cumulative P&amp;L เป็นบวก — เริ่ม Branded Content + ขยายทีม</div>
+          <div class="tl-tasks">
+            <div class="tl-task"><div class="tl-check">✓</div><span>Branded Content Deal แรก ฿150K</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>Hire: Editor + Digital Marketing + Sales Exec #2</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>Ad Revenue เกิน ฿500K → recruit Sales Exec #2</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>เพิ่ม Marketing Budget เป็น ฿175K/เดือน</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>วางแผน ASEAN Expansion (Indonesia, Vietnam)</span></div>
+            <div class="tl-task"><div class="tl-check">✓</div><span>เริ่ม Pipeline สำหรับ Exclusive / Co-produced Content</span></div>
+          </div>
+          <div class="tl-metrics">
+            <div class="tl-metric-item">🎯 Target: <span class="tl-metric-val">130,000 Active Users</span></div>
+            <div class="tl-metric-item">👥 Team: <span class="tl-metric-val">12 คน</span></div>
+            <div class="tl-metric-item">💼 Branded Deals: <span class="tl-metric-val">1 ดีล/เดือน</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Month 15 -->
+      <div class="tl-item">
+        <div class="tl-dot-wrap">
+          <div class="tl-dot future" style="font-size:9px">M15</div>
+          <div class="tl-time future">Month 15</div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-card-title">🌏 Scale &amp; Expand</div>
+          <div class="tl-card-sub">Target Year-End: 410,000 Active Users — กำไรหลังภาษีสะสม ฿27.2M</div>
+          <div class="tl-tasks">
+            <div class="tl-task"><div class="tl-check empty"></div><span>ASEAN Expansion เริ่มต้น</span></div>
+            <div class="tl-task"><div class="tl-check empty"></div><span>Original Content Production เปิดตัว</span></div>
+            <div class="tl-task"><div class="tl-check empty"></div><span>Branded Deals 6 ดีล/เดือน @ ฿350K/ดีล</span></div>
+            <div class="tl-task"><div class="tl-check empty"></div><span>Series A Fundraising พิจารณา</span></div>
+            <div class="tl-task"><div class="tl-check empty"></div><span>Japan Strategic Partnership</span></div>
+            <div class="tl-task"><div class="tl-check empty"></div><span>VIP Subscription 4% of Active Users</span></div>
+          </div>
+          <div class="tl-metrics">
+            <div class="tl-metric-item">🎯 Target: <span class="tl-metric-val">410,000 Active Users</span></div>
+            <div class="tl-metric-item">💰 After-tax Profit: <span class="tl-metric-val green">฿27.2M สะสม</span></div>
+            <div class="tl-metric-item">🏦 Closing Balance: <span class="tl-metric-val">฿20M+</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SUMMARY ═══ -->
+<section>
+  <div class="container">
+    <div class="summary-box">
+      <h2>สรุปสำหรับนักลงทุน</h2>
+      <p>เงิน 10 ล้านบาทนี้ไม่ได้ลงทุนใน "ไอเดีย" — แต่ลงทุนใน <strong style="color:var(--yellow)">ทีมที่เดินหน้าแล้ว</strong> แอปทำเสร็จ 80% content 320 เรื่องอยู่ในมือ deal กับ supplier เปิดไว้แล้ว โครงสร้างบริษัทออกแบบให้นักลงทุนถือ majority (51%) และ Founder ดูแล operation อย่างเต็มที่ Break-even ภายใน 5 เดือนหลัง Launch</p>
+      <div class="summary-stats">
+        <div>
+          <div class="summary-stat-val">80%</div>
+          <div class="summary-stat-label">App พัฒนาแล้ว</div>
+        </div>
+        <div>
+          <div class="summary-stat-val">320</div>
+          <div class="summary-stat-label">Series ในมือแล้ว</div>
+        </div>
+        <div>
+          <div class="summary-stat-val">Month 5</div>
+          <div class="summary-stat-label">Break-even</div>
+        </div>
+        <div>
+          <div class="summary-stat-val">฿27.2M</div>
+          <div class="summary-stat-label">กำไรสะสม 15 เดือน</div>
+        </div>
+        <div>
+          <div class="summary-stat-val">410K</div>
+          <div class="summary-stat-label">Active Users Month 15</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer">
+      <img src="Bold Box - LOGO.png" alt="BoldBox" style="height:32px;width:auto;object-fit:contain">
+      <div class="footer-note">Confidential · For Investor Use Only · พฤษภาคม 2569 · BoldBox by Bold Moves</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const mauCtx = document.getElementById('mauChart').getContext('2d');
+new Chart(mauCtx, {
+  type: 'bar',
+  data: {
+    labels: ['M4','M5','M6','M7','M8','M9','M10','M11','M12','M13','M14','M15'],
+    datasets: [{
+      label: 'Active Users',
+      data: [20000, 50000, 90000, 130000, 175000, 215000, 255000, 290000, 325000, 355000, 385000, 410000],
+      backgroundColor: (ctx) => ctx.dataIndex === 1 ? 'rgba(34,197,94,0.7)' : 'rgba(244,196,48,0.75)',
+      borderColor:     (ctx) => ctx.dataIndex === 1 ? '#22C55E' : '#F4C430',
+      borderWidth: 1,
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => ' ' + ctx.parsed.y.toLocaleString() + ' Active Users'
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#888', font: { size: 12 }, autoSkip: false },
+        grid: { color: 'rgba(255,255,255,0.04)' }
+      },
+      y: {
+        ticks: {
+          color: '#888',
+          font: { size: 11 },
+          callback: (v) => v >= 1000 ? Math.round(v / 1000) + 'K' : v
+        },
+        grid: { color: 'rgba(255,255,255,0.06)' },
+        min: 0
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

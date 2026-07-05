@@ -1,0 +1,2549 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BoldBox Global Tech Co., Ltd. — Building Asia's Storytelling Future</title>
+  <meta name="description" content="BoldBox Global Tech คือบริษัทเทคโนโลยีด้านความบันเทิงจากประเทศไทย ผู้พัฒนาแพลตฟอร์ม BoldBox — Micro Drama Streaming สำหรับตลาดเอเชีย" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+  /* ═══════════════════════════════════════
+     RESET & BASE
+  ═══════════════════════════════════════ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --yellow:   #F4C430;
+    --yellow2:  #FFD966;
+    --gold:     #A08C20;
+    --black:    #000000;
+    --dark:     #080808;
+    --surface:  #0F0F0F;
+    --card:     #141414;
+    --card2:    #1A1A1A;
+    --border:   rgba(255,255,255,0.06);
+    --border2:  rgba(244,196,48,0.15);
+    --white:    #FFFFFF;
+    --muted:    #888888;
+    --sub:      #555555;
+    --green:    #22C55E;
+    --purple:   #7C3AED;
+    --pink:     #EC4899;
+
+    --glow-y:   rgba(244,196,48,0.12);
+    --glow-p:   rgba(124,58,237,0.08);
+  }
+
+  body {
+    background: var(--dark);
+    color: var(--white);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+  h1,h2,h3,h4,h5 {
+    font-family: 'Nunito','Sarabun',sans-serif;
+    font-weight: 900;
+    line-height: 1.15;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ═══════════════════════════════════════
+     UTILITY
+  ═══════════════════════════════════════ */
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+  .yellow { color: var(--yellow); }
+  .muted  { color: var(--muted); }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* Tag chip */
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid rgba(244,196,48,0.25);
+    background: rgba(244,196,48,0.07);
+    color: var(--yellow);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  /* Section headers */
+  .sec-label  { text-align: center; margin-bottom: 14px; }
+  .sec-title  { text-align: center; font-size: clamp(26px, 3.5vw, 44px); margin-bottom: 14px; }
+  .sec-sub    { text-align: center; color: var(--muted); font-size: 16px; max-width: 540px; margin: 0 auto 64px; line-height: 1.8; }
+
+  /* Gradient text */
+  .grad-text {
+    background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow2) 50%, #FFB800 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow line */
+  .glow-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+    opacity: .2;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: none; cursor: pointer;
+    font-family: 'Nunito', sans-serif; font-weight: 800;
+    border-radius: 100px;
+    transition: all .2s;
+    position: relative; overflow: hidden;
+  }
+  .btn::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0);
+    transition: background .2s;
+  }
+  .btn:hover::after { background: rgba(255,255,255,0.08); }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--yellow), #FFB800);
+    color: #000;
+    padding: 14px 30px;
+    font-size: 15px;
+    box-shadow: 0 4px 24px rgba(244,196,48,0.25), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(244,196,48,0.4); }
+
+  .btn-glass {
+    background: rgba(255,255,255,0.05);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    padding: 13px 26px;
+    font-size: 15px;
+    backdrop-filter: blur(12px);
+  }
+  .btn-glass:hover { border-color: rgba(244,196,48,0.4) !important; background: rgba(244,196,48,0.07); }
+
+  /* Glass card */
+  .glass-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    transition: border-color .3s, transform .3s, box-shadow .3s;
+  }
+  .glass-card:hover {
+    border-color: rgba(244,196,48,0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(244,196,48,0.05);
+  }
+
+  /* Logo image */
+  .logo-img { height: 36px; width: auto; display: block; object-fit: contain; }
+  .logo-img-sm { height: 44px; width: auto; display: block; object-fit: contain; }
+
+  /* ═══════════════════════════════════════
+     NAVIGATION
+  ═══════════════════════════════════════ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: rgba(8,8,8,0.75);
+    backdrop-filter: blur(24px) saturate(1.5);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo { display: flex; align-items: center; }
+
+  .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 600; color: var(--muted); transition: color .2s; }
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--yellow);
+    color: #000 !important;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 800; font-size: 13px;
+    transition: all .2s;
+    box-shadow: 0 4px 16px rgba(244,196,48,0.2);
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(244,196,48,0.35); }
+
+  .nav-right-group { display: flex; align-items: center; gap: 12px; }
+  .lang-toggle {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--muted);
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 11px;
+    letter-spacing: .06em;
+    padding: 6px 12px 6px 8px; border-radius: 100px; cursor: pointer;
+    transition: all .2s;
+  }
+  .lang-toggle:hover { border-color: rgba(244,196,48,0.4); color: var(--white); background: rgba(244,196,48,0.06); }
+  .lang-flag { font-size: 18px; line-height: 1; }
+  .lang-label { font-size: 11px; font-weight: 700; }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+  .nav-hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
+
+  /* ═══════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    padding-top: 64px;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+  }
+
+  /* Animated aurora background */
+  .hero-aurora {
+    position: absolute; inset: 0; pointer-events: none;
+    overflow: hidden;
+  }
+  .aurora-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: auroraMove 8s ease-in-out infinite alternate;
+  }
+  .aurora-blob-1 {
+    width: 600px; height: 500px;
+    background: radial-gradient(circle, rgba(244,196,48,0.12), transparent 70%);
+    top: -100px; left: 30%;
+    animation-delay: 0s;
+  }
+  .aurora-blob-2 {
+    width: 500px; height: 400px;
+    background: radial-gradient(circle, rgba(124,58,237,0.08), transparent 70%);
+    top: 20%; right: -100px;
+    animation-delay: -3s;
+  }
+  .aurora-blob-3 {
+    width: 400px; height: 350px;
+    background: radial-gradient(circle, rgba(236,72,153,0.05), transparent 70%);
+    bottom: 10%; left: 0;
+    animation-delay: -5s;
+  }
+  @keyframes auroraMove {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, 30px) scale(1.1); }
+  }
+
+  /* Fine dot grid */
+  .hero-dots {
+    position: absolute; inset: 0; pointer-events: none; opacity: .06;
+    background-image: radial-gradient(circle, #F4C430 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+  }
+
+  /* Diagonal accent line */
+  .hero-line {
+    position: absolute; top: 0; right: 0;
+    width: 1px; height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(244,196,48,0.15), transparent);
+    right: 35%;
+  }
+
+  .hero-inner {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 420px;
+    gap: 60px; align-items: center;
+    padding: 80px 0 100px;
+  }
+
+  /* Left content */
+  .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .hero-line-accent { width: 32px; height: 2px; background: var(--yellow); border-radius: 2px; }
+  .hero-company-txt { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; font-family: 'Nunito',sans-serif; }
+
+  .hero-title {
+    font-size: clamp(40px, 6vw, 76px);
+    letter-spacing: -0.025em;
+    margin-bottom: 24px;
+    line-height: 1.05;
+  }
+  .hero-title .line-2 {
+    background: linear-gradient(135deg, var(--yellow) 0%, #FFD966 60%, #FFB800 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    display: block;
+  }
+  .hero-title .line-3 { color: rgba(255,255,255,0.9); }
+
+  .hero-sub {
+    font-size: 17px; color: var(--muted); line-height: 1.8; margin-bottom: 40px; max-width: 520px;
+  }
+  .hero-sub em { font-style: normal; color: rgba(255,255,255,0.75); }
+
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 52px; }
+
+  .hero-badges {
+    display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+  }
+  .hero-badge {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--muted);
+  }
+  .hero-badge-icon { color: var(--yellow); font-size: 16px; }
+  .hero-badge span { color: var(--white); font-weight: 600; }
+
+  /* Right visual – phone */
+  .hero-visual { position: relative; display: flex; justify-content: center; }
+  .phone-glow {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 450px; height: 600px;
+    background: radial-gradient(ellipse at center, rgba(244,196,48,0.12) 0%, rgba(124,58,237,0.06) 40%, transparent 70%);
+    pointer-events: none;
+  }
+  .phone-device {
+    width: 260px;
+    background: #0a0a0a;
+    border-radius: 40px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow:
+      0 0 0 1px rgba(244,196,48,0.08),
+      0 30px 80px rgba(0,0,0,0.8),
+      0 0 120px rgba(244,196,48,0.05);
+    overflow: hidden;
+    position: relative; z-index: 1;
+  }
+  .phone-top {
+    height: 28px; background: #000;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .phone-pill { width: 68px; height: 9px; background: rgba(255,255,255,0.06); border-radius: 100px; }
+
+  .phone-screen { height: 500px; background: #000; overflow: hidden; position: relative; }
+
+  /* Cinematic drama backdrop */
+  .drama-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(175deg, #1A0535 0%, #09011A 35%, #0D0005 60%, #000 100%);
+  }
+  .drama-highlight {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(244,196,48,0.08) 0%, transparent 70%);
+  }
+
+  /* App UI */
+  .app-header-row {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 14px 8px;
+  }
+  .app-logo-row { display: flex; align-items: center; gap: 6px; }
+  .app-logo-sq { width: 20px; height: 20px; background: var(--yellow); border-radius: 5px; display: flex; align-items: center; justify-content: center; }
+  .app-logo-sq span { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 11px; color: #000; }
+  .app-logo-name { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 13px; color: var(--yellow); }
+  .app-notif { font-size: 14px; }
+
+  .app-tabs {
+    position: relative; z-index: 2;
+    display: flex; gap: 4px; padding: 0 14px 10px;
+  }
+  .app-tab {
+    font-family: 'Nunito',sans-serif; font-weight: 700; font-size: 10px;
+    padding: 4px 9px; border-radius: 100px; color: var(--sub);
+  }
+  .app-tab.on { background: var(--yellow); color: #000; }
+
+  /* Featured drama card */
+  .drama-card {
+    position: relative; z-index: 2;
+    margin: 0 12px 10px;
+    border-radius: 14px; overflow: hidden;
+    background: linear-gradient(135deg, #230540, #12002A, #1A0010);
+    border: 1px solid rgba(244,196,48,0.1);
+    padding: 14px;
+  }
+  .drama-card-glow {
+    position: absolute; top: -20px; right: -20px;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle, rgba(244,196,48,0.25), transparent 60%);
+    pointer-events: none;
+  }
+  .drama-card-content { position: relative; z-index: 1; }
+  .drama-new-badge {
+    display: inline-block;
+    background: var(--yellow); color: #000;
+    font-size: 8px; font-weight: 800; font-family: 'Nunito',sans-serif;
+    padding: 2px 7px; border-radius: 4px; margin-bottom: 6px;
+    text-transform: uppercase; letter-spacing: .05em;
+  }
+  .drama-title { font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 14px; margin-bottom: 3px; line-height: 1.3; }
+  .drama-meta { font-size: 9px; color: var(--muted); margin-bottom: 10px; }
+  .drama-play-row { display: flex; align-items: center; gap: 8px; }
+  .drama-play-btn {
+    width: 28px; height: 28px; background: var(--yellow); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .drama-play-btn svg { fill: #000; margin-left: 2px; }
+  .drama-play-label { font-size: 9px; color: var(--muted); }
+
+  /* Series row */
+  .series-row-label {
+    position: relative; z-index: 2;
+    font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 9px;
+    color: var(--muted); padding: 0 14px 5px;
+    text-transform: uppercase; letter-spacing: .07em;
+  }
+  .series-row {
+    position: relative; z-index: 2;
+    display: flex; gap: 7px; padding: 0 14px 10px;
+  }
+  .series-thumb {
+    flex: 0 0 64px; height: 86px; border-radius: 8px;
+    overflow: hidden; position: relative;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .st-1 { background: linear-gradient(160deg, #2D0050, #1A001A, #000); }
+  .st-2 { background: linear-gradient(160deg, #002D1A, #001A2D, #000); }
+  .st-3 { background: linear-gradient(160deg, #2D2000, #1A0010, #000); }
+  .series-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 4px 5px; background: rgba(0,0,0,0.7); }
+  .series-name { font-size: 7px; color: var(--muted); font-family: 'Nunito',sans-serif; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .series-badge { font-size: 6px; }
+  .series-badge.vip { color: var(--yellow); }
+  .series-badge.free { color: var(--green); }
+
+  /* Progress bar on thumb 1 */
+  .series-progress { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.1); }
+  .series-progress-fill { height: 100%; width: 40%; background: var(--yellow); }
+
+  /* App bottom nav */
+  .app-nav {
+    position: relative; z-index: 2;
+    background: rgba(0,0,0,0.9);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    display: flex; justify-content: space-around;
+    padding: 8px 0 10px;
+  }
+  .app-nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .app-nav-bar { width: 18px; height: 3px; border-radius: 2px; }
+  .app-nav-bar.on { background: var(--yellow); }
+  .app-nav-bar.off { background: rgba(255,255,255,0.1); }
+  .app-nav-lbl { font-size: 8px; font-family: 'Nunito',sans-serif; font-weight: 700; }
+  .app-nav-item.active .app-nav-lbl { color: var(--yellow); }
+  .app-nav-item.inactive .app-nav-lbl { color: rgba(255,255,255,0.2); }
+
+  /* Floating chips on phone */
+  .float-chip {
+    position: absolute; z-index: 3;
+    background: rgba(14,14,14,0.92);
+    border: 1px solid rgba(244,196,48,0.18);
+    border-radius: 14px; padding: 10px 14px;
+    display: flex; gap: 10px; align-items: center;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    backdrop-filter: blur(16px);
+  }
+  .chip-1 { top: 60px; right: -70px; animation: chipFloat 3s ease-in-out infinite; }
+  .chip-2 { bottom: 80px; left: -75px; animation: chipFloat 4s ease-in-out infinite reverse; }
+  @keyframes chipFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  .chip-ico { width: 32px; height: 32px; border-radius: 8px; background: rgba(244,196,48,0.1); display: flex; align-items: center; justify-content: center; font-size: 15px; }
+  .chip-val { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 14px; color: var(--yellow); }
+  .chip-sub { font-size: 10px; color: var(--sub); margin-top: 1px; }
+
+  /* Scroll hint */
+  .scroll-hint {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 2;
+  }
+  .scroll-txt { font-size: 10px; color: var(--sub); letter-spacing: .15em; text-transform: uppercase; font-family: 'Nunito',sans-serif; }
+  .scroll-bar { width: 1px; height: 36px; background: linear-gradient(to bottom, transparent, var(--yellow)); animation: scrollPulse 1.6s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:.2;transform:scaleY(.6);transform-origin:top} 50%{opacity:1;transform:scaleY(1)} }
+
+  /* ═══════════════════════════════════════
+     STATS BAR
+  ═══════════════════════════════════════ */
+  .stats-bar {
+    position: relative; z-index: 1;
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow: hidden;
+  }
+  .stats-bar::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+    opacity: .15;
+  }
+  .stats-inner {
+    display: flex; align-items: stretch;
+  }
+  .stat-item {
+    flex: 1;
+    padding: 28px 20px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    position: relative;
+    transition: background .3s;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(244,196,48,0.04); }
+  .stat-num {
+    font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 34px;
+    background: linear-gradient(135deg, var(--yellow), var(--yellow2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+  .stat-label { font-size: 11px; color: var(--sub); letter-spacing: .04em; }
+
+  /* ═══════════════════════════════════════
+     ABOUT — Company
+  ═══════════════════════════════════════ */
+  #about { padding: 110px 0; position: relative; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+  .about-tag { margin-bottom: 20px; }
+  .about-title { font-size: clamp(28px, 3.5vw, 42px); margin-bottom: 20px; }
+  .about-body  { font-size: 16px; color: var(--muted); line-height: 1.85; margin-bottom: 14px; }
+  .about-quote {
+    margin: 28px 0;
+    border-left: 2px solid var(--yellow);
+    padding: 12px 20px;
+    background: rgba(244,196,48,0.04);
+    border-radius: 0 10px 10px 0;
+    font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.75; font-style: italic;
+  }
+
+  /* Value cards */
+  .value-list { display: flex; flex-direction: column; gap: 14px; }
+  .value-card {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 22px 20px;
+  }
+  .value-icon {
+    width: 46px; height: 46px; flex-shrink: 0;
+    background: rgba(244,196,48,0.07);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    border: 1px solid rgba(244,196,48,0.1);
+  }
+  .value-title { font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 15px; margin-bottom: 5px; }
+  .value-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  /* ═══════════════════════════════════════
+     PRODUCT — BoldBox App
+  ═══════════════════════════════════════ */
+  #product {
+    padding: 110px 0;
+    background: var(--surface);
+    position: relative; overflow: hidden;
+  }
+  #product::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--yellow) 50%, transparent 100%);
+    opacity: .12;
+  }
+  #product::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--yellow) 50%, transparent 100%);
+    opacity: .12;
+  }
+  .product-glow {
+    position: absolute; top: 50%; right: 0;
+    transform: translateY(-50%);
+    width: 500px; height: 600px;
+    background: radial-gradient(ellipse at right, rgba(124,58,237,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .product-layout {
+    display: grid; grid-template-columns: 1fr 400px;
+    gap: 80px; align-items: center; position: relative; z-index: 1;
+  }
+
+  .product-tag { margin-bottom: 20px; }
+  .product-app-name {
+    font-size: clamp(36px, 5vw, 60px);
+    letter-spacing: -0.025em;
+    margin-bottom: 8px;
+  }
+  .product-tagline {
+    font-family: 'Nunito',sans-serif; font-style: italic;
+    font-size: 14px; color: var(--yellow);
+    margin-bottom: 22px; display: block;
+  }
+  .product-body { font-size: 16px; color: var(--muted); line-height: 1.85; margin-bottom: 28px; }
+
+  /* Positioning strip */
+  .pos-strip {
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .pos-item { flex: 1; text-align: center; padding: 16px 12px; }
+  .pos-item-name { font-family: 'Nunito',sans-serif; font-weight: 700; font-size: 13px; color: var(--sub); }
+  .pos-item-name.center { color: var(--yellow); font-size: 17px; }
+  .pos-item-desc { font-size: 10px; color: var(--sub); margin-top: 2px; }
+  .pos-sep { color: rgba(255,255,255,0.08); font-size: 18px; }
+
+  /* Download buttons */
+  .dl-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .dl-btn {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 10px 16px;
+    transition: all .2s; cursor: pointer;
+  }
+  .dl-btn:hover { border-color: rgba(244,196,48,0.3); background: rgba(244,196,48,0.05); transform: translateY(-1px); }
+  .dl-btn-icon { font-size: 20px; }
+  .dl-btn-sub { font-size: 9px; color: var(--sub); font-family: 'Nunito',sans-serif; font-weight: 600; letter-spacing: .04em; }
+  .dl-btn-label { font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 14px; }
+
+  /* Product visual – large phone */
+  .product-visual { display: flex; justify-content: center; position: relative; }
+  .product-phone-glow {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 500px; height: 600px;
+    background: radial-gradient(ellipse, rgba(244,196,48,0.1) 0%, rgba(124,58,237,0.05) 40%, transparent 65%);
+    pointer-events: none;
+  }
+  .product-phone {
+    width: 280px;
+    background: #080808;
+    border-radius: 44px;
+    border: 1.5px solid rgba(255,255,255,0.08);
+    box-shadow:
+      0 0 0 1px rgba(244,196,48,0.06),
+      0 40px 100px rgba(0,0,0,0.9),
+      0 0 80px rgba(244,196,48,0.04);
+    overflow: hidden; position: relative; z-index: 1;
+  }
+  .product-phone-top { height: 30px; background: #000; display: flex; align-items: center; justify-content: center; }
+  .product-phone-pill { width: 72px; height: 10px; background: rgba(255,255,255,0.05); border-radius: 100px; }
+  .product-phone-screen { height: 530px; background: #000; overflow: hidden; position: relative; }
+
+  /* Full-screen drama episode */
+  .ep-screen {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, #0D001F 0%, #0A000D 30%, #000 100%);
+    display: flex; flex-direction: column;
+  }
+  .ep-filmgrain {
+    position: absolute; inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  }
+  .ep-gradient-top { position: absolute; top: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); z-index: 1; }
+  .ep-gradient-bot { position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, rgba(0,0,0,0.98), transparent); z-index: 1; }
+
+  /* Abstract visual silhouettes */
+  .ep-visual {
+    position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 260px;
+  }
+  .ep-circle-1 {
+    position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,196,48,0.12), transparent 70%);
+    border: 1px solid rgba(244,196,48,0.08);
+  }
+  .ep-silhouette {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 180px;
+    background: linear-gradient(to top, rgba(80,0,120,0.3), transparent);
+    border-radius: 60px 60px 0 0;
+    filter: blur(2px);
+  }
+
+  .ep-ui { position: relative; z-index: 2; padding: 12px; }
+  .ep-top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .ep-logo-row { display: flex; align-items: center; gap: 5px; }
+  .ep-logo-sq { width: 18px; height: 18px; background: var(--yellow); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+  .ep-logo-sq span { font-size: 10px; font-family: 'Nunito',sans-serif; font-weight: 900; color: #000; }
+  .ep-logo-name { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 12px; color: var(--yellow); }
+
+  .ep-bottom { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: 0 14px 14px; }
+  .ep-vip-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(236,72,153,0.2));
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 100px; padding: 3px 10px;
+    font-size: 8px; font-weight: 800; font-family: 'Nunito',sans-serif;
+    color: rgba(255,255,255,0.8); margin-bottom: 6px;
+  }
+  .ep-title { font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 15px; margin-bottom: 3px; line-height: 1.3; }
+  .ep-meta { font-size: 9px; color: var(--muted); margin-bottom: 10px; }
+  .ep-progress { height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 8px; overflow: hidden; }
+  .ep-progress-fill { height: 100%; width: 35%; background: linear-gradient(90deg, var(--yellow), #FFB800); }
+  .ep-controls { display: flex; align-items: center; gap: 10px; }
+  .ep-play {
+    width: 32px; height: 32px; background: var(--yellow); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 14px rgba(244,196,48,0.4);
+  }
+  .ep-play svg { fill: #000; margin-left: 2px; }
+  .ep-ep-txt { font-size: 9px; color: var(--muted); }
+
+  .ep-bottom-nav {
+    position: relative; z-index: 2;
+    margin-top: auto;
+    background: rgba(0,0,0,0.95);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    display: flex; justify-content: space-around;
+    padding: 7px 0 9px;
+  }
+
+  /* ═══════════════════════════════════════
+     FEATURES
+  ═══════════════════════════════════════ */
+  #features { padding: 110px 0; }
+  .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+  .feat-card {
+    padding: 30px 26px;
+    position: relative; overflow: hidden;
+  }
+  /* Gradient border effect */
+  .feat-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(244,196,48,0.0), rgba(244,196,48,0.15), rgba(124,58,237,0.0));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .feat-card:hover::before { opacity: 1; }
+
+  .feat-icon-wrap {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: rgba(244,196,48,0.08);
+    border: 1px solid rgba(244,196,48,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 18px;
+    transition: background .3s, border-color .3s;
+  }
+  .feat-card:hover .feat-icon-wrap {
+    background: rgba(244,196,48,0.14);
+    border-color: rgba(244,196,48,0.25);
+  }
+  .feat-title { font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 17px; margin-bottom: 10px; }
+  .feat-body { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* ═══════════════════════════════════════
+     MARQUEE GENRES
+  ═══════════════════════════════════════ */
+  #genres {
+    padding: 80px 0;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+  #genres::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+    opacity: .1;
+  }
+
+  .marquee-track {
+    overflow: hidden;
+    position: relative;
+    margin-top: 40px;
+  }
+  .marquee-track::before,
+  .marquee-track::after {
+    content: '';
+    position: absolute; top: 0; bottom: 0;
+    width: 120px; z-index: 2;
+    pointer-events: none;
+  }
+  .marquee-track::before { left: 0; background: linear-gradient(to right, var(--surface), transparent); }
+  .marquee-track::after  { right: 0; background: linear-gradient(to left, var(--surface), transparent); }
+
+  .marquee-row { display: flex; gap: 10px; width: max-content; margin-bottom: 10px; }
+  .marquee-row.reverse { animation: marqueeRight 30s linear infinite; }
+  .marquee-row.forward { animation: marqueeLeft 25s linear infinite; }
+
+  @keyframes marqueeLeft  { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  @keyframes marqueeRight { 0%{transform:translateX(-50%)} 100%{transform:translateX(0)} }
+
+  .genre-chip {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px; padding: 10px 22px;
+    font-size: 14px; font-weight: 600; color: var(--muted);
+    white-space: nowrap;
+    transition: border-color .2s, color .2s, background .2s;
+    cursor: default;
+  }
+  .genre-chip:hover { border-color: rgba(244,196,48,0.35); color: var(--yellow); background: rgba(244,196,48,0.06); }
+
+  /* ═══════════════════════════════════════
+     PLANS
+  ═══════════════════════════════════════ */
+  #plans { padding: 110px 0; }
+  .plans-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; align-items: start; }
+
+  .plan-card { padding: 30px 26px; position: relative; overflow: hidden; }
+  .plan-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .plan-card:hover::after { opacity: .3; }
+  .plan-card.featured::after { opacity: .6; }
+
+  .plan-card.featured {
+    background: rgba(244,196,48,0.04);
+    border-color: rgba(244,196,48,0.25) !important;
+  }
+  .plan-ribbon {
+    position: absolute; top: 0; right: 22px;
+    background: linear-gradient(135deg, var(--yellow), #FFB800);
+    color: #000; font-size: 10px; font-weight: 800;
+    font-family: 'Nunito',sans-serif;
+    padding: 5px 13px; border-radius: 0 0 12px 12px;
+    text-transform: uppercase; letter-spacing: .06em;
+    box-shadow: 0 4px 14px rgba(244,196,48,0.3);
+  }
+
+  .plan-tier { font-family: 'Nunito',sans-serif; font-weight: 700; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); margin-bottom: 12px; }
+  .plan-card.featured .plan-tier { color: var(--yellow); }
+  .plan-price { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 40px; line-height: 1; }
+  .plan-price sub { font-size: 14px; font-weight: 600; color: var(--sub); }
+  .plan-desc { font-size: 13px; color: var(--sub); margin: 8px 0 22px; }
+  .plan-hr { height: 1px; background: var(--border); margin-bottom: 20px; }
+  .plan-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .plan-list li { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .plan-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  .plan-btn {
+    width: 100%; padding: 12px;
+    border-radius: 100px; border: none; cursor: pointer;
+    font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 14px;
+    transition: all .2s;
+  }
+  .plan-btn.primary {
+    background: linear-gradient(135deg, var(--yellow), #FFB800);
+    color: #000;
+    box-shadow: 0 4px 20px rgba(244,196,48,0.2);
+  }
+  .plan-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(244,196,48,0.35); }
+  .plan-btn.ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.1) !important; }
+  .plan-btn.ghost:hover { border-color: rgba(244,196,48,0.35) !important; background: rgba(244,196,48,0.05); }
+
+  /* ═══════════════════════════════════════
+     FREE WATCH PROMO
+  ═══════════════════════════════════════ */
+  #watch-free {
+    width: 100%;
+    min-height: 100vh;
+    background: #050505;
+    position: relative; overflow: hidden;
+  }
+
+  .wf-bg-glow {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    filter: blur(120px); z-index: 0;
+  }
+  .wf-bg-glow-1 {
+    width: 700px; height: 600px;
+    background: radial-gradient(circle, rgba(100,20,200,0.4), transparent 70%);
+    top: -150px; right: 15%;
+  }
+  .wf-bg-glow-2 {
+    width: 500px; height: 400px;
+    background: radial-gradient(circle, rgba(200,30,60,0.25), transparent 70%);
+    bottom: -100px; right: 5%;
+  }
+
+  .wf-inner {
+    position: relative; z-index: 1;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* LEFT */
+  .wf-left {
+    flex: 0 0 480px;
+    padding: 120px 50px 120px 80px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 2;
+  }
+  .wf-eyebrow { margin-bottom: 22px; }
+  .wf-title {
+    font-size: clamp(38px, 4vw, 56px);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+  .wf-tagline {
+    font-family: 'Nunito', sans-serif;
+    font-style: italic; font-weight: 600;
+    font-size: 15px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    border-left: 2px solid rgba(244,196,48,0.25);
+    padding-left: 16px;
+  }
+  .wf-body {
+    font-size: 14px; color: var(--sub); line-height: 1.85; margin-bottom: 32px;
+  }
+  .wf-dl-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+
+  .wf-free-badge {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(244,196,48,0.06);
+    border: 1px solid rgba(244,196,48,0.15);
+    border-radius: 100px; padding: 10px 20px;
+    width: fit-content;
+  }
+  .wf-free-num {
+    font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 18px;
+    background: linear-gradient(135deg, var(--yellow), var(--yellow2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .wf-free-txt { font-size: 13px; color: var(--muted); }
+
+  /* RIGHT: Cover Grid */
+  .wf-right {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+  }
+  .wf-covers {
+    position: absolute; inset: 0;
+    display: flex; gap: 10px;
+    padding: 0 16px;
+    align-items: flex-start;
+  }
+  .wf-col {
+    flex: 1;
+    display: flex; flex-direction: column; gap: 10px;
+    min-width: 0;
+  }
+  .wf-col-1 { animation: colScroll 22s linear infinite; }
+  .wf-col-2 { animation: colScrollRev 28s linear infinite; margin-top: 50px; }
+  .wf-col-3 { animation: colScroll 18s linear infinite; margin-top: 100px; }
+
+  @keyframes colScroll    { 0%{transform:translateY(0)} 100%{transform:translateY(-50%)} }
+  @keyframes colScrollRev { 0%{transform:translateY(-50%)} 100%{transform:translateY(0)} }
+
+  .wf-cover {
+    flex-shrink: 0;
+    width: 100%;
+    aspect-ratio: 2/3;
+    border-radius: 12px;
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.07);
+    cursor: pointer;
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+  }
+  .wf-cover:hover {
+    transform: scale(1.05);
+    border-color: rgba(244,196,48,0.4);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(244,196,48,0.08);
+    z-index: 10;
+  }
+
+  /* ── Poster Art CSS ── */
+  .poster-art {
+    position: absolute; inset: 0; z-index: 1;
+    overflow: hidden;
+  }
+
+  /* Character silhouettes */
+  .pa-sil {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+  /* Two people standing close */
+  .pa-sil-duo {
+    width: 90%; height: 75%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    clip-path: polygon(10% 100%, 15% 40%, 22% 20%, 28% 35%, 30% 20%, 38% 0%, 45% 25%, 50% 15%, 55% 30%, 60% 0%, 68% 20%, 72% 35%, 78% 20%, 84% 40%, 90% 100%);
+    filter: blur(2px);
+  }
+  /* Single tall figure */
+  .pa-sil-tall {
+    width: 40%; height: 80%;
+    background: rgba(0,0,0,0.5);
+    clip-path: polygon(25% 100%, 20% 60%, 15% 40%, 30% 20%, 35% 5%, 50% 0%, 65% 5%, 70% 20%, 85% 40%, 80% 60%, 75% 100%);
+    filter: blur(1.5px);
+  }
+  /* Shadow / ghost figure */
+  .pa-sil-shadow {
+    width: 80%; height: 70%;
+    background: rgba(0,0,0,0.4);
+    clip-path: polygon(20% 100%, 18% 55%, 10% 35%, 25% 15%, 40% 5%, 50% 0%, 60% 5%, 75% 15%, 90% 35%, 82% 55%, 80% 100%);
+    filter: blur(6px);
+    opacity: 0.6;
+  }
+  /* Ghost transparent figure */
+  .pa-sil-ghost {
+    width: 70%; height: 90%;
+    background: linear-gradient(to top, rgba(110,231,183,0.15), rgba(110,231,183,0.03));
+    clip-path: polygon(25% 100%, 20% 55%, 15% 35%, 30% 12%, 45% 2%, 55% 2%, 70% 12%, 85% 35%, 80% 55%, 75% 100%);
+    filter: blur(3px);
+  }
+  /* Crown / historical silhouette */
+  .pa-sil-crown {
+    width: 55%; height: 80%;
+    background: linear-gradient(to top, rgba(253,230,138,0.2), rgba(253,230,138,0.03));
+    clip-path: polygon(30% 100%, 25% 60%, 10% 45%, 20% 30%, 15% 15%, 30% 20%, 35% 5%, 50% 0%, 65% 5%, 70% 20%, 85% 15%, 80% 30%, 90% 45%, 75% 60%, 70% 100%);
+    filter: blur(2px);
+  }
+
+  /* Glows / dramatic lighting */
+  .pa-glow {
+    position: absolute; border-radius: 50%;
+    pointer-events: none; filter: blur(40px);
+  }
+  .pa-glow-pink   { width:130%; height:90%; top:-20%; left:-15%; background: radial-gradient(ellipse, rgba(244,114,182,0.5) 0%, rgba(190,24,93,0.3) 40%, transparent 70%); }
+  .pa-glow-gold   { width:130%; height:90%; top:-20%; left:-15%; background: radial-gradient(ellipse, rgba(251,191,36,0.45) 0%, rgba(180,100,0,0.25) 40%, transparent 70%); }
+  .pa-glow-blue   { width:130%; height:90%; top:-20%; left:-15%; background: radial-gradient(ellipse, rgba(96,165,250,0.4) 0%, rgba(29,78,216,0.3) 40%, transparent 70%); }
+  .pa-glow-rose   { width:130%; height:90%; top:-20%; left:-15%; background: radial-gradient(ellipse, rgba(251,113,133,0.45) 0%, rgba(159,18,57,0.3) 40%, transparent 70%); }
+  .pa-glow-cold   { width:130%; height:90%; top:-20%; left:-15%; background: radial-gradient(ellipse, rgba(167,139,250,0.45) 0%, rgba(91,33,182,0.3) 40%, transparent 70%); }
+  .pa-glow-teal   { width:130%; height:90%; top:-20%; left:-15%; background: radial-gradient(ellipse, rgba(52,211,153,0.4) 0%, rgba(6,95,70,0.3) 40%, transparent 70%); }
+  .pa-glow-red    { width:130%; height:90%; top:-20%; left:-15%; background: radial-gradient(ellipse, rgba(239,68,68,0.45) 0%, rgba(127,29,29,0.3) 40%, transparent 70%); }
+  .pa-glow-purple { width:130%; height:90%; top:-20%; left:-15%; background: radial-gradient(ellipse, rgba(192,132,252,0.45) 0%, rgba(88,28,135,0.3) 40%, transparent 70%); }
+  .pa-glow-yellow { width:130%; height:90%; top:-20%; left:-15%; background: radial-gradient(ellipse, rgba(253,224,71,0.4) 0%, rgba(161,98,7,0.25) 40%, transparent 70%); }
+  .pa-glow-green  { width:130%; height:90%; top:-20%; left:-15%; background: radial-gradient(ellipse, rgba(134,239,172,0.4) 0%, rgba(20,83,45,0.3) 40%, transparent 70%); }
+
+  /* Big display title on poster */
+  .pa-title-big {
+    position: absolute; bottom: 28%; left: 0; right: 0;
+    font-family: 'Nunito', 'Sarabun', sans-serif;
+    font-weight: 900; font-size: 15px;
+    text-align: center; line-height: 1.25;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+    z-index: 3; padding: 0 8px;
+    letter-spacing: 0.01em;
+  }
+
+  /* Decorative elements */
+  .pa-petals {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background-image:
+      radial-gradient(circle 3px at 20% 30%, rgba(255,255,255,0.15) 0%, transparent 100%),
+      radial-gradient(circle 2px at 70% 20%, rgba(255,255,255,0.12) 0%, transparent 100%),
+      radial-gradient(circle 4px at 50% 45%, rgba(255,255,255,0.08) 0%, transparent 100%),
+      radial-gradient(circle 2px at 80% 55%, rgba(255,255,255,0.1) 0%, transparent 100%),
+      radial-gradient(circle 3px at 30% 65%, rgba(255,255,255,0.08) 0%, transparent 100%);
+  }
+  .pa-lines {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 1px; height: 40%; z-index: 2;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+  }
+  .pa-lines::before, .pa-lines::after {
+    content: '';
+    position: absolute; top: 0; height: 100%;
+    width: 1px; background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+  }
+  .pa-lines::before { left: -20px; }
+  .pa-lines::after  { left:  20px; }
+
+  .pa-grid-lines {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.06;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: radial-gradient(ellipse at 50% 40%, black 20%, transparent 70%);
+  }
+  .pa-particles {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background-image:
+      radial-gradient(circle 2px at 25% 25%, rgba(110,231,183,0.6) 0%, transparent 100%),
+      radial-gradient(circle 1px at 60% 15%, rgba(110,231,183,0.4) 0%, transparent 100%),
+      radial-gradient(circle 3px at 75% 40%, rgba(110,231,183,0.3) 0%, transparent 100%),
+      radial-gradient(circle 1px at 40% 55%, rgba(110,231,183,0.5) 0%, transparent 100%),
+      radial-gradient(circle 2px at 15% 60%, rgba(110,231,183,0.3) 0%, transparent 100%);
+  }
+  .pa-drip {
+    position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
+    width: 2px; height: 30%; z-index: 2;
+    background: linear-gradient(to bottom, rgba(239,68,68,0.7), rgba(239,68,68,0));
+    filter: blur(1px);
+  }
+  .pa-drip::before {
+    content: '';
+    position: absolute; top: 0; left: -8px;
+    width: 2px; height: 60%;
+    background: linear-gradient(to bottom, rgba(239,68,68,0.4), transparent);
+    filter: blur(1px);
+  }
+  .pa-ornament {
+    position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+    width: 50px; height: 50px; z-index: 2;
+    border: 1px solid rgba(253,230,138,0.3);
+    border-radius: 50%;
+  }
+  .pa-ornament::before {
+    content: '';
+    position: absolute; inset: 8px;
+    border: 1px solid rgba(253,230,138,0.2);
+    border-radius: 50%;
+  }
+
+  /* Drama poster gradients */
+  .wf-c1  { background: linear-gradient(170deg,#3D0060 0%,#1F0030 45%,#080010 100%); }
+  .wf-c2  { background: linear-gradient(170deg,#400020 0%,#280010 45%,#0D0005 100%); }
+  .wf-c3  { background: linear-gradient(170deg,#002040 0%,#001030 45%,#000510 100%); }
+  .wf-c4  { background: linear-gradient(170deg,#3A1800 0%,#250C00 45%,#0D0500 100%); }
+  .wf-c5  { background: linear-gradient(170deg,#380040 0%,#200028 45%,#0A000F 100%); }
+  .wf-c6  { background: linear-gradient(170deg,#003040 0%,#001E2A 45%,#000A10 100%); }
+  .wf-c7  { background: linear-gradient(170deg,#3A0020 0%,#28000F 45%,#0D0005 100%); }
+  .wf-c8  { background: linear-gradient(170deg,#251800 0%,#180D00 45%,#080300 100%); }
+  .wf-c9  { background: linear-gradient(170deg,#2A0040 0%,#1A0028 45%,#080010 100%); }
+  .wf-c10 { background: linear-gradient(170deg,#3A1000 0%,#280800 45%,#0D0300 100%); }
+  .wf-c11 { background: linear-gradient(170deg,#003528 0%,#002018 45%,#000D0A 100%); }
+  .wf-c12 { background: linear-gradient(170deg,#380000 0%,#220000 45%,#0D0000 100%); }
+
+  /* Light shimmer at top of each poster */
+  .wf-cover::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 55%;
+    background: radial-gradient(ellipse 80% 70% at 50% 0%, rgba(255,255,255,0.06), transparent 100%);
+  }
+  /* Bottom fade for text readability */
+  .wf-cover::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 60%;
+    background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.5) 55%, transparent 100%);
+  }
+
+  .wf-cover-badge {
+    position: absolute; top: 9px; left: 9px; z-index: 2;
+    font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 7px;
+    background: rgba(244,196,48,0.92); color: #000;
+    border-radius: 4px; padding: 3px 7px;
+    text-transform: uppercase; letter-spacing: .05em;
+  }
+  .wf-badge-vip {
+    background: linear-gradient(135deg, #7C3AED, #EC4899) !important;
+    color: #fff !important;
+  }
+
+  .wf-cover-info {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+    padding: 8px 10px 11px;
+  }
+  .wf-cover-title {
+    font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 11px;
+    line-height: 1.3; margin-bottom: 3px; color: #fff;
+  }
+  .wf-cover-genre { font-size: 8px; color: rgba(255,255,255,0.38); }
+
+  /* Fade edges */
+  .wf-fade-top, .wf-fade-bot, .wf-fade-left {
+    position: absolute; z-index: 4; pointer-events: none;
+  }
+  .wf-fade-top {
+    top: 0; left: 0; right: 0; height: 200px;
+    background: linear-gradient(to bottom, #050505 0%, transparent 100%);
+  }
+  .wf-fade-bot {
+    bottom: 0; left: 0; right: 0; height: 200px;
+    background: linear-gradient(to top, #050505 0%, transparent 100%);
+  }
+  .wf-fade-left {
+    top: 0; bottom: 0; left: 0; width: 60px;
+    background: linear-gradient(to right, #050505 0%, transparent 100%);
+  }
+
+  @media (max-width: 980px) {
+    .wf-inner  { flex-direction: column; }
+    .wf-left   { flex: none; padding: 80px 28px 40px; }
+    .wf-right  { min-height: 60vh; }
+    .wf-col-3  { display: none; }
+  }
+
+  /* ═══════════════════════════════════════
+     FOR BRANDS
+  ═══════════════════════════════════════ */
+  #brands {
+    padding: 110px 0;
+    background: var(--surface);
+    position: relative; overflow: hidden;
+  }
+  .brands-accent {
+    position: absolute; top: 50%; left: 0;
+    transform: translateY(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(244,196,48,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .brands-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; position: relative; z-index: 1; }
+  .brands-title { font-size: clamp(26px, 3.5vw, 40px); margin-bottom: 16px; line-height: 1.2; }
+  .brands-body { font-size: 15px; color: var(--muted); line-height: 1.85; margin-bottom: 28px; }
+
+  .ad-rows { display: flex; flex-direction: column; gap: 10px; }
+  .ad-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 18px;
+    transition: border-color .2s, background .2s;
+  }
+  .ad-row:hover { border-color: rgba(244,196,48,0.2); background: rgba(244,196,48,0.03); }
+  .ad-name { font-family: 'Nunito',sans-serif; font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+  .ad-place { font-size: 11px; color: var(--sub); }
+  .ad-price { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 18px; color: var(--yellow); }
+  .ad-unit { font-size: 10px; color: var(--sub); text-align: right; }
+
+  /* Metrics */
+  .metrics-col { display: flex; flex-direction: column; gap: 12px; }
+  .metric-card { padding: 18px 20px; }
+  .metric-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .metric-lbl { font-size: 12px; color: var(--muted); }
+  .metric-val { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 20px; color: var(--yellow); }
+  .metric-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
+  .metric-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--yellow)); border-radius: 4px; }
+
+  .brands-note {
+    background: rgba(244,196,48,0.05);
+    border: 1px solid rgba(244,196,48,0.15);
+    border-radius: 14px; padding: 16px 18px;
+    font-size: 13px; color: var(--muted); line-height: 1.7;
+  }
+  .brands-note strong { color: var(--yellow); }
+
+  /* ═══════════════════════════════════════
+     VISION
+  ═══════════════════════════════════════ */
+  #vision { padding: 110px 0; }
+  .expansion-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 28px; }
+  .exp-card { padding: 26px 20px; }
+  .exp-flag { font-size: 34px; margin-bottom: 10px; }
+  .exp-country { font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 16px; margin-bottom: 6px; }
+  .exp-desc { font-size: 12px; color: var(--sub); line-height: 1.65; }
+  .exp-badge {
+    display: inline-block; margin-top: 12px;
+    font-size: 10px; font-weight: 700; font-family: 'Nunito',sans-serif;
+    color: var(--yellow); background: rgba(244,196,48,0.08);
+    border: 1px solid rgba(244,196,48,0.12);
+    border-radius: 100px; padding: 3px 11px;
+  }
+
+  .phase-bar {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border); border-radius: 18px; overflow: hidden;
+  }
+  .phase-cell {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    position: relative; overflow: hidden;
+    transition: background .3s;
+  }
+  .phase-cell:last-child { border-right: none; }
+  .phase-cell:hover { background: rgba(244,196,48,0.03); }
+  .phase-cell::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--yellow), var(--yellow2));
+    opacity: 0; transition: opacity .3s;
+  }
+  .phase-cell:hover::before { opacity: .3; }
+
+  .phase-num  { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 11px; color: var(--yellow); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+  .phase-name { font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 16px; margin-bottom: 8px; }
+  .phase-desc { font-size: 12px; color: var(--sub); }
+
+  /* ═══════════════════════════════════════
+     TEAM
+  ═══════════════════════════════════════ */
+  #team {
+    padding: 110px 0;
+    background: var(--surface);
+    position: relative; overflow: hidden;
+  }
+  .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .team-card { padding: 30px 22px; text-align: center; }
+  .team-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--yellow), var(--yellow2));
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 28px; color: #000;
+    box-shadow: 0 8px 28px rgba(244,196,48,0.25);
+    position: relative;
+  }
+  .team-avatar::after {
+    content: '';
+    position: absolute; inset: -2px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--yellow), transparent, var(--yellow2));
+    z-index: -1; opacity: .4;
+  }
+  .team-name { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 18px; margin-bottom: 4px; }
+  .team-role { font-size: 12px; color: var(--yellow); font-weight: 600; margin-bottom: 12px; font-family: 'Nunito',sans-serif; }
+  .team-bio { font-size: 12px; color: var(--sub); line-height: 1.65; }
+
+  .team-quote {
+    margin-top: 40px; text-align: center;
+    padding: 30px 36px;
+    position: relative; overflow: hidden;
+  }
+  .team-quote::before {
+    content: '"';
+    position: absolute; top: -20px; left: 24px;
+    font-size: 120px; color: var(--yellow); opacity: .06;
+    font-family: serif; line-height: 1;
+  }
+  .team-quote-text { font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.8; max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+  .team-quote-text em { font-style: normal; color: var(--yellow); }
+  .team-quote-from { font-size: 12px; color: var(--sub); margin-top: 14px; }
+
+  /* ═══════════════════════════════════════
+     CONTACT
+  ═══════════════════════════════════════ */
+  #contact {
+    padding: 110px 0;
+    position: relative; overflow: hidden;
+  }
+  .contact-aurora {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(244,196,48,0.07) 0%, rgba(124,58,237,0.04) 40%, transparent 65%);
+    pointer-events: none;
+    animation: auroraMove 6s ease-in-out infinite alternate;
+  }
+  .contact-inner { position: relative; z-index: 1; text-align: center; max-width: 740px; margin: 0 auto; }
+  .contact-title { font-size: clamp(30px, 5vw, 52px); margin-bottom: 18px; }
+  .contact-sub { font-size: 17px; color: var(--muted); margin-bottom: 44px; line-height: 1.8; }
+  .contact-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+
+  .contact-cards {
+    display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
+  }
+  .contact-card {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 22px;
+    font-size: 14px;
+  }
+  .contact-card-icon { font-size: 18px; }
+  .contact-card-label { font-size: 11px; color: var(--sub); margin-bottom: 2px; font-family: 'Nunito',sans-serif; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+  .contact-card-val { font-size: 14px; color: var(--white); font-weight: 600; }
+
+  /* ═══════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════ */
+  footer {
+    background: #000;
+    border-top: 1px solid var(--border);
+    padding: 60px 0 28px;
+    position: relative;
+  }
+  footer::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+    opacity: .12;
+  }
+
+  .footer-grid {
+    display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+  }
+  .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .footer-logo-row .logo-mark { width: 32px; height: 32px; }
+  .footer-logo-row .logo-back { width: 28px; height: 28px; top: 3px; left: 3px; border-radius: 7px; }
+  .footer-logo-row .logo-front { width: 28px; height: 28px; border-radius: 7px; }
+  .footer-logo-row .logo-b { font-size: 15px; }
+  .footer-brand-name { font-family: 'Nunito',sans-serif; font-weight: 900; font-size: 16px; color: var(--yellow); line-height: 1; }
+  .footer-brand-co   { font-size: 10px; color: var(--sub); margin-top: 2px; }
+  .footer-tagline { font-size: 15px; color: var(--muted); margin: 16px 0 16px; font-style: italic; line-height: 1.7; }
+  .footer-reg { font-size: 13px; color: var(--sub); line-height: 1.85; }
+
+  .footer-col h5 {
+    font-family: 'Nunito',sans-serif; font-weight: 800; font-size: 11px;
+    color: var(--white); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 18px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { font-size: 13px; color: var(--sub); transition: color .2s; }
+  .footer-links a:hover { color: var(--yellow); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border); padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .footer-copy { font-size: 12px; color: var(--sub); }
+  .footer-legal { display: flex; gap: 20px; }
+  .footer-legal a { font-size: 12px; color: var(--sub); transition: color .2s; }
+  .footer-legal a:hover { color: var(--yellow); }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════ */
+  @media (max-width: 980px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .product-layout { grid-template-columns: 1fr; }
+    .product-visual { display: none; }
+    .brands-layout { grid-template-columns: 1fr; gap: 48px; }
+    .expansion-grid { grid-template-columns: 1fr 1fr; }
+    .phase-bar { grid-template-columns: 1fr; }
+    .phase-cell { border-right: none; border-bottom: 1px solid var(--border); }
+    .phase-cell:last-child { border-bottom: none; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+  @media (max-width: 600px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .expansion-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .stats-inner { flex-wrap: wrap; }
+    .stat-item { flex: 0 0 50%; border-bottom: 1px solid var(--border); }
+  }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="BoldBox - Micro Drama Streaming Platform/BoldBox Global Tech - LOGO for Website.png" alt="BoldBox Global Tech" class="logo-img" />
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#product">Our Product</a></li>
+        <li><a href="#brands">For Brands</a></li>
+        <li><a href="#vision">Vision</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact" class="nav-cta" data-i18n="nav.contact">ติดต่อเรา</a></li>
+      </ul>
+
+      <div class="nav-right-group">
+        <button class="lang-toggle" id="langBtn" onclick="toggleLang()" title="Switch Language">
+          <span class="lang-flag" id="langFlag">🇬🇧</span>
+          <span class="lang-label" id="langLabel">EN</span>
+        </button>
+        <button class="nav-hamburger" aria-label="menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-aurora">
+    <div class="aurora-blob aurora-blob-1"></div>
+    <div class="aurora-blob aurora-blob-2"></div>
+    <div class="aurora-blob aurora-blob-3"></div>
+  </div>
+  <div class="hero-dots"></div>
+  <div class="hero-line"></div>
+
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- LEFT -->
+      <div>
+        <div class="hero-eyebrow">
+          <div class="hero-line-accent"></div>
+          <span class="hero-company-txt">BoldBox Global Tech Co., Ltd.</span>
+        </div>
+
+        <h1 class="hero-title" data-i18n-html="hero.title">
+          บริษัทเทคโนโลยี<br/>
+          <span class="line-2">Entertainment</span>
+          <span class="line-3">สัญชาติไทย</span>
+        </h1>
+
+        <p class="hero-sub" data-i18n-html="hero.sub">
+          เราสร้างแพลตฟอร์มความบันเทิงดิจิทัลรูปแบบใหม่<br/>
+          เชื่อม<em>ผู้ชม แบรนด์ และวัฒนธรรม</em> ผ่านเรื่องราว Micro Drama<br/>
+          ที่ดูง่าย อินเร็ว และข้ามพรมแดนได้
+        </p>
+
+        <div class="hero-actions">
+          <a href="#product" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+            <span data-i18n="hero.btn1">ดู Product ของเรา</span>
+          </a>
+          <a href="#about" class="btn btn-glass" data-i18n="hero.btn2">เกี่ยวกับบริษัท →</a>
+        </div>
+
+        <div class="hero-badges">
+          <div class="hero-badge"><span class="hero-badge-icon">⚡</span> <span>10+ ปี</span> <span data-i18n="hero.badge.exp">ประสบการณ์</span></div>
+          <div class="hero-badge"><span class="hero-badge-icon">🌏</span> ASEAN Market</div>
+          <div class="hero-badge"><span class="hero-badge-icon">🎬</span> Micro Drama Platform</div>
+        </div>
+      </div>
+
+      <!-- RIGHT — Phone -->
+      <div class="hero-visual">
+        <div class="phone-glow"></div>
+
+        <div class="float-chip chip-1">
+          <div class="chip-ico">🔥</div>
+          <div>
+            <div class="chip-val">Trending</div>
+            <div class="chip-sub">Romance · 3M views</div>
+          </div>
+        </div>
+        <div class="float-chip chip-2">
+          <div class="chip-ico">⭐</div>
+          <div>
+            <div class="chip-val">VIP</div>
+            <div class="chip-sub">฿129 / เดือน</div>
+          </div>
+        </div>
+
+        <div class="phone-device">
+          <div class="phone-top"><div class="phone-pill"></div></div>
+          <div class="phone-screen">
+            <div class="drama-bg"></div>
+            <div class="drama-highlight"></div>
+
+            <div class="app-header-row">
+              <div class="app-logo-row">
+                <img src="BoldBox - Micro Drama Streaming Platform/Bold Box - LOGO.png" alt="BoldBox" style="width:22px;height:22px;border-radius:6px;background:#fff;object-fit:contain;flex-shrink:0;" />
+                <div class="app-logo-name">BoldBox</div>
+              </div>
+              <div class="app-notif">🔔</div>
+            </div>
+
+            <div class="app-tabs">
+              <div class="app-tab on">For You</div>
+              <div class="app-tab">New</div>
+              <div class="app-tab">Romance</div>
+            </div>
+
+            <div class="drama-card">
+              <div class="drama-card-glow"></div>
+              <div class="drama-card-content">
+                <div class="drama-new-badge">New Series</div>
+                <div class="drama-title">รักข้ามชาติ Season 2</div>
+                <div class="drama-meta">Romance · Drama · 24 Episodes</div>
+                <div class="drama-play-row">
+                  <div class="drama-play-btn">
+                    <svg width="10" height="10" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <div class="drama-play-label">ดูตอนที่ 1 ฟรี</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="series-row-label">กำลังฮิต</div>
+            <div class="series-row">
+              <div class="series-thumb st-1">
+                <div class="series-progress"><div class="series-progress-fill"></div></div>
+                <div class="series-info">
+                  <div class="series-name">แค้นรัก</div>
+                  <div class="series-badge vip">● VIP</div>
+                </div>
+              </div>
+              <div class="series-thumb st-2">
+                <div class="series-info">
+                  <div class="series-name">CEO หัวใจร้าย</div>
+                  <div class="series-badge free">● Free</div>
+                </div>
+              </div>
+              <div class="series-thumb st-3">
+                <div class="series-info">
+                  <div class="series-name">ยอดรัก</div>
+                  <div class="series-badge vip">● VIP</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="app-nav">
+              <div class="app-nav-item active">
+                <div class="app-nav-bar on"></div>
+                <div class="app-nav-lbl">For You</div>
+              </div>
+              <div class="app-nav-item inactive">
+                <div class="app-nav-bar off"></div>
+                <div class="app-nav-lbl">Series</div>
+              </div>
+              <div class="app-nav-item inactive">
+                <div class="app-nav-bar off"></div>
+                <div class="app-nav-lbl">Search</div>
+              </div>
+              <div class="app-nav-item inactive">
+                <div class="app-nav-bar off"></div>
+                <div class="app-nav-lbl">Profile</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span class="scroll-txt">Scroll</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+
+<!-- ══════════ STATS BAR ══════════ -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num">10+</div>
+        <div class="stat-label" data-i18n="stat1.label">ปีประสบการณ์ Digital Industry</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1</div>
+        <div class="stat-label" data-i18n="stat2.label">Flagship Product</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">40+</div>
+        <div class="stat-label" data-i18n="stat3.label">Series Launch</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label" data-i18n="stat4.label">ASEAN Target Markets</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">410K</div>
+        <div class="stat-label" data-i18n="stat5.label">Target MAU Year 1</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div>
+        <div class="about-tag"><span class="tag" data-i18n="about.tag">เกี่ยวกับบริษัท</span></div>
+        <h2 class="about-title" data-i18n-html="about.title">เราคือใคร<br/>และ<span class="grad-text"> ทำอะไร</span></h2>
+
+        <p class="about-body" data-i18n-html="about.body1">
+          <strong style="color:#fff;">BoldBox Global Tech Co., Ltd.</strong> คือบริษัทเทคโนโลยีความบันเทิงสัญชาติไทย ก่อตั้งโดยทีมที่มีประสบการณ์มากกว่า 10 ปีในด้าน Digital Creative, Content Production และ Digital Marketing
+        </p>
+        <p class="about-body" data-i18n-html="about.body2">
+          เราเชื่อว่า <em style="color:#fff;font-style:normal;">เรื่องราวเป็นภาษาสากล</em> — และด้วยเทคโนโลยีที่เหมาะสม เรื่องราวท้องถิ่นสามารถเดินทางข้ามพรมแดน เชื่อมผู้คน แบรนด์ และวัฒนธรรมเข้าหากันได้
+        </p>
+
+        <blockquote class="about-quote">
+          "We are leveraging 10+ years of experience in content, distribution, and monetization to build a scalable entertainment ecosystem that connects audiences, brands, and cultures across Asia."
+        </blockquote>
+
+        <a href="#team" class="btn btn-glass" style="margin-top:8px;" data-i18n="about.btn">รู้จักทีมผู้ก่อตั้ง →</a>
+      </div>
+
+      <div class="value-list">
+        <div class="glass-card value-card">
+          <div class="value-icon">🎯</div>
+          <div>
+            <div class="value-title" data-i18n="val1.title">Mission</div>
+            <div class="value-desc" data-i18n="val1.desc">สร้างแพลตฟอร์มที่ทำให้ local stories เดินทางข้ามประเทศได้ ผ่าน micro drama ที่เข้าถึงง่าย สนุก และเชื่อมผู้ชม แบรนด์ และวัฒนธรรมเข้าด้วยกัน</div>
+          </div>
+        </div>
+        <div class="glass-card value-card">
+          <div class="value-icon">🌏</div>
+          <div>
+            <div class="value-title" data-i18n="val2.title">Vision</div>
+            <div class="value-desc" data-i18n="val2.desc">Building the next cross-border storytelling platform for Asia — เริ่มจากประเทศไทย ขยายสู่อาเซียน และเชื่อมโลกด้วยเรื่องราว</div>
+          </div>
+        </div>
+        <div class="glass-card value-card">
+          <div class="value-icon">⚡</div>
+          <div>
+            <div class="value-title" data-i18n="val3.title">เราทำอะไร</div>
+            <div class="value-desc" data-i18n="val3.desc">พัฒนาแพลตฟอร์มสตรีมมิ่ง Micro Drama พร้อมระบบ monetization ที่ครบครัน — Ad Sales, VIP Subscription, Branded Content และ Creator Ecosystem</div>
+          </div>
+        </div>
+        <div class="glass-card value-card">
+          <div class="value-icon">🏆</div>
+          <div>
+            <div class="value-title" data-i18n="val4.title">จุดแข็ง</div>
+            <div class="value-desc" data-i18n="val4.desc">First-mover advantage ในตลาด Micro Drama ของไทย + Founder team ที่เข้าใจ creative, growth และ monetization ครบทุกมิติ</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ PRODUCT ══════════ -->
+<section id="product">
+  <div class="product-glow"></div>
+  <div class="container">
+
+    <div class="sec-label"><span class="tag">Our Product</span></div>
+    <h2 class="sec-title">ผลิตภัณฑ์<span class="grad-text">ของเรา</span></h2>
+    <p class="sec-sub">BoldBox Global Tech พัฒนาแพลตฟอร์ม Micro Drama Streaming ที่ถูกออกแบบมาสำหรับยุค Attention Economy โดยเฉพาะ</p>
+
+    <div class="product-layout">
+
+      <div>
+        <div class="product-tag"><span class="tag">📱 BoldBox App</span></div>
+        <h3 class="product-app-name"><span class="grad-text">BoldBox</span><br/>Micro Drama Platform</h3>
+        <span class="product-tagline">"Watch in seconds. Feel in moments. Return every day."</span>
+
+        <p class="product-body" data-i18n="product.body1">
+          BoldBox คือแอปพลิเคชันสตรีมมิ่ง Micro Drama บนมือถือ สำหรับซีรีส์แนวตั้งความยาวสั้น ดูง่าย อินเร็ว และสร้าง daily habit ให้ผู้ชมกลับมาดูซ้ำได้ทุกวัน
+        </p>
+        <p class="product-body" data-i18n="product.body2">
+          ตั้งอยู่ระหว่าง TikTok และ Netflix — เร็วแบบ short-form video แต่มีเรื่องราวและ emotional depth แบบ scripted drama
+        </p>
+
+        <div class="pos-strip">
+          <div class="pos-item">
+            <div class="pos-item-name">TikTok</div>
+            <div class="pos-item-desc">เร็ว ไม่มี story</div>
+          </div>
+          <div class="pos-sep">←</div>
+          <div class="pos-item" style="background:rgba(244,196,48,0.05);border-left:1px solid rgba(244,196,48,0.1);border-right:1px solid rgba(244,196,48,0.1);">
+            <div class="pos-item-name center">BoldBox</div>
+            <div class="pos-item-desc">เร็ว <em style="font-style:normal;color:var(--yellow)">และ</em> มีเรื่อง</div>
+          </div>
+          <div class="pos-sep">→</div>
+          <div class="pos-item">
+            <div class="pos-item-name">Netflix</div>
+            <div class="pos-item-desc">มี story ช้าเกิน</div>
+          </div>
+        </div>
+
+        <div class="dl-row">
+          <!-- Google Play -->
+          <a href="#" class="dl-btn">
+            <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.431 0.358C0.162 0.644 0 1.082 0 1.656V22.344C0 22.918 0.162 23.356 0.431 23.642L0.504 23.713L11.626 12.591V12.409L0.504 1.287L0.431 0.358Z" fill="url(#gp1)"/>
+              <path d="M15.457 16.426L11.626 12.591V12.409L15.457 8.574L15.548 8.626L20.119 11.22C21.428 11.963 21.428 13.037 20.119 13.78L15.548 16.374L15.457 16.426Z" fill="url(#gp2)"/>
+              <path d="M15.548 16.374L11.626 12.452L0.431 23.642C0.852 24.088 1.545 24.143 2.329 23.704L15.548 16.374Z" fill="url(#gp3)"/>
+              <path d="M15.548 8.626L2.329 1.296C1.545 0.857 0.852 0.912 0.431 1.358L11.626 12.548L15.548 8.626Z" fill="url(#gp4)"/>
+              <defs>
+                <linearGradient id="gp1" x1="10.636" y1="1.408" x2="-4.796" y2="16.84" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#00A0FF"/>
+                  <stop offset="0.007" stop-color="#00A1FF"/>
+                  <stop offset="0.26" stop-color="#00BEFF"/>
+                  <stop offset="0.512" stop-color="#00D2FF"/>
+                  <stop offset="0.76" stop-color="#00DFFF"/>
+                  <stop offset="1" stop-color="#00E3FF"/>
+                </linearGradient>
+                <linearGradient id="gp2" x1="21.844" y1="12" x2="-0.376" y2="12" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FFE000"/>
+                  <stop offset="0.409" stop-color="#FFBD00"/>
+                  <stop offset="0.775" stop-color="#FFA500"/>
+                  <stop offset="1" stop-color="#FF9C00"/>
+                </linearGradient>
+                <linearGradient id="gp3" x1="13.404" y1="14.306" x2="-7.344" y2="35.054" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FF3A44"/>
+                  <stop offset="1" stop-color="#C31162"/>
+                </linearGradient>
+                <linearGradient id="gp4" x1="-1.92" y1="-6.876" x2="7.52" y2="2.564" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#32A071"/>
+                  <stop offset="0.069" stop-color="#2DA771"/>
+                  <stop offset="0.476" stop-color="#15CF74"/>
+                  <stop offset="0.801" stop-color="#06E775"/>
+                  <stop offset="1" stop-color="#00F076"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div>
+              <div class="dl-btn-sub">GET IT ON</div>
+              <div class="dl-btn-label">Google Play</div>
+            </div>
+          </a>
+          <!-- App Store -->
+          <a href="#" class="dl-btn">
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.038 13.79C18.017 11.13 19.694 9.858 19.773 9.804C18.782 8.373 17.265 8.17 16.735 8.151C15.46 8.018 14.224 8.909 13.574 8.909C12.911 8.909 11.909 8.164 10.832 8.187C9.441 8.208 8.139 9.005 7.42 10.247C5.933 12.778 7.024 16.512 8.449 18.568C9.163 19.574 9.997 20.699 11.102 20.659C12.18 20.615 12.582 19.973 13.857 19.973C15.12 19.973 15.497 20.659 16.621 20.632C17.779 20.615 18.496 19.623 19.185 18.607C20.014 17.447 20.347 16.305 20.361 16.246C20.333 16.237 18.063 15.369 18.038 13.79Z" fill="white"/>
+              <path d="M15.914 6.612C16.487 5.908 16.878 4.951 16.769 3.98C15.952 4.017 14.923 4.544 14.327 5.232C13.8 5.843 13.328 6.833 13.451 7.769C14.366 7.836 15.318 7.303 15.914 6.612Z" fill="white"/>
+            </svg>
+            <div>
+              <div class="dl-btn-sub">Download on the</div>
+              <div class="dl-btn-label">App Store</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Product Visual — full-screen drama episode -->
+      <div class="product-visual">
+        <div class="product-phone-glow"></div>
+        <div class="product-phone">
+          <div class="product-phone-top"><div class="product-phone-pill"></div></div>
+          <div class="product-phone-screen">
+            <div class="ep-screen">
+              <div class="ep-filmgrain"></div>
+              <div class="ep-gradient-top"></div>
+              <div class="ep-gradient-bot"></div>
+
+              <div class="ep-visual">
+                <div class="ep-circle-1"></div>
+                <div class="ep-silhouette"></div>
+              </div>
+
+              <div class="ep-ui">
+                <div class="ep-top-bar">
+                  <div class="ep-logo-row">
+                    <img src="BoldBox - Micro Drama Streaming Platform/Bold Box - LOGO.png" alt="BoldBox" style="width:20px;height:20px;border-radius:5px;background:#fff;object-fit:contain;flex-shrink:0;" />
+                    <div class="ep-logo-name">BoldBox</div>
+                  </div>
+                  <div style="font-size:12px;color:var(--muted);">✕</div>
+                </div>
+              </div>
+
+              <div class="ep-bottom">
+                <div class="ep-vip-badge">⭐ VIP Exclusive</div>
+                <div class="ep-title">รักข้ามชาติ Season 2</div>
+                <div class="ep-meta">EP.4 · Romance · Drama</div>
+                <div class="ep-progress"><div class="ep-progress-fill"></div></div>
+                <div class="ep-controls">
+                  <div class="ep-play">
+                    <svg width="12" height="12" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <div class="ep-ep-txt">ดูต่อตอนที่ 4</div>
+                </div>
+              </div>
+
+              <div class="ep-bottom-nav">
+                <div class="app-nav-item active">
+                  <div class="app-nav-bar on"></div>
+                  <div class="app-nav-lbl" style="color:var(--yellow)">For You</div>
+                </div>
+                <div class="app-nav-item inactive">
+                  <div class="app-nav-bar off"></div>
+                  <div class="app-nav-lbl" style="color:rgba(255,255,255,0.2)">Series</div>
+                </div>
+                <div class="app-nav-item inactive">
+                  <div class="app-nav-bar off"></div>
+                  <div class="app-nav-lbl" style="color:rgba(255,255,255,0.2)">Search</div>
+                </div>
+                <div class="app-nav-item inactive">
+                  <div class="app-nav-bar off"></div>
+                  <div class="app-nav-lbl" style="color:rgba(255,255,255,0.2)">Profile</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FEATURES ══════════ -->
+<section id="features">
+  <div class="container">
+    <div class="sec-label"><span class="tag">Features</span></div>
+    <h2 class="sec-title" data-i18n-html="feat.title">ทำไม BoldBox ถึง<span class="grad-text">แตกต่าง</span></h2>
+    <p class="sec-sub" data-i18n="feat.sub">ออกแบบทุก feature เพื่อให้ผู้ชมเปิดแอปแล้วอินได้เร็ว และกลับมาดูซ้ำได้ทุกวัน</p>
+
+    <div class="features-grid">
+      <div class="glass-card feat-card">
+        <div class="feat-icon-wrap">⚡</div>
+        <div class="feat-title" data-i18n="feat1.title">Instant Access</div>
+        <div class="feat-body" data-i18n="feat1.body">เปิดแอปแล้วดูได้ทันที ไม่ต้องรอโหลด ไม่ต้องสมัครก็ดูฟรีได้เลย ลด friction ให้เหลือน้อยที่สุด</div>
+      </div>
+      <div class="glass-card feat-card">
+        <div class="feat-icon-wrap">🎭</div>
+        <div class="feat-title" data-i18n="feat2.title">Emotional Hook</div>
+        <div class="feat-body" data-i18n="feat2.body">ทุก Episode มีคลิฟแฮงเกอร์ที่ดึงให้ดูต่อ — scripted drama คุณภาพสูง ที่อินได้ภายใน 3 นาทีแรก</div>
+      </div>
+      <div class="glass-card feat-card">
+        <div class="feat-icon-wrap">📱</div>
+        <div class="feat-title" data-i18n="feat3.title">Mobile-First Vertical</div>
+        <div class="feat-body" data-i18n="feat3.body">วิดีโอแนวตั้ง ออกแบบมาเพื่อจอมือถือโดยเฉพาะ ดูสะดวกทุกที่ ระหว่างเดินทาง พักกินข้าว หรือก่อนนอน</div>
+      </div>
+      <div class="glass-card feat-card">
+        <div class="feat-icon-wrap">🤖</div>
+        <div class="feat-title" data-i18n="feat4.title">For You Algorithm</div>
+        <div class="feat-body" data-i18n="feat4.body">อัลกอริทึมแนะนำเรื่องที่ตรงกับ interest ของผู้ชมโดยเฉพาะ เหมือน TikTok แต่มีเรื่องราว</div>
+      </div>
+      <div class="glass-card feat-card">
+        <div class="feat-icon-wrap">🆓</div>
+        <div class="feat-title" data-i18n="feat5.title">Free-to-Watch Core</div>
+        <div class="feat-body" data-i18n="feat5.body">คอนเทนต์หลักดูฟรีทั้งหมด สร้างฐานผู้ใช้กว้าง พร้อม VIP tier สำหรับ Exclusive Series ไม่อั้น</div>
+      </div>
+      <div class="glass-card feat-card">
+        <div class="feat-icon-wrap">🌏</div>
+        <div class="feat-title" data-i18n="feat6.title">Asian Storytelling</div>
+        <div class="feat-body" data-i18n="feat6.body">คอนเทนต์ที่เข้าใจวัฒนธรรมและอารมณ์ของคนเอเชียจริงๆ ไม่ใช่แค่ translation แต่คือ cultural connection</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ GENRES MARQUEE ══════════ -->
+<section id="genres">
+  <div class="container">
+    <div class="sec-label"><span class="tag">Content Library</span></div>
+    <h2 class="sec-title" data-i18n-html="genres.title">คอนเทนต์ทุกแนว<span class="grad-text"> ที่คุณชอบ</span></h2>
+    <p class="sec-sub" data-i18n="genres.sub">40+ Series พร้อมดูตั้งแต่วันแรก ครอบคลุมทุก genre ที่คนไทยและคนเอเชียรัก</p>
+  </div>
+
+  <div class="marquee-track">
+    <!-- Row 1 forward -->
+    <div class="marquee-row forward">
+      <div class="genre-chip">💕 Romance</div>
+      <div class="genre-chip">🎭 Drama</div>
+      <div class="genre-chip">🌈 BL / GL</div>
+      <div class="genre-chip">⚔️ Revenge</div>
+      <div class="genre-chip">💼 Workplace</div>
+      <div class="genre-chip">✨ Fantasy</div>
+      <div class="genre-chip">🔄 Reincarnation</div>
+      <div class="genre-chip">👨‍👩‍👧 Family</div>
+      <div class="genre-chip">😂 Comedy Romance</div>
+      <div class="genre-chip">👻 Horror / Mystery</div>
+      <!-- Duplicate for seamless loop -->
+      <div class="genre-chip">💕 Romance</div>
+      <div class="genre-chip">🎭 Drama</div>
+      <div class="genre-chip">🌈 BL / GL</div>
+      <div class="genre-chip">⚔️ Revenge</div>
+      <div class="genre-chip">💼 Workplace</div>
+      <div class="genre-chip">✨ Fantasy</div>
+      <div class="genre-chip">🔄 Reincarnation</div>
+      <div class="genre-chip">👨‍👩‍👧 Family</div>
+      <div class="genre-chip">😂 Comedy Romance</div>
+      <div class="genre-chip">👻 Horror / Mystery</div>
+    </div>
+    <!-- Row 2 reverse -->
+    <div class="marquee-row reverse">
+      <div class="genre-chip">🏙️ Urban Drama</div>
+      <div class="genre-chip">👑 CEO Romance</div>
+      <div class="genre-chip">🗡️ Historical</div>
+      <div class="genre-chip">🌸 School Love</div>
+      <div class="genre-chip">💰 Revenge Rich</div>
+      <div class="genre-chip">🧿 Supernatural</div>
+      <div class="genre-chip">🎵 Idol Drama</div>
+      <div class="genre-chip">🏥 Medical</div>
+      <div class="genre-chip">🌙 Night Romance</div>
+      <div class="genre-chip">🎭 Thriller</div>
+      <div class="genre-chip">🏙️ Urban Drama</div>
+      <div class="genre-chip">👑 CEO Romance</div>
+      <div class="genre-chip">🗡️ Historical</div>
+      <div class="genre-chip">🌸 School Love</div>
+      <div class="genre-chip">💰 Revenge Rich</div>
+      <div class="genre-chip">🧿 Supernatural</div>
+      <div class="genre-chip">🎵 Idol Drama</div>
+      <div class="genre-chip">🏥 Medical</div>
+      <div class="genre-chip">🌙 Night Romance</div>
+      <div class="genre-chip">🎭 Thriller</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FREE WATCH PROMO ══════════ -->
+<section id="watch-free">
+  <div class="wf-bg-glow wf-bg-glow-1"></div>
+  <div class="wf-bg-glow wf-bg-glow-2"></div>
+
+  <div class="wf-inner">
+    <!-- LEFT -->
+    <div class="wf-left">
+      <div class="wf-eyebrow"><span class="tag" data-i18n="wf.eyebrow">🎬 BoldBox App</span></div>
+      <h2 class="wf-title" data-i18n-html="wf.title">
+        ดูฟรี<br/>
+        <span class="grad-text">ทุกตอน</span><br/>
+        ไม่ต้องสมัคร
+      </h2>
+      <p class="wf-tagline" data-i18n="wf.tagline">"Watch in seconds. Feel in moments. Return every day."</p>
+      <p class="wf-body" data-i18n-html="wf.body">เปิดแอปแล้วดูได้ทันที ไม่ต้องจ่าย ไม่ต้องสมัครสมาชิก<br/>คอนเทนต์ทุกตอนพร้อมให้คุณอินได้เลยภายในไม่กี่วินาที</p>
+
+      <div class="wf-dl-row">
+        <a href="#" class="dl-btn">
+          <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.431 0.358C0.162 0.644 0 1.082 0 1.656V22.344C0 22.918 0.162 23.356 0.431 23.642L0.504 23.713L11.626 12.591V12.409L0.504 1.287L0.431 0.358Z" fill="url(#wgp1)"/><path d="M15.457 16.426L11.626 12.591V12.409L15.457 8.574L15.548 8.626L20.119 11.22C21.428 11.963 21.428 13.037 20.119 13.78L15.548 16.374L15.457 16.426Z" fill="url(#wgp2)"/><path d="M15.548 16.374L11.626 12.452L0.431 23.642C0.852 24.088 1.545 24.143 2.329 23.704L15.548 16.374Z" fill="url(#wgp3)"/><path d="M15.548 8.626L2.329 1.296C1.545 0.857 0.852 0.912 0.431 1.358L11.626 12.548L15.548 8.626Z" fill="url(#wgp4)"/><defs><linearGradient id="wgp1" x1="10.636" y1="1.408" x2="-4.796" y2="16.84" gradientUnits="userSpaceOnUse"><stop stop-color="#00A0FF"/><stop offset="1" stop-color="#00E3FF"/></linearGradient><linearGradient id="wgp2" x1="21.844" y1="12" x2="-0.376" y2="12" gradientUnits="userSpaceOnUse"><stop stop-color="#FFE000"/><stop offset="1" stop-color="#FF9C00"/></linearGradient><linearGradient id="wgp3" x1="13.404" y1="14.306" x2="-7.344" y2="35.054" gradientUnits="userSpaceOnUse"><stop stop-color="#FF3A44"/><stop offset="1" stop-color="#C31162"/></linearGradient><linearGradient id="wgp4" x1="-1.92" y1="-6.876" x2="7.52" y2="2.564" gradientUnits="userSpaceOnUse"><stop stop-color="#32A071"/><stop offset="1" stop-color="#00F076"/></linearGradient></defs></svg>
+          <div><div class="dl-btn-sub">GET IT ON</div><div class="dl-btn-label">Google Play</div></div>
+        </a>
+        <a href="#" class="dl-btn">
+          <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.038 13.79C18.017 11.13 19.694 9.858 19.773 9.804C18.782 8.373 17.265 8.17 16.735 8.151C15.46 8.018 14.224 8.909 13.574 8.909C12.911 8.909 11.909 8.164 10.832 8.187C9.441 8.208 8.139 9.005 7.42 10.247C5.933 12.778 7.024 16.512 8.449 18.568C9.163 19.574 9.997 20.699 11.102 20.659C12.18 20.615 12.582 19.973 13.857 19.973C15.12 19.973 15.497 20.659 16.621 20.632C17.779 20.615 18.496 19.623 19.185 18.607C20.014 17.447 20.347 16.305 20.361 16.246C20.333 16.237 18.063 15.369 18.038 13.79Z" fill="white"/><path d="M15.914 6.612C16.487 5.908 16.878 4.951 16.769 3.98C15.952 4.017 14.923 4.544 14.327 5.232C13.8 5.843 13.328 6.833 13.451 7.769C14.366 7.836 15.318 7.303 15.914 6.612Z" fill="white"/></svg>
+          <div><div class="dl-btn-sub">Download on the</div><div class="dl-btn-label">App Store</div></div>
+        </a>
+      </div>
+
+      <div class="wf-free-badge">
+        <span class="wf-free-num">FREE</span>
+        <span class="wf-free-txt" data-i18n="wf.free.txt">ดูได้เลย ไม่มีค่าใช้จ่าย</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: Drama Cover Grid -->
+    <div class="wf-right">
+      <div class="wf-covers">
+        <!-- Col 1 -->
+        <div class="wf-col wf-col-1">
+          <div class="wf-cover wf-c1">
+            <div class="wf-cover-badge">🔥 TRENDING</div>
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-duo"></div>
+              <div class="pa-glow pa-glow-pink"></div>
+              <div class="pa-petals"></div>
+              <div class="pa-title-big" style="color:#FF8FAB;">แค้นรัก</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">แค้นรัก</div><div class="wf-cover-genre">Romance · Drama</div></div>
+          </div>
+          <div class="wf-cover wf-c2">
+            <div class="wf-cover-badge wf-badge-vip">⭐ VIP</div>
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-tall"></div>
+              <div class="pa-glow pa-glow-gold"></div>
+              <div class="pa-lines"></div>
+              <div class="pa-title-big" style="color:#FFD566;font-size:13px;">ยอดรัก<br/>มหาเศรษฐี</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">ยอดรักมหาเศรษฐี</div><div class="wf-cover-genre">CEO · Romance</div></div>
+          </div>
+          <div class="wf-cover wf-c3">
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-shadow"></div>
+              <div class="pa-glow pa-glow-blue"></div>
+              <div class="pa-grid-lines"></div>
+              <div class="pa-title-big" style="color:#93C5FD;">คืนสุดท้าย</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">คืนสุดท้าย</div><div class="wf-cover-genre">Thriller · Mystery</div></div>
+          </div>
+          <div class="wf-cover wf-c4">
+            <div class="wf-cover-badge">NEW</div>
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-duo"></div>
+              <div class="pa-glow pa-glow-rose"></div>
+              <div class="pa-title-big" style="color:#FDA4AF;">รักข้ามชาติ</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">รักข้ามชาติ</div><div class="wf-cover-genre">Romance · Drama</div></div>
+          </div>
+        </div>
+
+        <!-- Col 2 -->
+        <div class="wf-col wf-col-2">
+          <div class="wf-cover wf-c5">
+            <div class="wf-cover-badge wf-badge-vip">⭐ VIP</div>
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-tall"></div>
+              <div class="pa-glow pa-glow-cold"></div>
+              <div class="pa-lines"></div>
+              <div class="pa-title-big" style="color:#C4B5FD;font-size:13px;">หัวใจร้าย<br/>CEO</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">หัวใจร้าย CEO</div><div class="wf-cover-genre">CEO · Revenge</div></div>
+          </div>
+          <div class="wf-cover wf-c6">
+            <div class="wf-cover-badge">🔥 HOT</div>
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-ghost"></div>
+              <div class="pa-glow pa-glow-teal"></div>
+              <div class="pa-particles"></div>
+              <div class="pa-title-big" style="color:#6EE7B7;">ผีรักมนุษย์</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">ผีรักมนุษย์</div><div class="wf-cover-genre">Fantasy · BL</div></div>
+          </div>
+          <div class="wf-cover wf-c7">
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-shadow"></div>
+              <div class="pa-glow pa-glow-red"></div>
+              <div class="pa-drip"></div>
+              <div class="pa-title-big" style="color:#FCA5A5;font-size:13px;">รักใน<br/>รอยเลือด</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">รักในรอยเลือด</div><div class="wf-cover-genre">Revenge · Drama</div></div>
+          </div>
+          <div class="wf-cover wf-c8">
+            <div class="wf-cover-badge">NEW</div>
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-crown"></div>
+              <div class="pa-glow pa-glow-gold"></div>
+              <div class="pa-ornament"></div>
+              <div class="pa-title-big" style="color:#FDE68A;font-size:13px;">เจ้าหญิง<br/>ใจหิน</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">เจ้าหญิงใจหิน</div><div class="wf-cover-genre">Historical</div></div>
+          </div>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="wf-col wf-col-3">
+          <div class="wf-cover wf-c9">
+            <div class="wf-cover-badge">🔥 TRENDING</div>
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-duo"></div>
+              <div class="pa-glow pa-glow-purple"></div>
+              <div class="pa-title-big" style="color:#D8B4FE;">สามีแค้น</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">สามีแค้น</div><div class="wf-cover-genre">Revenge · Romance</div></div>
+          </div>
+          <div class="wf-cover wf-c10">
+            <div class="wf-cover-badge wf-badge-vip">⭐ VIP</div>
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-duo"></div>
+              <div class="pa-glow pa-glow-yellow"></div>
+              <div class="pa-petals"></div>
+              <div class="pa-title-big" style="color:#FEF08A;">รักอลวน</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">รักอลวน</div><div class="wf-cover-genre">Comedy · Romance</div></div>
+          </div>
+          <div class="wf-cover wf-c11">
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-shadow"></div>
+              <div class="pa-glow pa-glow-green"></div>
+              <div class="pa-grid-lines"></div>
+              <div class="pa-title-big" style="color:#86EFAC;">เงาอดีต</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">เงาอดีต</div><div class="wf-cover-genre">Mystery · Drama</div></div>
+          </div>
+          <div class="wf-cover wf-c12">
+            <div class="wf-cover-badge">NEW</div>
+            <div class="poster-art">
+              <div class="pa-sil pa-sil-tall"></div>
+              <div class="pa-glow pa-glow-red"></div>
+              <div class="pa-title-big" style="color:#F87171;">ใจดำ</div>
+            </div>
+            <div class="wf-cover-info"><div class="wf-cover-title">ใจดำ</div><div class="wf-cover-genre">Thriller</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Fade edges -->
+      <div class="wf-fade-top"></div>
+      <div class="wf-fade-bot"></div>
+      <div class="wf-fade-left"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FOR BRANDS ══════════ -->
+<section id="brands">
+  <div class="brands-accent"></div>
+  <div class="container">
+
+    <div class="sec-label"><span class="tag">สำหรับแบรนด์</span></div>
+    <h2 class="sec-title">Story-First<span class="grad-text"> Marketing</span></h2>
+    <p class="sec-sub" data-i18n="brands.sub">พื้นที่โฆษณาที่ผู้ชมกำลังอินกับเรื่องราวอย่างเต็มที่ — ไม่ใช่แค่ banner ad ธรรมดา</p>
+
+    <div class="brands-layout">
+      <div>
+        <h2 class="brands-title" data-i18n-html="brands.h2">
+          เข้าถึง Audience<br/>
+          <span class="grad-text">ที่มี Emotional Engagement สูง</span>
+        </h2>
+        <p class="brands-body" data-i18n-html="brands.body">
+          BoldBox คือ channel ใหม่สำหรับแบรนด์ที่ต้องการสื่อสารกับ Gen Z + Millennials อายุ 18–35 ปี ที่กำลัง <em style="color:#fff;font-style:normal;">อินกับเรื่องราว</em> อย่างเต็มที่ ไม่ใช่แค่เลื่อน scroll ผ่านไป
+        </p>
+
+        <a href="#contact" class="btn btn-primary" style="margin-bottom:32px;" data-i18n="brands.cta">ติดต่อทีม Ad Sales →</a>
+
+      </div>
+
+      <div class="metrics-col">
+        <div class="glass-card metric-card">
+          <div class="metric-hd"><div class="metric-lbl">Target MAU (Month 12)</div><div class="metric-val">325K</div></div>
+          <div class="metric-bar"><div class="metric-fill" style="width:80%"></div></div>
+        </div>
+        <div class="glass-card metric-card">
+          <div class="metric-hd"><div class="metric-lbl">Core Audience — Gen Z + Millennials</div><div class="metric-val">18–35 ปี</div></div>
+          <div class="metric-bar"><div class="metric-fill" style="width:100%"></div></div>
+        </div>
+        <div class="glass-card metric-card">
+          <div class="metric-hd"><div class="metric-lbl">Platform — Mobile-First</div><div class="metric-val">100%</div></div>
+          <div class="metric-bar"><div class="metric-fill" style="width:100%"></div></div>
+        </div>
+        <div class="glass-card metric-card">
+          <div class="metric-hd"><div class="metric-lbl">Primary: ผู้หญิง + LGBTQ+</div><div class="metric-val">High Intent</div></div>
+          <div class="metric-bar"><div class="metric-fill" style="width:75%"></div></div>
+        </div>
+        <div class="brands-note">
+          <strong>Coming Soon — Branded Content</strong><br/>
+          Sponsored Micro Drama · Product Tie-in · Brand-funded Original Series · เมื่อ MAU ถึง 100K
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ VISION ══════════ -->
+<section id="vision">
+  <div class="container">
+    <div class="sec-label"><span class="tag">Vision & Expansion</span></div>
+    <h2 class="sec-title" data-i18n-html="vision.title">เริ่มจากไทย<span class="grad-text"> ขยายสู่เอเชีย</span></h2>
+    <p class="sec-sub" data-i18n="vision.sub">BoldBox Global Tech กำลังสร้าง Cross-border Storytelling Platform ที่เชื่อมวัฒนธรรม ผู้ชม และแบรนด์ทั่วทั้งเอเชีย</p>
+
+    <div class="expansion-grid">
+      <div class="glass-card exp-card">
+        <div class="exp-flag">🇹🇭</div>
+        <div class="exp-country">ประเทศไทย</div>
+        <div class="exp-desc">Launch Market — Free-to-Watch, Direct Ad Sales, VIP Subscription, Branded Content</div>
+        <div class="exp-badge">Phase 1 — Active</div>
+      </div>
+      <div class="glass-card exp-card">
+        <div class="exp-flag">🇮🇩</div>
+        <div class="exp-country">อินโดนีเซีย</div>
+        <div class="exp-desc">ตลาดใหญ่สุดในอาเซียน ฐานผู้ใช้มือถือสูง ชอบ drama, family &amp; romance content</div>
+        <div class="exp-badge">Phase 2 — ASEAN</div>
+      </div>
+      <div class="glass-card exp-card">
+        <div class="exp-flag">🇻🇳</div>
+        <div class="exp-country">เวียดนาม</div>
+        <div class="exp-desc">ผู้ใช้ดิจิทัลเติบโตเร็ว Short-form video ได้รับความนิยมสูง ศักยภาพ localization สูง</div>
+        <div class="exp-badge">Phase 2 — ASEAN</div>
+      </div>
+      <div class="glass-card exp-card">
+        <div class="exp-flag">🇯🇵</div>
+        <div class="exp-country">ญี่ปุ่น</div>
+        <div class="exp-desc">Strategic Partnership — IP Exchange, Co-production, Cultural Bridge, Scale Up to Global</div>
+        <div class="exp-badge">Phase 3 — Partnership</div>
+      </div>
+    </div>
+
+    <div class="phase-bar">
+      <div class="phase-cell">
+        <div class="phase-num">Phase 1</div>
+        <div class="phase-name">Thailand First</div>
+        <div class="phase-desc">MVP Launch · 40+ Series · Direct Ad Sales · VIP System · Data Collection</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-num">Phase 2</div>
+        <div class="phase-name">ASEAN Expansion</div>
+        <div class="phase-desc">Indonesia · Vietnam · Philippines · Malaysia · Localization · Regional Brands</div>
+      </div>
+      <div class="phase-cell">
+        <div class="phase-num">Phase 3</div>
+        <div class="phase-name">Japan & Cross-border</div>
+        <div class="phase-desc">IP Licensing · Thai-Japan Co-production · Cultural Storytelling · Scale Up Global</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ TEAM ══════════ -->
+<section id="team">
+  <div class="container">
+    <div class="sec-label"><span class="tag">Our Team</span></div>
+    <h2 class="sec-title" data-i18n-html="team.title">ทีมผู้ก่อตั้ง<span class="grad-text"> BoldBox Global Tech</span></h2>
+    <p class="sec-sub" data-i18n="team.sub">ทีมที่เข้าใจทั้ง Storytelling, Growth และ Monetization จาก Bold Moves Digital Creative Agency ประสบการณ์ 10+ ปี</p>
+
+    <div class="team-grid">
+      <div class="glass-card team-card">
+        <div class="team-avatar">M</div>
+        <div class="team-name">Mighty</div>
+        <div class="team-role">CEO &amp; Co-Founder</div>
+        <div class="team-bio">วิสัยทัศน์ธุรกิจ กลยุทธ์การเติบโต Investor Relations และ Strategic Partnerships</div>
+      </div>
+      <div class="glass-card team-card">
+        <div class="team-avatar">A</div>
+        <div class="team-name">Ake</div>
+        <div class="team-role">CCO &amp; Co-Founder</div>
+        <div class="team-bio">Creative Direction คอนเทนต์ Storytelling Strategy และ Brand Identity</div>
+      </div>
+      <div class="glass-card team-card">
+        <div class="team-avatar">J</div>
+        <div class="team-name">Joe</div>
+        <div class="team-role">CTO &amp; Co-Founder</div>
+        <div class="team-bio">Platform Architecture ระบบ Streaming, Analytics, Payment และ Recommendation Engine</div>
+      </div>
+      <div class="glass-card team-card">
+        <div class="team-avatar">F</div>
+        <div class="team-name">Fim</div>
+        <div class="team-role">CPO &amp; Co-Founder</div>
+        <div class="team-bio">Production Pipeline, Content Acquisition, Quality Control และ Creator Partnerships</div>
+      </div>
+    </div>
+
+    <div class="glass-card team-quote">
+      <p class="team-quote-text">
+        <em>"We are not just building a platform.</em> We are leveraging 10+ years of experience in content, distribution, and monetization to build a scalable entertainment ecosystem that connects audiences, brands, and cultures across Asia and beyond."
+      </p>
+      <p class="team-quote-from">— Founding Team, BoldBox Global Tech Co., Ltd.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="contact-aurora"></div>
+  <div class="container">
+    <div class="contact-inner">
+      <div style="margin-bottom:16px;"><span class="tag" data-i18n="contact.tag">ติดต่อเรา</span></div>
+      <h2 class="contact-title" data-i18n-html="contact.title">
+        พร้อมร่วมงานกับ<br/>
+        <span class="grad-text">BoldBox Global Tech</span>
+      </h2>
+      <p class="contact-sub" data-i18n-html="contact.sub">
+        ไม่ว่าคุณจะเป็นนักลงทุน แบรนด์ที่ต้องการพื้นที่ใหม่<br/>
+        หรือ creator ที่อยากร่วมสร้างเรื่องราว — เราพร้อมคุยกับคุณ
+      </p>
+
+      <div class="contact-actions">
+        <a href="mailto:hello@boldbox.co" class="btn btn-primary" style="padding:15px 34px;font-size:16px;" data-i18n="contact.btn1">📧 ส่งอีเมลหาเรา</a>
+        <a href="#product" class="btn btn-glass" style="padding:14px 28px;font-size:16px;" data-i18n="contact.btn2">ดาวน์โหลดแอป BoldBox</a>
+      </div>
+
+      <div class="contact-cards">
+        <div class="glass-card contact-card">
+          <div class="contact-card-icon">📍</div>
+          <div>
+            <div class="contact-card-label">Location</div>
+            <div class="contact-card-val">Bangkok, Thailand</div>
+          </div>
+        </div>
+        <div class="glass-card contact-card">
+          <div class="contact-card-icon">📧</div>
+          <div>
+            <div class="contact-card-label">Email</div>
+            <div class="contact-card-val">hello@boldbox.co</div>
+          </div>
+        </div>
+        <div class="glass-card contact-card">
+          <div class="contact-card-icon">🌐</div>
+          <div>
+            <div class="contact-card-label">Website</div>
+            <div class="contact-card-val">boldbox.co</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo-row">
+          <img src="BoldBox - Micro Drama Streaming Platform/BoldBox Global Tech - LOGO for Website.png" alt="BoldBox Global Tech" class="logo-img-sm" />
+        </div>
+        <p class="footer-tagline">"Watch in seconds. Feel in moments.<br/>Return every day."</p>
+        <p class="footer-reg">
+          บริษัท โบลด์บ็อกซ์ โกลบอล เทค จำกัด<br/>
+          จดทะเบียนในประเทศไทย<br/>
+          © 2026 BoldBox Global Tech Co., Ltd.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul class="footer-links">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#team">Our Team</a></li>
+          <li><a href="#vision">Vision & Expansion</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Product</h5>
+        <ul class="footer-links">
+          <li><a href="#product">BoldBox App</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#genres">Content Genres</a></li>
+          <li><a href="#plans">Pricing Plans</a></li>
+          <li><a href="#">Download App</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Partners</h5>
+        <ul class="footer-links">
+          <li><a href="#brands">Advertise</a></li>
+          <li><a href="#brands">Brand Packages</a></li>
+          <li><a href="#">Creator Program</a></li>
+          <li><a href="#">Investor Relations</a></li>
+          <li><a href="#">Content Partners</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 BoldBox Global Tech Co., Ltd. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+let lang = 'th';
+
+const T = {
+  th: {
+    'nav.contact': 'ติดต่อเรา',
+    'hero.title': 'บริษัทเทคโนโลยี<br/><span class="line-2">Entertainment</span><span class="line-3">สัญชาติไทย</span>',
+    'hero.sub': 'เราสร้างแพลตฟอร์มความบันเทิงดิจิทัลรูปแบบใหม่<br/>เชื่อม<em>ผู้ชม แบรนด์ และวัฒนธรรม</em> ผ่านเรื่องราว Micro Drama<br/>ที่ดูง่าย อินเร็ว และข้ามพรมแดนได้',
+    'hero.btn1': 'ดู Product ของเรา',
+    'hero.btn2': 'เกี่ยวกับบริษัท →',
+    'hero.badge.exp': 'ประสบการณ์',
+    'stat1.label': 'ปีประสบการณ์ Digital Industry',
+    'stat2.label': 'Flagship Product',
+    'stat3.label': 'Series Launch',
+    'stat4.label': 'ASEAN Target Markets',
+    'stat5.label': 'Target MAU Year 1',
+    'about.tag': 'เกี่ยวกับบริษัท',
+    'about.title': 'เราคือใคร<br/>และ<span class="grad-text"> ทำอะไร</span>',
+    'about.body1': '<strong style="color:#fff;">BoldBox Global Tech Co., Ltd.</strong> คือบริษัทเทคโนโลยีความบันเทิงสัญชาติไทย ก่อตั้งโดยทีมที่มีประสบการณ์มากกว่า 10 ปีในด้าน Digital Creative, Content Production และ Digital Marketing',
+    'about.body2': 'เราเชื่อว่า <em style="color:#fff;font-style:normal;">เรื่องราวเป็นภาษาสากล</em> — และด้วยเทคโนโลยีที่เหมาะสม เรื่องราวท้องถิ่นสามารถเดินทางข้ามพรมแดน เชื่อมผู้คน แบรนด์ และวัฒนธรรมเข้าหากันได้',
+    'about.btn': 'รู้จักทีมผู้ก่อตั้ง →',
+    'val1.title': 'Mission', 'val1.desc': 'สร้างแพลตฟอร์มที่ทำให้ local stories เดินทางข้ามประเทศได้ ผ่าน micro drama ที่เข้าถึงง่าย สนุก และเชื่อมผู้ชม แบรนด์ และวัฒนธรรมเข้าด้วยกัน',
+    'val2.title': 'Vision', 'val2.desc': 'Building the next cross-border storytelling platform for Asia — เริ่มจากประเทศไทย ขยายสู่อาเซียน และเชื่อมโลกด้วยเรื่องราว',
+    'val3.title': 'เราทำอะไร', 'val3.desc': 'พัฒนาแพลตฟอร์มสตรีมมิ่ง Micro Drama พร้อมระบบ monetization ที่ครบครัน — Ad Sales, VIP Subscription, Branded Content และ Creator Ecosystem',
+    'val4.title': 'จุดแข็ง', 'val4.desc': 'First-mover advantage ในตลาด Micro Drama ของไทย + Founder team ที่เข้าใจ creative, growth และ monetization ครบทุกมิติ',
+    'product.body1': 'BoldBox คือแอปพลิเคชันสตรีมมิ่ง Micro Drama บนมือถือ สำหรับซีรีส์แนวตั้งความยาวสั้น ดูง่าย อินเร็ว และสร้าง daily habit ให้ผู้ชมกลับมาดูซ้ำได้ทุกวัน',
+    'product.body2': 'ตั้งอยู่ระหว่าง TikTok และ Netflix — เร็วแบบ short-form video แต่มีเรื่องราวและ emotional depth แบบ scripted drama',
+    'feat.title': 'ทำไม BoldBox ถึง<span class="grad-text">แตกต่าง</span>',
+    'feat.sub': 'ออกแบบทุก feature เพื่อให้ผู้ชมเปิดแอปแล้วอินได้เร็ว และกลับมาดูซ้ำได้ทุกวัน',
+    'feat1.title': 'Instant Access', 'feat1.body': 'เปิดแอปแล้วดูได้ทันที ไม่ต้องรอโหลด ไม่ต้องสมัครก็ดูฟรีได้เลย ลด friction ให้เหลือน้อยที่สุด',
+    'feat2.title': 'Emotional Hook', 'feat2.body': 'ทุก Episode มีคลิฟแฮงเกอร์ที่ดึงให้ดูต่อ — scripted drama คุณภาพสูง ที่อินได้ภายใน 3 นาทีแรก',
+    'feat3.title': 'Mobile-First Vertical', 'feat3.body': 'วิดีโอแนวตั้ง ออกแบบมาเพื่อจอมือถือโดยเฉพาะ ดูสะดวกทุกที่ ระหว่างเดินทาง พักกินข้าว หรือก่อนนอน',
+    'feat4.title': 'For You Algorithm', 'feat4.body': 'อัลกอริทึมแนะนำเรื่องที่ตรงกับ interest ของผู้ชมโดยเฉพาะ เหมือน TikTok แต่มีเรื่องราว',
+    'feat5.title': 'Free-to-Watch Core', 'feat5.body': 'คอนเทนต์หลักดูฟรีทั้งหมด สร้างฐานผู้ใช้กว้าง พร้อม VIP tier สำหรับ Exclusive Series ไม่อั้น',
+    'feat6.title': 'Asian Storytelling', 'feat6.body': 'คอนเทนต์ที่เข้าใจวัฒนธรรมและอารมณ์ของคนเอเชียจริงๆ ไม่ใช่แค่ translation แต่คือ cultural connection',
+    'genres.title': 'คอนเทนต์ทุกแนว<span class="grad-text"> ที่คุณชอบ</span>',
+    'genres.sub': '40+ Series พร้อมดูตั้งแต่วันแรก ครอบคลุมทุก genre ที่คนไทยและคนเอเชียรัก',
+    'wf.eyebrow': '🎬 BoldBox App',
+    'wf.title': 'ดูฟรี<br/><span class="grad-text">ทุกตอน</span><br/>ไม่ต้องสมัคร',
+    'wf.tagline': '"Watch in seconds. Feel in moments. Return every day."',
+    'wf.body': 'เปิดแอปแล้วดูได้ทันที ไม่ต้องจ่าย ไม่ต้องสมัครสมาชิก<br/>คอนเทนต์ทุกตอนพร้อมให้คุณอินได้เลยภายในไม่กี่วินาที',
+    'wf.free.txt': 'ดูได้เลย ไม่มีค่าใช้จ่าย',
+    'brands.sub': 'พื้นที่โฆษณาที่ผู้ชมกำลังอินกับเรื่องราวอย่างเต็มที่ — ไม่ใช่แค่ banner ad ธรรมดา',
+    'brands.h2': 'เข้าถึง Audience<br/><span class="grad-text">ที่มี Emotional Engagement สูง</span>',
+    'brands.body': 'BoldBox คือ channel ใหม่สำหรับแบรนด์ที่ต้องการสื่อสารกับ Gen Z + Millennials อายุ 18–35 ปี ที่กำลัง <em style="color:#fff;font-style:normal;">อินกับเรื่องราว</em> อย่างเต็มที่ ไม่ใช่แค่เลื่อน scroll ผ่านไป',
+    'brands.cta': 'ติดต่อทีม Ad Sales →',
+    'vision.title': 'เริ่มจากไทย<span class="grad-text"> ขยายสู่เอเชีย</span>',
+    'vision.sub': 'BoldBox Global Tech กำลังสร้าง Cross-border Storytelling Platform ที่เชื่อมวัฒนธรรม ผู้ชม และแบรนด์ทั่วทั้งเอเชีย',
+    'team.title': 'ทีมผู้ก่อตั้ง<span class="grad-text"> BoldBox Global Tech</span>',
+    'team.sub': 'ทีมที่เข้าใจทั้ง Storytelling, Growth และ Monetization จาก Bold Moves Digital Creative Agency ประสบการณ์ 10+ ปี',
+    'contact.tag': 'ติดต่อเรา',
+    'contact.title': 'พร้อมร่วมงานกับ<br/><span class="grad-text">BoldBox Global Tech</span>',
+    'contact.sub': 'ไม่ว่าคุณจะเป็นนักลงทุน แบรนด์ที่ต้องการพื้นที่ใหม่<br/>หรือ creator ที่อยากร่วมสร้างเรื่องราว — เราพร้อมคุยกับคุณ',
+    'contact.btn1': '📧 ส่งอีเมลหาเรา',
+    'contact.btn2': 'ดาวน์โหลดแอป BoldBox',
+  },
+  en: {
+    'nav.contact': 'Contact Us',
+    'hero.title': 'Technology<br/><span class="line-2">Entertainment</span><span class="line-3">Company from Thailand</span>',
+    'hero.sub': 'We build a next-generation digital entertainment platform<br/>connecting <em>audiences, brands, and cultures</em> through Micro Drama stories<br/>that are easy to watch, emotionally engaging, and borderless.',
+    'hero.btn1': 'View Our Product',
+    'hero.btn2': 'About the Company →',
+    'hero.badge.exp': 'Years of Experience',
+    'stat1.label': 'Years in Digital Industry',
+    'stat2.label': 'Flagship Product',
+    'stat3.label': 'Series at Launch',
+    'stat4.label': 'ASEAN Target Markets',
+    'stat5.label': 'Target MAU Year 1',
+    'about.tag': 'About Us',
+    'about.title': 'Who We Are<br/>& <span class="grad-text">What We Do</span>',
+    'about.body1': '<strong style="color:#fff;">BoldBox Global Tech Co., Ltd.</strong> is a Thai-born entertainment technology company, founded by a team with 10+ years of experience in Digital Creative, Content Production, and Digital Marketing.',
+    'about.body2': 'We believe <em style="color:#fff;font-style:normal;">stories are a universal language</em> — and with the right technology, local stories can cross borders, connecting people, brands, and cultures.',
+    'about.btn': 'Meet the Founding Team →',
+    'val1.title': 'Mission', 'val1.desc': 'Build a platform that takes local stories across borders through accessible, engaging micro drama that connects audiences, brands, and cultures.',
+    'val2.title': 'Vision', 'val2.desc': 'Building the next cross-border storytelling platform for Asia — starting from Thailand, expanding to ASEAN, and connecting the world through stories.',
+    'val3.title': 'What We Do', 'val3.desc': 'We develop a Micro Drama streaming platform with a full monetization system — Ad Sales, VIP Subscription, Branded Content, and Creator Ecosystem.',
+    'val4.title': 'Our Strength', 'val4.desc': "First-mover advantage in Thailand's Micro Drama market + a founder team with deep expertise in creative, growth, and monetization.",
+    'product.body1': 'BoldBox is a mobile Micro Drama streaming app for short vertical series — easy to watch, emotionally engaging, and designed to create daily viewing habits.',
+    'product.body2': 'Positioned between TikTok and Netflix — as fast as short-form video, but with the story depth and emotional resonance of scripted drama.',
+    'feat.title': 'Why BoldBox is <span class="grad-text">Different</span>',
+    'feat.sub': 'Every feature is designed to hook viewers within seconds of opening the app — and keep them coming back every day.',
+    'feat1.title': 'Instant Access', 'feat1.body': 'Open the app and start watching immediately. No loading, no sign-up required. Minimum friction for maximum engagement.',
+    'feat2.title': 'Emotional Hook', 'feat2.body': 'Every episode ends with a cliffhanger — high-quality scripted drama that hooks you within the first 3 minutes.',
+    'feat3.title': 'Mobile-First Vertical', 'feat3.body': 'Full-screen vertical video designed for mobile. Watch comfortably anywhere — commuting, lunch breaks, or before bed.',
+    'feat4.title': 'For You Algorithm', 'feat4.body': 'A personalized recommendation algorithm that surfaces exactly the right story for each viewer — like TikTok, but with storylines.',
+    'feat5.title': 'Free-to-Watch Core', 'feat5.body': 'All core content is free to watch, building a wide user base. VIP tier unlocks unlimited Exclusive Series.',
+    'feat6.title': 'Asian Storytelling', 'feat6.body': 'Content that genuinely understands Asian culture and emotions — not just translation, but true cultural connection.',
+    'genres.title': 'Every Genre <span class="grad-text">You Love</span>',
+    'genres.sub': '40+ Series available from day one, covering every genre that Thai and Asian audiences love.',
+    'wf.eyebrow': '🎬 BoldBox App',
+    'wf.title': 'Watch Free<br/><span class="grad-text">Every Episode</span><br/>No Sign-up',
+    'wf.tagline': '"Watch in seconds. Feel in moments. Return every day."',
+    'wf.body': 'Open the app and start watching instantly — no payment, no subscription needed.<br/>Every episode is ready for you to enjoy within seconds.',
+    'wf.free.txt': "Start watching. It's free.",
+    'brands.sub': 'An advertising environment where viewers are fully immersed in a story — not just another banner ad.',
+    'brands.h2': 'Reach an Audience with<br/><span class="grad-text">High Emotional Engagement</span>',
+    'brands.body': 'BoldBox is a new channel for brands targeting Gen Z + Millennials aged 18–35, who are <em style="color:#fff;font-style:normal;">emotionally invested in stories</em> — not just mindlessly scrolling.',
+    'brands.cta': 'Contact Ad Sales Team →',
+    'vision.title': 'Starting in Thailand,<span class="grad-text"> Expanding Across Asia</span>',
+    'vision.sub': 'BoldBox Global Tech is building a Cross-border Storytelling Platform connecting cultures, audiences, and brands across Asia.',
+    'team.title': 'The Founding Team of<span class="grad-text"> BoldBox Global Tech</span>',
+    'team.sub': 'A team with deep expertise in Storytelling, Growth, and Monetization from Bold Moves Digital Creative Agency — 10+ years of experience.',
+    'contact.tag': 'Contact Us',
+    'contact.title': 'Ready to Work with<br/><span class="grad-text">BoldBox Global Tech</span>',
+    'contact.sub': "Whether you're an investor, a brand looking for a new channel,<br/>or a creator ready to build stories — we'd love to talk.",
+    'contact.btn1': '📧 Send Us an Email',
+    'contact.btn2': 'Download BoldBox App',
+  }
+};
+
+function toggleLang() {
+  lang = lang === 'th' ? 'en' : 'th';
+  document.getElementById('langFlag').textContent  = lang === 'th' ? '🇬🇧' : '🇹🇭';
+  document.getElementById('langLabel').textContent = lang === 'th' ? 'EN'  : 'TH';
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const val = T[lang][el.dataset.i18n];
+    if (val !== undefined) el.textContent = val;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const val = T[lang][el.dataset.i18nHtml];
+    if (val !== undefined) el.innerHTML = val;
+  });
+
+  document.documentElement.lang = lang;
+}
+</script>
+</body>
+</html>
