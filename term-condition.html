@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms &amp; Conditions — BoldBox Global Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Sarabun:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow: #F4C430;
+      --dark: #080808;
+      --surface: #0F0F0F;
+      --card: #141414;
+      --border: rgba(255,255,255,0.07);
+      --text: #E8E8E8;
+      --muted: #888;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Sarabun', 'Nunito', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-img { height: 32px; object-fit: contain; }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--yellow); }
+    .nav-back svg { width: 16px; height: 16px; }
+
+    .hero {
+      background: linear-gradient(180deg, #0d0d0d 0%, var(--dark) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 72px 40px 56px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(244,196,48,0.12);
+      border: 1px solid rgba(244,196,48,0.3);
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: clamp(32px, 5vw, 52px);
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+
+    .hero h1 span { color: var(--yellow); }
+    .hero-meta { color: var(--muted); font-size: 14px; }
+
+    .content-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 64px 40px 100px;
+    }
+
+    .toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 56px;
+    }
+
+    .toc h3 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .toc ol {
+      padding-left: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 32px;
+    }
+
+    .toc li a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .toc li a:hover { color: var(--yellow); }
+
+    .policy-section {
+      margin-bottom: 52px;
+      scroll-margin-top: 80px;
+    }
+
+    .section-number {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--yellow);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .policy-section h2 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-section p {
+      color: #bbb;
+      margin-bottom: 16px;
+      font-size: 15px;
+    }
+
+    .policy-section ul, .policy-section ol {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    .policy-section li {
+      color: #bbb;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .highlight-box {
+      background: rgba(244,196,48,0.06);
+      border: 1px solid rgba(244,196,48,0.2);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .highlight-box p { color: #ddd; margin: 0; font-size: 15px; }
+    .highlight-box strong { color: var(--yellow); }
+
+    .warning-box {
+      background: rgba(239,68,68,0.06);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .warning-box p { color: #ddd; margin: 0; font-size: 15px; }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      margin-top: 64px;
+    }
+
+    .contact-card h3 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .contact-card p { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+
+    .contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary { background: var(--yellow); color: #000; }
+    .btn-primary:hover { background: #ffd966; transform: translateY(-1px); }
+
+    .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--yellow); }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 48px 20px 40px; }
+      .content-wrap { padding: 40px 20px 64px; }
+      .toc ol { grid-template-columns: 1fr; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="BoldBox - Micro Drama Streaming Platform/BoldBox Global Tech - LOGO for Website.png" class="logo-img" alt="BoldBox Global Tech" />
+    </a>
+    <a href="/" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Home
+    </a>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge">Legal</div>
+    <h1>Terms &amp; <span>Conditions</span></h1>
+    <p class="hero-meta">Effective Date: June 1, 2026 &nbsp;·&nbsp; BoldBox Global Tech Co., Ltd.</p>
+  </div>
+
+  <div class="content-wrap">
+
+    <div class="toc">
+      <h3>Contents</h3>
+      <ol>
+        <li><a href="#s1">Service Description</a></li>
+        <li><a href="#s2">User Eligibility</a></li>
+        <li><a href="#s3">Account Requirements</a></li>
+        <li><a href="#s4">Account Deletion</a></li>
+        <li><a href="#s5">Prohibited Activities</a></li>
+        <li><a href="#s6">Content Management</a></li>
+        <li><a href="#s7">Paid Features &amp; Purchases</a></li>
+        <li><a href="#s8">Promotions &amp; Advertising</a></li>
+        <li><a href="#s9">Intellectual Property</a></li>
+        <li><a href="#s10">User-Generated Content</a></li>
+        <li><a href="#s11">Privacy &amp; Third-Party Services</a></li>
+        <li><a href="#s12">Termination</a></li>
+        <li><a href="#s13">Limitation of Liability</a></li>
+        <li><a href="#s14">Governing Law &amp; Disputes</a></li>
+        <li><a href="#s15">Contact Us</a></li>
+      </ol>
+    </div>
+
+    <div class="policy-section">
+      <p>Welcome to BoldBox. These Terms and Conditions ("Terms") govern your access to and use of the BoldBox mobile application and related services operated by BoldBox Global Tech Co., Ltd. ("BoldBox", "we", "our", or "us").</p>
+      <p>By downloading, accessing, or using BoldBox, you agree to be bound by these Terms. If you do not agree, please discontinue use of our services immediately.</p>
+    </div>
+
+    <div class="policy-section" id="s1">
+      <div class="section-number">Section 01</div>
+      <h2>Service Description</h2>
+      <p>BoldBox is a mobile streaming platform specializing in short-form dramatic content. Our services include:</p>
+      <ul>
+        <li><strong>Free Content</strong> — a selection of micro drama series available at no cost</li>
+        <li><strong>Premium Content</strong> — additional series and episodes accessible via subscription</li>
+        <li><strong>Exclusive Content</strong> — original productions available only on BoldBox</li>
+        <li><strong>In-App Features</strong> — personalized recommendations, watchlists, and community features</li>
+        <li><strong>In-App Purchases</strong> — coins, episode unlocks, and subscription plans</li>
+      </ul>
+      <p>We reserve the right to introduce, modify, or discontinue any features or content offerings at our discretion.</p>
+    </div>
+
+    <div class="policy-section" id="s2">
+      <div class="section-number">Section 02</div>
+      <h2>User Eligibility</h2>
+      <p>To use BoldBox, you must:</p>
+      <ul>
+        <li>Be legally capable of entering into binding agreements under applicable law</li>
+        <li>Comply with all local, national, and international laws and regulations</li>
+        <li>Not be prohibited from using our services under any applicable law</li>
+      </ul>
+      <div class="highlight-box">
+        <p><strong>Minors:</strong> Users under the applicable age of majority in their jurisdiction must obtain verifiable parental or guardian consent before using BoldBox. By using the platform, minors confirm that such consent has been granted.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s3">
+      <div class="section-number">Section 03</div>
+      <h2>Account Requirements</h2>
+      <p>When creating an account on BoldBox, you agree to:</p>
+      <ul>
+        <li>Provide accurate, current, and complete information</li>
+        <li>Keep your login credentials confidential and secure</li>
+        <li>Notify us immediately of any unauthorized access to your account</li>
+        <li>Accept full responsibility for all activities that occur under your account</li>
+      </ul>
+      <p>BoldBox reserves the right to suspend or terminate accounts that provide false information or violate these Terms.</p>
+    </div>
+
+    <div class="policy-section" id="s4">
+      <div class="section-number">Section 04</div>
+      <h2>Account Deletion</h2>
+      <p>You may request deletion of your account at any time through the app settings or by contacting our support team.</p>
+      <div class="highlight-box">
+        <p>Upon requesting deletion, your account will enter a <strong>90-day pending deletion period</strong>. During this window, your account remains accessible and the deletion can be reversed. After 90 days, your account and associated personal data will be permanently removed.</p>
+      </div>
+      <p>Certain data may be retained beyond this period where required by law, regulatory compliance, fraud prevention, or legitimate business purposes.</p>
+    </div>
+
+    <div class="policy-section" id="s5">
+      <div class="section-number">Section 05</div>
+      <h2>Prohibited Activities</h2>
+      <p>You agree not to engage in any of the following activities while using BoldBox:</p>
+      <ul>
+        <li>Copying, reproducing, distributing, or publicly displaying any content without authorization</li>
+        <li>Commercially exploiting any content, features, or data from the platform</li>
+        <li>Reverse engineering, decompiling, or attempting to extract source code</li>
+        <li>Bypassing, disabling, or circumventing any security or access control features</li>
+        <li>Uploading or transmitting malicious software, viruses, or harmful code</li>
+        <li>Harassing, threatening, or harming other users</li>
+        <li>Creating multiple accounts to abuse promotions or circumvent restrictions</li>
+        <li>Using automated tools (bots, scrapers) to access the platform</li>
+        <li>Engaging in any activity that violates applicable laws or regulations</li>
+      </ul>
+      <p>Violation of these prohibitions may result in immediate account termination and, where applicable, legal action.</p>
+    </div>
+
+    <div class="policy-section" id="s6">
+      <div class="section-number">Section 06</div>
+      <h2>Content Management</h2>
+      <p>BoldBox maintains full editorial discretion over all content available on the platform. We reserve the right to:</p>
+      <ul>
+        <li>Modify, remove, or restrict access to any content at any time</li>
+        <li>Make content decisions based on licensing, legal, business, technical, or operational reasons</li>
+        <li>Add, update, or discontinue content categories and genres</li>
+      </ul>
+      <div class="warning-box">
+        <p>Content availability may vary by region due to licensing agreements and local regulations. BoldBox is not liable for the removal or unavailability of any content.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s7">
+      <div class="section-number">Section 07</div>
+      <h2>Paid Features &amp; Purchases</h2>
+      <p>BoldBox offers various paid features including subscriptions, coin packages, and individual episode unlocks.</p>
+      <ul>
+        <li><strong>All digital purchases are non-refundable</strong> unless required by applicable law</li>
+        <li>Purchased coins and unlocked episodes are tied to your account and cannot be transferred</li>
+        <li>Subscription benefits apply only during the active subscription period</li>
+        <li>If your account is terminated or a feature is discontinued, purchased items may expire</li>
+        <li>Prices are subject to change; you will be notified before any price changes affect your subscription</li>
+      </ul>
+      <p>For billing issues or disputes, please contact us at <a href="mailto:hi@boldboxglobaltech.com" style="color:var(--yellow)">hi@boldboxglobaltech.com</a>.</p>
+    </div>
+
+    <div class="policy-section" id="s8">
+      <div class="section-number">Section 08</div>
+      <h2>Promotions &amp; Advertising</h2>
+      <p>BoldBox may display advertisements, sponsored content, and promotional materials within the platform. By using BoldBox, you acknowledge that:</p>
+      <ul>
+        <li>Ads may appear in the content feed, viewing screen, and other areas of the app</li>
+        <li>Sponsored content will be clearly identified where required by law</li>
+        <li>Ad-free features, where available, apply only to specific ad placements and may not eliminate all promotional content</li>
+        <li>Third-party advertisers operate independently and BoldBox is not responsible for their content or practices</li>
+      </ul>
+    </div>
+
+    <div class="policy-section" id="s9">
+      <div class="section-number">Section 09</div>
+      <h2>Intellectual Property</h2>
+      <p>All content, features, and technology on the BoldBox platform — including but not limited to videos, scripts, graphics, logos, software, and user interface designs — are the exclusive property of BoldBox Global Tech Co., Ltd. or its licensors.</p>
+      <p>Nothing in these Terms grants you any ownership rights to any BoldBox content or technology. You may access and use content solely for personal, non-commercial entertainment purposes.</p>
+      <p>The BoldBox name, logo, and related marks are trademarks of BoldBox Global Tech Co., Ltd. and may not be used without prior written permission.</p>
+    </div>
+
+    <div class="policy-section" id="s10">
+      <div class="section-number">Section 10</div>
+      <h2>User-Generated Content</h2>
+      <p>If you submit, upload, or share any content on BoldBox (including reviews, comments, or creative submissions), you grant BoldBox a non-exclusive, worldwide, royalty-free, perpetual license to use, reproduce, modify, adapt, publish, and distribute such content for platform and promotional purposes.</p>
+      <p>You represent that any content you submit:</p>
+      <ul>
+        <li>Is original or you have the necessary rights to share it</li>
+        <li>Does not infringe any third-party intellectual property rights</li>
+        <li>Does not contain unlawful, harmful, or offensive material</li>
+      </ul>
+      <p>BoldBox reserves the right to remove any user-submitted content at its sole discretion.</p>
+    </div>
+
+    <div class="policy-section" id="s11">
+      <div class="section-number">Section 11</div>
+      <h2>Privacy &amp; Third-Party Services</h2>
+      <p>Your use of BoldBox is also governed by our <a href="/privacy" style="color:var(--yellow)">Privacy Policy</a>, which is incorporated into these Terms by reference.</p>
+      <p>BoldBox may integrate with or link to third-party services (e.g., payment processors, social login providers, analytics tools). These third parties have their own terms and privacy policies, and BoldBox is not responsible for their practices. Your use of third-party services is at your own risk.</p>
+    </div>
+
+    <div class="policy-section" id="s12">
+      <div class="section-number">Section 12</div>
+      <h2>Termination</h2>
+      <p>BoldBox reserves the right to suspend or terminate your account and access to the platform at any time, with or without notice, if:</p>
+      <ul>
+        <li>You violate any provision of these Terms</li>
+        <li>We reasonably suspect fraudulent, abusive, or illegal activity</li>
+        <li>We are required to do so by law or regulatory authority</li>
+        <li>Continued access would cause harm to the platform or other users</li>
+      </ul>
+      <p>Upon termination, your right to access BoldBox ceases immediately. Provisions that by their nature should survive termination (including intellectual property, limitation of liability, and dispute resolution) will continue to apply.</p>
+    </div>
+
+    <div class="policy-section" id="s13">
+      <div class="section-number">Section 13</div>
+      <h2>Limitation of Liability</h2>
+      <p>To the fullest extent permitted by applicable law, BoldBox and its directors, employees, partners, and licensors shall not be liable for:</p>
+      <ul>
+        <li>Indirect, incidental, special, consequential, or punitive damages</li>
+        <li>Loss of profits, data, goodwill, or business opportunities</li>
+        <li>Service interruptions, errors, or security breaches beyond our reasonable control</li>
+        <li>Content accuracy, completeness, or fitness for a particular purpose</li>
+      </ul>
+      <div class="warning-box">
+        <p>BoldBox provides its services "as is" and "as available" without warranties of any kind, either express or implied.</p>
+      </div>
+    </div>
+
+    <div class="policy-section" id="s14">
+      <div class="section-number">Section 14</div>
+      <h2>Governing Law &amp; Dispute Resolution</h2>
+      <p>These Terms are governed by and construed in accordance with the laws of the <strong>Kingdom of Thailand</strong>, without regard to conflict of law principles.</p>
+      <p>In the event of any dispute arising from or related to these Terms or your use of BoldBox, the parties agree to first attempt to resolve the matter through good-faith negotiation. If resolution cannot be reached within 30 days, the dispute shall be submitted to the competent courts of Thailand.</p>
+    </div>
+
+    <div class="policy-section" id="s15">
+      <div class="section-number">Section 15</div>
+      <h2>Changes to These Terms</h2>
+      <p>We may update these Terms from time to time to reflect changes in our services, business practices, or legal requirements. When material changes are made, we will notify you via the app or email at least 7 days before the changes take effect.</p>
+      <p>Your continued use of BoldBox after changes take effect constitutes acceptance of the updated Terms.</p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Questions about our Terms?</h3>
+      <p>If you have any questions or concerns about these Terms and Conditions, our team is happy to help.</p>
+      <div class="contact-links">
+        <a href="mailto:hi@boldboxglobaltech.com" class="btn-contact btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hi@boldboxglobaltech.com
+        </a>
+        <a href="/privacy" class="btn-contact btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Privacy Policy
+        </a>
+      </div>
+      <p style="margin-top:20px; font-size:13px;"><strong>BoldBox Global Tech Co., Ltd.</strong></p>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 BoldBox Global Tech Co., Ltd. · <a href="/">Home</a> · <a href="/privacy">Privacy Policy</a> · <a href="/term-condition">Terms &amp; Conditions</a></p>
+  </footer>
+
+</body>
+</html>
